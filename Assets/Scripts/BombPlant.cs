@@ -21,15 +21,17 @@ public class BombPlant : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space key was pressed.");
+            Debug.Log("Space key was pressed.Bomb planted");
             PlantBomb();
         }
 
     }
+
+    //Plant a bomb at player's position
     void PlantBomb()
     {
         spawnPo = playerRb.transform.position;
         Instantiate(bombPrefab, spawnPo, bombPrefab.transform.rotation);
-                                                                        
+
     }
 }
