@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float timeToMove = 0.2f;
+    public float timeToMove = 0.1f;
     private Vector3 origPosition, targetPosition;
     private bool isMoving = false;
 
