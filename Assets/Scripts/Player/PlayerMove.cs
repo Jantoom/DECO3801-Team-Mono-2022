@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [SerializeField]
     private float timeToMove, timeToRebound;
     private Vector3 origPosition, targetPosition;
-    private MoveStatus moveStatus = MoveStatus.STATIONARY;
+    private MoveCode moveStatus = MoveCode.STATIONARY;
     private IEnumerator moveCoroutine;
     private int REBOUND_LAYER;
+    public MoveCode MoveStatus { get => moveStatus; }
 
     void Awake()
     {
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (moveStatus.Equals(MoveStatus.STATIONARY)) {
+        if (moveStatus.Equals(MoveCode.STATIONARY)) {
             Vector3 direction;
             if (Input.GetKeyDown(KeyCode.W)) {
                 direction = Vector3.forward;
@@ -44,14 +45,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveStatus.MOVING)) {
+        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING)) {
             StopCoroutine(moveCoroutine);
             StartCoroutine(ReboundPlayer());
         }
     }
 
     private IEnumerator MovePlayer(Vector3 direction) {
-        moveStatus = MoveStatus.MOVING;
+        moveStatus = MoveCode.MOVING;
         origPosition = transform.position;
         targetPosition = origPosition + direction;
         
@@ -63,11 +64,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = targetPosition;
-        moveStatus = MoveStatus.STATIONARY;
+        moveStatus = MoveCode.STATIONARY;
     }
 
     private IEnumerator ReboundPlayer() {
-        moveStatus = MoveStatus.REBOUNDING;
+        moveStatus = MoveCode.REBOUNDING;
         var reboundPosition = transform.position;
 
         float elapsedTime = 0f;
@@ -78,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = origPosition;
-        moveStatus = MoveStatus.STATIONARY;
-    }
+        moveStatus = MoveCode.STATIONARY;
+    }   
+}
 
-    private enum MoveStatus {
+public enum MoveCode {
         STATIONARY, MOVING, REBOUNDING
-    }
 }
