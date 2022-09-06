@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 02217544b96d25640bedcd04191abced
+guid: 73f28d1efec8e72439edcecc1b28adba
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wallStoneB
+    second: {fileID: 2800000, guid: 3e6910c614517894284ce18288255ffe, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
