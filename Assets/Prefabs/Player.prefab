@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c626c7441a0f8c4ab61de3775f8f752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 5686585067370764456, guid: 9e9f550a261a1c645b0ba27765d850a2,
+  bombPrefab: {fileID: 5067422554293926601, guid: d7c53950492d0415395853f9cbc612a7,
     type: 3}
 --- !u!114 &2150773631684907096
 MonoBehaviour:
@@ -157,3 +157,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d63bd3945430584b92aee29f93ad756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 1
