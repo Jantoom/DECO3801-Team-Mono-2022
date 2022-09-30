@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDestructive : MonoBehaviour
+public class PlayerMortality : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.GetComponent<Bomb>() == null) {
-            collision.gameObject.GetComponent<IDestructible>()?.ApplyDamage(1);
+            collision.gameObject.GetComponent<IDestructible>()?.Hit(1);
         }
     }
 }

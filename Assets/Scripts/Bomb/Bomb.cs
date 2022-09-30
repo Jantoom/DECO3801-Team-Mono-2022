@@ -22,7 +22,7 @@ public class Bomb : MonoBehaviour, IDestructible
         if (!isExploding) Explode();
     }
 
-    public void ApplyDamage(int damage) {
+    public void Hit(int damage) {
         if (!isExploding) {
             Explode();
         }

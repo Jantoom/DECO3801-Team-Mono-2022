@@ -38,8 +38,8 @@ public class Explosion : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        collision.gameObject.GetComponent<IDestructible>()?.ApplyDamage(damage);
-        if (collision.gameObject.GetComponent<WallIndestructible>() != null) {
+        collision.gameObject.GetComponent<IDestructible>()?.Hit(damage);
+        if (collision.gameObject.GetComponent<WallStrong>() != null) {
             Destroy(gameObject);
         }
     }
