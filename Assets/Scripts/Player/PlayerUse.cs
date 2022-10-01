@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPlant : MonoBehaviour
+public class PlayerUse : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject bombPrefab;
     private PlayerInfo playerInfo;
 
     void Awake() {
@@ -13,9 +11,9 @@ public class PlayerPlant : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(playerInfo.BombKey) && 
+        if (Input.GetKeyDown(playerInfo.ItemKey) && 
             GetComponent<PlayerMove>().MoveStatus == MoveCode.STATIONARY) {
-            Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            GetComponent<BaseItem>()?.UseItem();
         }
     }
 }

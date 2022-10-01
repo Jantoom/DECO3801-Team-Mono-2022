@@ -10,7 +10,7 @@ public class PlayerDestruction : MonoBehaviour, IDestructible
         playerInfo = gameObject.GetComponent<PlayerInfo>();
     }
 
-    public void Hit(int damage) {
+    public void TakeDamage(int damage) {
         var damageOverflow = Mathf.Max(damage - playerInfo.Shield, 0);
         playerInfo.Shield -= damage;
         playerInfo.Health -= damageOverflow;
@@ -20,8 +20,9 @@ public class PlayerDestruction : MonoBehaviour, IDestructible
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.GetComponent<Bomb>() == null) {
-            collision.gameObject.GetComponent<IDestructible>()?.Hit(playerInfo.Attack);
+        if (collision.gameObject.GetComponent<BaseBomb>() == null &&
+            collision.gameObject.GetComponent<PlayerInfo>() == null) {
+            collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(playerInfo.Attack);
         }
     }
 }

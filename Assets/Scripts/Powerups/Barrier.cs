@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Juggernaut : BaseEffect
+public class Barrier : BaseEffect
 {
-    [SerializeField]
-    private float duration;
+    private float duration = 3f;
     public override float Duration { get => duration; }
 
     public override void StartEffect() {
-        playerInfo.AttackMultiplier *= 100;
+        playerInfo.Shield += 9999;
         base.StartEffect();
     }
     public override void EndEffect()
     {
-        playerInfo.AttackMultiplier /= 100;
+        playerInfo.Shield -= 9999;
         base.EndEffect();
     }
 }

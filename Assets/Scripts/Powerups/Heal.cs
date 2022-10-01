@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Heal : BaseEffect
 {
-    [SerializeField]
-    private int healAmount;
+    private int healAmount = 100;
 
     public override void StartEffect() {
         playerInfo.Health += healAmount;

@@ -6,72 +6,38 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField]
     private float timeToMove, timeToRebound;
-    private int playerNumber;
+    private PlayerInfo playerInfo;
     private Vector3 origPosition, targetPosition;
     private MoveCode moveStatus = MoveCode.STATIONARY;
     private IEnumerator moveCoroutine;
     private int REBOUND_LAYER;
     public MoveCode MoveStatus { get => moveStatus; }
 
-    internal void SetPlayerNumber(int playerNum)
-    {
-        playerNumber = playerNum;
-    }
     void Awake()
     {
         REBOUND_LAYER = LayerMask.NameToLayer("Wall");
+        playerInfo = GetComponent<PlayerInfo>();
     }
 
     void Update()
     {
-        if (playerNumber.Equals(1)) { 
-            if (moveStatus.Equals(MoveCode.STATIONARY)) {
-                Vector3 direction;
-                if (Input.GetKeyDown(KeyCode.W)) {
-                    direction = Vector3.forward;
-                }
-                else if (Input.GetKeyDown(KeyCode.A)) {
-                    direction = Vector3.left;
-                }
-                else if (Input.GetKeyDown(KeyCode.S)) {
-                    direction = Vector3.back;
-                }
-                else if (Input.GetKeyDown(KeyCode.D)) {
-                    direction = Vector3.right;
-                }
-                else {
-                    direction = Vector3.zero;
-                }
+        Vector3 direction = Vector3.zero;
+        if (Input.GetKeyDown(playerInfo.ForwardKey)) {
+            direction = Vector3.forward;
+        }
+        else if (Input.GetKeyDown(playerInfo.LeftKey)) {
+            direction = Vector3.left;
+        }
+        else if (Input.GetKeyDown(playerInfo.BackKey)) {
+            direction = Vector3.back;
+        }
+        else if (Input.GetKeyDown(playerInfo.RightKey)) {
+            direction = Vector3.right;
+        }
 
-                if (direction != Vector3.zero) {
-                    moveCoroutine = MovePlayer(direction);
-                    StartCoroutine(moveCoroutine);
-                }
-            }
-        } else if (playerNumber.Equals(2)) {
-            if (moveStatus.Equals(MoveCode.STATIONARY)) {
-                Vector3 direction;
-                if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                    direction = Vector3.forward;
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                    direction = Vector3.left;
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                    direction = Vector3.back;
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                    direction = Vector3.right;
-                }
-                else {
-                    direction = Vector3.zero;
-                }
-
-                if (direction != Vector3.zero) {
-                    moveCoroutine = MovePlayer(direction);
-                    StartCoroutine(moveCoroutine);
-                }
-            }
+        if (direction != Vector3.zero && moveStatus == MoveCode.STATIONARY) {
+            moveCoroutine = MovePlayer(direction);
+            StartCoroutine(moveCoroutine);
         }
     }
 
@@ -86,6 +52,7 @@ public class PlayerMove : MonoBehaviour
         moveStatus = MoveCode.MOVING;
         origPosition = transform.position;
         targetPosition = origPosition + direction;
+        targetPosition = new Vector3(Mathf.Round(targetPosition.x), Mathf.Round(targetPosition.y), Mathf.Round(targetPosition.z));
         
         float elapsedTime = 0f;
         while (elapsedTime < timeToMove) {

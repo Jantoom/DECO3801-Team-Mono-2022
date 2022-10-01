@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Exhaust : BaseEffect
 {
-    [SerializeField]
-    private float duration;
+    private float duration = 2f;
     public override float Duration { get => duration; }
 
     public override void StartEffect() {

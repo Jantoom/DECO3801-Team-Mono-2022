@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6129087191003452987}
   - component: {fileID: -8553102172164406979}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: StandardBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5686585067370764456}
-  m_Mesh: {fileID: 6123752992615479067, guid: 9c5acd9435175054980dac06438aea84, type: 3}
+  m_Mesh: {fileID: 6123752992615479067, guid: a3f557be41a6840798a1fc7bf4848562, type: 3}
 --- !u!23 &7704457330679186553
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 9c5acd9435175054980dac06438aea84, type: 3}
+  - {fileID: 2100000, guid: 4589b87b8508f6e48b8fddb385924b16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,13 +124,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5686585067370764456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948bfd8caad19404fa20ae4999e023c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 47a684950f8f98446a07128c5ae35d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 8431613691879521690, guid: dc16846eff7171f49ac3efb2bd80a2b7,
     type: 3}
-  damage: 2
   range: 3
-  delay: 1.5
-  persistence: 0.2
+  damage: 100
+  delay: 2
   speed: 0.1
