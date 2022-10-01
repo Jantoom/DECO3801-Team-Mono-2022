@@ -8,14 +8,19 @@ using UnityEngine.UIElements;
 
 public class TimeDisplay : MonoBehaviour
 {
-    public float timeAmount = 10;
+    float timeAmount;//static float timeAmount;
     public TMP_Text timeT;
     // Use a singleton class or combine gameover class with this one or use static variable
-    public TMP_Text gameOverText;
+    /*public TMP_Text gameOverText;
     public TMP_Text winnerText;
     public TMP_Text winnerNameText;
-    public GameObject gameOverScreen;
+    public GameObject gameOverScreen;*/
     //
+
+    private void Start()
+    {
+        timeAmount = 10;
+    }
     void Update()
     {
         if (timeAmount > 0)
@@ -24,7 +29,7 @@ public class TimeDisplay : MonoBehaviour
         } else
         {
             timeAmount = 0;
-            DisplayGameOverScreen();
+           // DisplayGameOverScreen();
 
 
         }
@@ -44,12 +49,16 @@ public class TimeDisplay : MonoBehaviour
     {
         return timeAmount <= 0;
     }
+    public float getTime()
+    {
+        return timeAmount;
+    }
 
-    void DisplayGameOverScreen() { 
+    /*void DisplayGameOverScreen() { 
     
          gameOverScreen.SetActive(true);
          gameOverText.text = "Game Over";
          winnerText.text = "Winner is";
          winnerNameText.text = "Player 1";//?
-    }
+    }*/
 }
