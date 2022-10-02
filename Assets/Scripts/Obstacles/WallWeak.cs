@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WallWeak : MonoBehaviour, IDestructible
 {
-    [SerializeField]
-    private int health;
+    private int health = 2;
+    public int Health { get => health; }
 
     public void TakeDamage(int damage) {
         health -= damage;

@@ -59,8 +59,11 @@ public class PlayerControls : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING)) {
-            StopCoroutine(moveCoroutine);
-            StartCoroutine(ReboundPlayer());
+            if (!collision.gameObject.TryGetComponent<WallWeak>(out var wall) || wall.Health - playerInfo.Attack > 0) {
+                StopCoroutine(moveCoroutine);
+                StartCoroutine(ReboundPlayer());
+            }
+            collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(playerInfo.Attack);
         }
     }
 
