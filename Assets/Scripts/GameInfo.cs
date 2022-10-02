@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallIndestructible : MonoBehaviour
+public class GameInfo : MonoBehaviour
 {
+    public static int BASE_HEALTH = 100;
     // Start is called before the first frame update
     void Start()
     {

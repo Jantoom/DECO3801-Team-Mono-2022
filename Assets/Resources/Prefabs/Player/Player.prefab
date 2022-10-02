@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2150773631684907089}
   - component: {fileID: 2150773631684907102}
   - component: {fileID: 2150773631684907101}
-  - component: {fileID: 2150773631684907103}
+  - component: {fileID: 1758625746909005334}
   - component: {fileID: 2150773631684907096}
   m_Layer: 8
   m_Name: Player
@@ -129,9 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b597f18ca6ad014994c3b822fedcaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToMove: 0.1
-  timeToRebound: 0.25
---- !u!114 &2150773631684907103
+  forwardKey: 0
+  backKey: 0
+  leftKey: 0
+  rightKey: 0
+  bombKey: 0
+  itemKey: 0
+--- !u!114 &1758625746909005334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,11 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 283895187677194583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c626c7441a0f8c4ab61de3775f8f752, type: 3}
+  m_Script: {fileID: 11500000, guid: 625a427fa98a7c4439754b9c8d58cd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 5686585067370764456, guid: 9e9f550a261a1c645b0ba27765d850a2,
-    type: 3}
+  playerNumber: 0
 --- !u!114 &2150773631684907096
 MonoBehaviour:
   m_ObjectHideFlags: 0
