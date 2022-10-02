@@ -18,11 +18,4 @@ public class PlayerDestruction : MonoBehaviour, IDestructible
             Destroy(gameObject);
         }
     }
-
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.GetComponent<BaseBomb>() == null &&
-            collision.gameObject.GetComponent<PlayerInfo>() == null) {
-            collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(playerInfo.Attack);
-        }
-    }
 }
