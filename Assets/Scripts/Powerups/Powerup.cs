@@ -2,33 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : MonoBehaviour
+public abstract class Powerup : MonoBehaviour
 {
-    [SerializeField]
-    private string powerupName;
+    // Powerup Owner
+    protected PlayerInfo playerInfo = null;
+    public PlayerInfo PlayerInfo { get => playerInfo; set => playerInfo = playerInfo ?? value; }
+    // Powerup Duration
+    protected float startTime = 0f, tick = 0.25f;
+    public virtual float Duration { get => 0f; }
+    public float StartTime { get => startTime; }
+    public float EndTime { get => StartTime + Duration; }
+    private IEnumerator effectCoroutine;
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.TryGetComponent<PlayerInfo>(out var owner)) {
-            var powerupType = System.Type.GetType(powerupName);
-
-            var existingPowerup = owner.Player.gameObject.GetComponent(powerupType);
-            if (existingPowerup == null) {
-                var addedPowerup = owner.Player.AddComponent(powerupType);
-                if (typeof(BaseEffect).IsAssignableFrom(addedPowerup.GetType())) {
-                    Debug.Log("Starting juggernaut effect");
-                    ((BaseEffect) addedPowerup).StartEffect();
-                } else if (typeof(BaseItem).IsAssignableFrom(addedPowerup.GetType())) {
-                    // ??
-                }
-            } else {
-                if (typeof(BaseEffect).IsAssignableFrom(existingPowerup.GetType())) {
-                    ((BaseEffect) existingPowerup).ExtendEffect();
-                } else if (typeof(BaseItem).IsAssignableFrom(existingPowerup.GetType())) {
-                    // ??
-                }
+        if (playerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out playerInfo)) {
+            Debug.Log("Something went right (?) with powerup collision.");
+            if (!playerInfo.Player.TryGetComponent(this.GetType(), out var powerup)) {
+                powerup = playerInfo.Player.AddComponent(this.GetType());
             }
-
+            ((Powerup) powerup).PlayerInfo = playerInfo;
+            ((Powerup) powerup).Activate();
+            
             Destroy(gameObject);
+        } else {
+            Debug.Log("Something went wrong with powerup collision.");
         }
+    }
+
+    public virtual void Activate() {
+        if (effectCoroutine == null) {
+            StartPowerup();
+        } else {
+            ExtendPowerup();
+        }
+    }
+
+    public virtual void StartPowerup() {
+        startTime = Time.time;
+        effectCoroutine = RunPowerup();
+        StartCoroutine(effectCoroutine);
+
+    }
+
+    public virtual void ExtendPowerup() {
+        startTime = Time.time;
+    }
+
+    public IEnumerator RunPowerup() {
+        while (true) {
+            TickPowerup();
+            if (Time.time >= EndTime) {
+                EndPowerup();
+            }
+            yield return new WaitForSeconds(tick);
+        }
+    }
+
+    public virtual void TickPowerup() {
+    }
+
+    public virtual void EndPowerup() {
+        Destroy(GetComponent(this.GetType()));
     }
 }

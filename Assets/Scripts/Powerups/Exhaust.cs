@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exhaust : BaseEffect
+public class Exhaust : Powerup
 {
     private float duration = 2f;
     public override float Duration { get => duration; }
 
-    public override void StartEffect() {
+    public override void StartPowerup() {
         playerInfo.AttackMultiplier /= 2;
         playerInfo.CooldownMultiplier *= 2;
-        base.StartEffect();
+        base.StartPowerup();
     }
-    public override void EndEffect()
+    public override void EndPowerup()
     {
         playerInfo.AttackMultiplier *= 2;
         playerInfo.CooldownMultiplier /= 2;
-        base.EndEffect();
+        base.EndPowerup();
     }
 }

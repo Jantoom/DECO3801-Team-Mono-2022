@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : Powerup
+public class LongRange : Powerup
 {
     private float duration = 10f;
     public override float Duration { get => duration; }
-    private Object laserBombPrefab;
+    private Object longRangeBombPrefab;
 
     void Awake() {
-        laserBombPrefab = Resources.Load("Prefabs/Bombs/LaserBomb");
+        longRangeBombPrefab = Resources.Load("Prefabs/Bombs/LongRangeBomb");
     }
-
+    
     public override void StartPowerup()
     {
-        playerInfo.BombPrefab = laserBombPrefab;
+        playerInfo.BombPrefab = longRangeBombPrefab;
         base.StartPowerup();
     }
 

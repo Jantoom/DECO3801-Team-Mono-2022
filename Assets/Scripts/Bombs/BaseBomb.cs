@@ -19,7 +19,7 @@ public abstract class BaseBomb : MonoBehaviour, IDestructible
         StartCoroutine(StartExplosion());
     }
 
-    private IEnumerator StartExplosion() {
+    protected virtual IEnumerator StartExplosion() {
         yield return new WaitForSeconds(delay);
         if (!isExploding) StartCoroutine(Explode());
     }

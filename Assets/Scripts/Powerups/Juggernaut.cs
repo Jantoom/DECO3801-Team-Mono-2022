@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Juggernaut : BaseEffect
+public class Juggernaut : Powerup
 {
     private float duration = 3f;
     public override float Duration { get => duration; }
 
-    public override void StartEffect() {
+    public override void StartPowerup() {
         playerInfo.AttackMultiplier *= 100;
-        base.StartEffect();
+        base.StartPowerup();
     }
-    public override void EndEffect()
+    public override void EndPowerup()
     {
         playerInfo.AttackMultiplier /= 100;
-        Debug.Log("Ending juggernaut");
-        base.EndEffect();
+        base.EndPowerup();
     }
 }

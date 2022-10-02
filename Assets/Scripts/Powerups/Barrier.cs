@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : BaseEffect
+public class Barrier : Powerup
 {
     private float duration = 3f;
     public override float Duration { get => duration; }
 
-    public override void StartEffect() {
+    public override void StartPowerup() {
         playerInfo.Shield += 9999;
-        base.StartEffect();
+        base.StartPowerup();
     }
-    public override void EndEffect()
+    public override void EndPowerup()
     {
         playerInfo.Shield -= 9999;
-        base.EndEffect();
+        base.EndPowerup();
     }
 }

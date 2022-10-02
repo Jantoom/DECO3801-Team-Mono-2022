@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heal : BaseEffect
+public class Heal : Powerup
 {
     private int healAmount = 100;
 
-    public override void StartEffect() {
+    public override void StartPowerup() {
         playerInfo.Health += healAmount;
-        EndEffect();
+        EndPowerup();
     }
 }
