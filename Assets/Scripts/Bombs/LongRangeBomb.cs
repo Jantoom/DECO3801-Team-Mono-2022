@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDestructible
+public class LongRangeBomb : BaseBomb
 {
-    public void TakeDamage(int damage);
 }
