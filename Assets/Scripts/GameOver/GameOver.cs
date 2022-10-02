@@ -34,6 +34,7 @@ public class GameOver : MonoBehaviour
             winnerText.text = "Winner is";
             winnerNameText.text = "Player 1";//?
             gameOverButton.SetActive(true);
+            FindObjectOfType<AudioManager>().stop("GameMusic");
         }
     }
 
