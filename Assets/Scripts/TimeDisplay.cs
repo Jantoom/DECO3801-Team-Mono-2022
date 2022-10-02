@@ -19,7 +19,7 @@ public class TimeDisplay : MonoBehaviour
 
     private void Start()
     {
-        timeAmount = 10;
+        timeAmount = 600;
     }
     void Update()
     {
