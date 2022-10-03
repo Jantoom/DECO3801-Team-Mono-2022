@@ -16,7 +16,6 @@ public abstract class Powerup : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if (playerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out playerInfo)) {
-            Debug.Log("Something went right (?) with powerup collision.");
             if (!playerInfo.Player.TryGetComponent(this.GetType(), out var powerup)) {
                 powerup = playerInfo.Player.AddComponent(this.GetType());
             }
@@ -24,8 +23,6 @@ public abstract class Powerup : MonoBehaviour
             ((Powerup) powerup).Activate();
             
             Destroy(gameObject);
-        } else {
-            Debug.Log("Something went wrong with powerup collision.");
         }
     }
 
