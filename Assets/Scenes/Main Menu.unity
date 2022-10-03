@@ -461,6 +461,18 @@ MonoBehaviour:
           m_StringArgument: MVP
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1100783558}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: ChangeMusic
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuMusic,GameMusic
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &233288308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,9 +1981,15 @@ MonoBehaviour:
   sounds:
   - clipName: GameMusic
     clip: {fileID: 8300000, guid: de662a938bc518745912e89fe8eef902, type: 3}
-    vol: 0.294
-    pitch: 1.27
-    loop: 0
+    vol: 0.25
+    pitch: 1.68
+    loop: 1
+    source: {fileID: 0}
+  - clipName: MenuMusic
+    clip: {fileID: 8300000, guid: ef43ecbf55f98bf488c9f630b56db192, type: 3}
+    vol: 0.25
+    pitch: 0.47
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &1100783559
 Transform:

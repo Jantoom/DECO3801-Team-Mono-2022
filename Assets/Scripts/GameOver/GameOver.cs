@@ -12,10 +12,12 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject gameOverButton;
     TimeDisplay timeValue;
+    bool timeIsAlreadyOver;
 
     private void Awake()
     {
         timeValue = GameObject.Find("TimeDisplayManager").GetComponent<TimeDisplay>();
+        timeIsAlreadyOver = false;
     }
     void Update()
     {
@@ -24,11 +26,11 @@ public class GameOver : MonoBehaviour
     }
     void DisplayGameOverScreen()
     {
-        if(timeValue.IsTimeOver())
+        if(timeValue.IsTimeOver() && !timeIsAlreadyOver)
         {
             Debug.Log(timeValue.IsTimeOver());
 
-
+            timeIsAlreadyOver = true;
             gameOverScreen.SetActive(true);
             gameOverText.text = "Game Over";
             winnerText.text = "Winner is";
