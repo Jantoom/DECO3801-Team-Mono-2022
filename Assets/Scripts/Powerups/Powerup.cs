@@ -13,6 +13,8 @@ public abstract class Powerup : MonoBehaviour
     public float StartTime { get => startTime; }
     public float EndTime { get => StartTime + Duration; }
     private IEnumerator effectCoroutine;
+    // Powerup Type
+    public virtual bool IsItem { get => false; }
 
     void OnCollisionEnter(Collision collision) {
         if (playerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out playerInfo)) {
@@ -28,6 +30,9 @@ public abstract class Powerup : MonoBehaviour
 
     public virtual void Activate() {
         if (effectCoroutine == null) {
+            foreach (var powerup in playerInfo.Player.GetComponents<Powerup>()) {
+                if (powerup.IsItem && powerup != this) powerup.EndPowerup();
+            }
             StartPowerup();
         } else {
             ExtendPowerup();
