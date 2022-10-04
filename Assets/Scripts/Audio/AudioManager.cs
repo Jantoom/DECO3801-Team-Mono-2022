@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         Debug.Log("Name: " + scene.name);
 
-        if (audioInstance == null)
+       /* if (audioInstance == null)
         {
             audioInstance = this;
             Debug.Log("null");
@@ -38,14 +38,14 @@ public class AudioManager : MonoBehaviour
 
             Debug.Log("destroy");
             return;
-        }
-        Debug.Log("destroylddddddddddddd");
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("destroylooooooad");
+        }*/
+       
+        //DontDestroyOnLoad(gameObject);
+
 
         foreach (Sound music in sounds)
         {
-            Debug.Log("music1");
+            //Debug.Log("music1");
             music.source = gameObject.AddComponent<AudioSource>();
             music.source.clip = music.clip;
             music.source.volume = music.vol;
@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
   void Start()
     {
         Debug.Log("start");
-        play("MenuMusic");
+        play("GameMusic");
 
     }
    /* void Update()
@@ -114,29 +114,12 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("change");
         string[] musics = music.Split(",");
-            Debug.Log("1");
-        Debug.Log(musics[0]);
         stop(musics[0]);
-
-        Debug.Log("2");
-        Debug.Log(musics[1]);
         play(musics[1]);
 
     }
 
-    public void ChangeMusic2(string music)
-    {
-        Debug.Log("change2");
-        string[] musics = music.Split(",");
-        if (IsAudioPlaying(musics[0]))
-        {
-            Debug.Log("1");
-            stop(musics[0]);
-        }
-        Debug.Log("2");
-        play(musics[1]);
 
-    }
 
 
 }

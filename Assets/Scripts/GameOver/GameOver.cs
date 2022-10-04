@@ -13,7 +13,8 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverButton;
     TimeDisplay timeValue;
     bool timeIsAlreadyOver;
-
+    //public AudioSource audioo;
+   // public AudioSource newaudioo;
     private void Awake()
     {
         timeValue = GameObject.Find("TimeDisplayManager").GetComponent<TimeDisplay>();
@@ -37,6 +38,10 @@ public class GameOver : MonoBehaviour
             winnerNameText.text = "Player 1";//?
             gameOverButton.SetActive(true);
             FindObjectOfType<AudioManager>().stop("GameMusic");
+            FindObjectOfType<AudioManager>().play("WinSound");
+
+            //audioo.Stop();
+            //newaudioo.Play();
         }
     }
 
