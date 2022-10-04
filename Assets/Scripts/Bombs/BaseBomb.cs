@@ -42,7 +42,6 @@ public abstract class BaseBomb : MonoBehaviour, IDestructible
                 var spawnPos = transform.position + direction * radius;
                 foreach (var collider in Physics.OverlapSphere(spawnPos, 0.3f)) {
                     if (collider.gameObject.TryGetComponent<WallStrong>(out var temp)) {
-                        Debug.Log("blocked");
                         blocked = true;
                         break;
                     }

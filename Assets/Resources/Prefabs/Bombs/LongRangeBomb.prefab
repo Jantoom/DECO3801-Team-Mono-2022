@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 8431613691879521690, guid: dc16846eff7171f49ac3efb2bd80a2b7,
     type: 3}
-  range: 3
+  range: 5
   damage: 100
   delay: 2
   speed: 0.1
