@@ -47,7 +47,6 @@ public class TerrainGenerator : MonoBehaviour
 
     private IEnumerator GenerateTerrain() {
         for (var terrainCount = 1; terrainCount < MAX_TERRAINS_PER_MAP; terrainCount++) {
-            Debug.Log(terrainCount);
             var terrainPref = PickNextRandomValidTerrain();
             var terrainObj = new GameObject($"Terrain{terrainCount} ({terrainPref.name})");
             terrainObj.transform.SetParent(mapObj.transform, false);
