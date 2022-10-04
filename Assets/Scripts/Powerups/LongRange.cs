@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LongRange : Powerup
 {
+    public override bool IsItem { get => true; }
     private float duration = 10f;
     public override float Duration { get => duration; }
     private Object longRangeBombPrefab;
