@@ -52,6 +52,7 @@ public class TerrainGenerator : MonoBehaviour
             terrainObj.transform.localPosition = Vector3.forward * NUM_ROWS_PER_TERRAIN * terrainCount;
 
             for (var rowCount = 0; rowCount < NUM_ROWS_PER_TERRAIN; rowCount++) {
+                Debug.Log("Generating!");
                 GenerateRow(terrainPref, terrainObj, rowCount);
                 yield return new WaitForSeconds(GENERATION_COOLDOWN);
             }
