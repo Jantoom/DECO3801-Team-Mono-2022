@@ -2136,6 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a458557a5c46cdc44a4983f31b16dba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeAmount: 0
   timeT: {fileID: 1772632883}
 --- !u!4 &801116590
 Transform:
@@ -5146,13 +5147,19 @@ PrefabInstance:
     - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
       propertyPath: terrainPrefabs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
       propertyPath: terrainPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 1750576853607991601, guid: c66d65caefc320b42afaf5274130a0f9,
+        type: 3}
+    - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
+        type: 3}
+      propertyPath: terrainPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1750576853607991601, guid: e4e098e972d5bf640b6de41b2f8e2c25,
         type: 3}
     - target: {fileID: 529883094851172841, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}

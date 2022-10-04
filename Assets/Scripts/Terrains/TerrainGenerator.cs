@@ -33,7 +33,8 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     private IEnumerator GenerateInitialTerrain() {
-        var terrainPref = PickNextRandomValidTerrain();
+        // Only valid starting prefab so far
+        var terrainPref = terrainPrefabs[0]; // PickNextRandomValidTerrain();
         var terrainObj = new GameObject($"Terrain{0} ({terrainPref.name})");
         terrainObj.transform.SetParent(mapObj.transform, false);
         terrainObj.transform.localPosition = Vector3.forward * NUM_ROWS_PER_TERRAIN * 0;
@@ -46,17 +47,18 @@ public class TerrainGenerator : MonoBehaviour
 
     private IEnumerator GenerateTerrain() {
         for (var terrainCount = 1; terrainCount < MAX_TERRAINS_PER_MAP; terrainCount++) {
+            Debug.Log(terrainCount);
             var terrainPref = PickNextRandomValidTerrain();
             var terrainObj = new GameObject($"Terrain{terrainCount} ({terrainPref.name})");
             terrainObj.transform.SetParent(mapObj.transform, false);
             terrainObj.transform.localPosition = Vector3.forward * NUM_ROWS_PER_TERRAIN * terrainCount;
 
             for (var rowCount = 0; rowCount < NUM_ROWS_PER_TERRAIN; rowCount++) {
-                Debug.Log("Generating!");
                 GenerateRow(terrainPref, terrainObj, rowCount);
                 yield return new WaitForSeconds(GENERATION_COOLDOWN);
             }
         }
+        isGenerating = false;
     }
 
     private void GenerateRow(GameObject terrainPref, GameObject terrainObj, int rowCount) {
