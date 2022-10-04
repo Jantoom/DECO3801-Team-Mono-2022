@@ -382,7 +382,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &103002181
 MonoBehaviour:
@@ -400,7 +400,7 @@ MonoBehaviour:
   - clipName: GameMusic
     clip: {fileID: 8300000, guid: de662a938bc518745912e89fe8eef902, type: 3}
     vol: 0.164
-    pitch: 0.88
+    pitch: 0.85
     loop: 1
     source: {fileID: 0}
   - clipName: WinSound
@@ -1709,9 +1709,7 @@ Transform:
   - {fileID: 1047439666}
   - {fileID: 1508330650}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_RootOrder: 4
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &562141631 stripped
 Transform:
@@ -1925,8 +1923,7 @@ Transform:
   - {fileID: 230222812}
   - {fileID: 1739098045}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_RootOrder: 5
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &701814158 stripped
 Transform:
@@ -2118,8 +2115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &778473276
 MonoBehaviour:
@@ -2238,8 +2234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &828245021
 GameObject:
@@ -2343,7 +2338,6 @@ RectTransform:
   - {fileID: 1059256098}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2578,8 +2572,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &985340470
 MonoBehaviour:
@@ -2969,7 +2962,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1046168089
 MonoBehaviour:
@@ -3534,8 +3527,7 @@ Transform:
   - {fileID: 1599081085}
   - {fileID: 1584753737}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_RootOrder: 3
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1293620076
 PrefabInstance:
@@ -4987,8 +4979,7 @@ Transform:
   m_Children:
   - {fileID: 1311179630}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1949429155 stripped
 Transform:
