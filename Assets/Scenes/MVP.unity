@@ -5243,7 +5243,7 @@ PrefabInstance:
     - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
       propertyPath: terrainPrefabs.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
@@ -5262,6 +5262,18 @@ PrefabInstance:
       propertyPath: terrainPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 1750576853607991601, guid: 1c9d3f975214c9c40aa53a2c5cff7bba,
+        type: 3}
+    - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
+        type: 3}
+      propertyPath: terrainPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1750576853607991601, guid: 63cc5e88b2a54f343bf48b9cbaa4842f,
+        type: 3}
+    - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
+        type: 3}
+      propertyPath: terrainPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 1750576853607991601, guid: a520cfe5caf8c1748a6287034fdfeb0f,
         type: 3}
     - target: {fileID: 529883094851172841, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
