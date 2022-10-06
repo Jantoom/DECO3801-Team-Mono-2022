@@ -60,5 +60,6 @@ public abstract class BaseBomb : MonoBehaviour, IDestructible
         } while (radius < range);
 
         Destroy(gameObject);
+        FindObjectOfType<AudioManager>().play("BombSound");
     }
 }
