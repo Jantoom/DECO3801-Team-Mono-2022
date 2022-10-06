@@ -11,6 +11,7 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController animController;
     private GameObject mapObj, cameraObj;
     private bool isGenerating = false;
+    public bool IsGenerating { get => isGenerating; }
     private Queue<GameObject> activeRows = new();
 
     void Start()
@@ -92,7 +93,7 @@ public class TerrainGenerator : MonoBehaviour
         yield return new WaitForSeconds(GENERATION_SPEED);
 
         Destroy(rowObj);
-        if (terrainObj.transform.childCount == 0) {
+        if (terrainObj.transform.childCount == 1) {
             Destroy(terrainObj);
         }
     }
