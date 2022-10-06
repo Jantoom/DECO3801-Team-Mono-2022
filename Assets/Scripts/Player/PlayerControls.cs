@@ -6,7 +6,7 @@ using System.IO.Ports;
 public class PlayerControls : MonoBehaviour
 {
     // Serial Port Comms from arduino
-    SerialPort sp = new SerialPort("COM3", 9600);
+    SerialPort sp = new SerialPort("COM4", 9600);
     int movement; 
 
     private PlayerInfo playerInfo;
@@ -44,13 +44,13 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        // Serial port input
+        // Serial port inputs
         if (sp.IsOpen)
         {
             try
             {
                 movement = sp.ReadByte();
-                //print(sp.ReadByte());
+                print(sp.ReadByte());
                 if (moveStatus == MoveCode.STATIONARY)
                 {
                     Vector3 direction = Vector3.zero;

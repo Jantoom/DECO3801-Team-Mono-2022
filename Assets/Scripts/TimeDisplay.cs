@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class TimeDisplay : MonoBehaviour
 {
-    float timeAmount;//static float timeAmount;
+    public float timeAmount;
     public TMP_Text timeT;
     // Use a singleton class or combine gameover class with this one or use static variable
     /*public TMP_Text gameOverText;
