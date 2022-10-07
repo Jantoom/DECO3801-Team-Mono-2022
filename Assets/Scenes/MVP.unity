@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1931,6 +1931,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 170457739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &728879456
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7573642678823292322, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_Name
+      value: Abyss
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292323, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573642678823292350, guid: e6c3fdc7431880c47b34997631ec1718,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6c3fdc7431880c47b34997631ec1718, type: 3}
 --- !u!1001 &758843403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4053,6 +4127,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 315641052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1537060470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 529883094851172841, guid: 8b320e8f658de984089b43796d35a45b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1590969234072500632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1537060474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537060470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ec23135a81f744da1861eddf53dfc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1584753737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
