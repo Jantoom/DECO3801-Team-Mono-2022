@@ -10,16 +10,12 @@ public class TimeDisplay : MonoBehaviour
 {
     public float timeAmount;
     public TMP_Text timeT;
-    // Use a singleton class or combine gameover class with this one or use static variable
-    /*public TMP_Text gameOverText;
-    public TMP_Text winnerText;
-    public TMP_Text winnerNameText;
-    public GameObject gameOverScreen;*/
-    //
+
+
 
     private void Start()
     {
-        timeAmount = 600;
+        timeAmount = 60;
     }
     void Update()
     {
@@ -29,7 +25,7 @@ public class TimeDisplay : MonoBehaviour
         } else
         {
             timeAmount = 0;
-           // DisplayGameOverScreen();
+            GameOverInfo.isGameOver = true;
 
 
         }
@@ -47,18 +43,17 @@ public class TimeDisplay : MonoBehaviour
     }
     public Boolean IsTimeOver()
     {
-        return timeAmount <= 0;
+        if( timeAmount <= 0)
+        {
+            GameOverInfo.isGameOver = true;//
+
+            return true;
+        }
+        return false;
     }
     public float getTime()
     {
         return timeAmount;
     }
 
-    /*void DisplayGameOverScreen() { 
-    
-         gameOverScreen.SetActive(true);
-         gameOverText.text = "Game Over";
-         winnerText.text = "Winner is";
-         winnerNameText.text = "Player 1";//?
-    }*/
 }
