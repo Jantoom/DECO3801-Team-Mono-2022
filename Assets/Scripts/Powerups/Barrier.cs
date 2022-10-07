@@ -8,12 +8,12 @@ public class Barrier : Powerup
     public override float Duration { get => duration; }
 
     public override void StartPowerup() {
-        playerInfo.Shield += 9999;
+        playerInfo.Invincible = true;
         base.StartPowerup();
     }
     public override void EndPowerup()
     {
-        playerInfo.Shield -= 9999;
+        playerInfo.Invincible = false;
         base.EndPowerup();
     }
 }

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    [SerializeField]
-    private int damage = GameInfo.BASE_HEALTH;
-    [SerializeField]
+    private int damage = GameInfo.BASE_HEALTH * 10;
     private float persistence = 0.2f;
     private PlayerInfo owner = null;
     public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }
