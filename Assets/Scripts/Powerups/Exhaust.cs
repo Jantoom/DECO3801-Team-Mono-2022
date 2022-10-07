@@ -8,14 +8,12 @@ public class Exhaust : Powerup
     public override float Duration { get => duration; }
 
     public override void StartPowerup() {
-        playerInfo.AttackMultiplier /= 2;
-        playerInfo.CooldownMultiplier *= 2;
+        playerInfo.Exhaust = true;
         base.StartPowerup();
     }
     public override void EndPowerup()
     {
-        playerInfo.AttackMultiplier *= 2;
-        playerInfo.CooldownMultiplier /= 2;
+        playerInfo.Exhaust = false;
         base.EndPowerup();
     }
 }

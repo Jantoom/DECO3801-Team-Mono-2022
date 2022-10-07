@@ -11,11 +11,14 @@ public class PlayerDestruction : MonoBehaviour, IDestructible
     }
 
     public void TakeDamage(int damage) {
-        var damageOverflow = Mathf.Max(damage - playerInfo.Shield, 0);
-        playerInfo.Shield -= damage;
-        playerInfo.Health -= damageOverflow;
-        if (playerInfo.Health == 0) {
-            Destroy(gameObject);
+        var health = playerInfo.Health;
+        playerInfo.Health -= damage;
+        if (health > playerInfo.Health) {
+            // Took actual damage/lost a life
+            if (playerInfo.Health == 0) {
+                // Has no more lives
+                Destroy(gameObject);
+            }
         }
     }
 }

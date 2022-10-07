@@ -9,7 +9,7 @@ public abstract class BaseBomb : MonoBehaviour, IDestructible
     [SerializeField]
     protected int range = 3;
     [SerializeField]
-    protected float damage = GameInfo.BASE_HEALTH, delay = 2.0f, speed = 0.1f;
+    protected float delay = 2.0f, speed = 0.1f;
     protected PlayerInfo owner = null;
     protected bool isExploding = false;
     public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }
