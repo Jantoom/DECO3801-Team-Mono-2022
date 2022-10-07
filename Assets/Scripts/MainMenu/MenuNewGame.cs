@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class MenuNewGame : MonoBehaviour
 {
-
-    public void loadNewGame(string gameScene)
+    [SerializeField]
+    string gameScene;
+    private void Update()
     {
-        SceneManager.LoadScene(gameScene);
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(gameScene);
+        }
     }
+
+
 
 
 }
