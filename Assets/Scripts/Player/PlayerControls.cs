@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
 
 public class PlayerControls : MonoBehaviour
 {
+    // Serial Port Comms from arduino
+    SerialPort sp = new SerialPort("COM4", 9600);
+    int movement; 
+
     private PlayerInfo playerInfo;
     // Player Controls
     [SerializeField]
@@ -25,6 +30,12 @@ public class PlayerControls : MonoBehaviour
     private MoveCode moveStatus = MoveCode.STATIONARY;
     public MoveCode MoveStatus { get => moveStatus; }
 
+    private void Start()
+    {
+        // Opens port and sets a timeout between reads
+        sp.Open();
+        sp.ReadTimeout = 1;
+    }
     void Awake()
     {
         playerInfo = GetComponent<PlayerInfo>();
@@ -33,6 +44,34 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        // Serial port inputs
+        if (sp.IsOpen)
+        {
+            try
+            {
+                movement = sp.ReadByte();
+                print(sp.ReadByte());
+                if (moveStatus == MoveCode.STATIONARY)
+                {
+                    Vector3 direction = Vector3.zero;
+                    if (movement == 1)
+                    {
+                        direction = Vector3.forward;
+                    }
+                    if (direction != Vector3.zero)
+                    {
+                        moveCoroutine = MovePlayer(direction);
+                        StartCoroutine(moveCoroutine);
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+
+            }
+        }
+
+        // Keyboard input
         if (moveStatus == MoveCode.STATIONARY) {
             if (Input.GetKeyDown(bombKey)) {
                 Instantiate(playerInfo.BombPrefab, transform.position, transform.rotation);

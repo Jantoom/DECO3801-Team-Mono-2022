@@ -19,7 +19,7 @@ public class PlayerInfo : MonoBehaviour
     public float CooldownMultiplier { get => cooldownMultiplier; set => cooldownMultiplier = Mathf.Max(value, 0); }
     // Player Bomb
     private Object defaultBombPrefab = null, overrideBombPrefab = null;
-    public Object BombPrefab { get => overrideBombPrefab ?? defaultBombPrefab; set => overrideBombPrefab = value; }
+    public Object BombPrefab { get => overrideBombPrefab != null ? overrideBombPrefab : defaultBombPrefab; set => overrideBombPrefab = value; }
     // Player Item (only useful if we decide to separate controls for items and bombs)
     private Object itemPrefab = null;
     public Object ItemPrefab { get => itemPrefab; set => itemPrefab = value; }
