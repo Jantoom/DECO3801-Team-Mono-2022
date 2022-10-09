@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBomb : BaseBomb
+public class Laser : MonoBehaviour
 {
-    protected override IEnumerator Explode() {
-        isExploding = true;
-        explosionPrefab.GetComponent<Explosion>().Owner = owner;
+    [SerializeField]
+    protected GameObject beamPrefab;
+    [SerializeField]
+    protected int range = 3;
+    protected PlayerInfo owner = null;
+    public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }
+
+    void Start()
+    {
+        beamPrefab.GetComponent<Explosion>().Owner = owner;
         var length = 1;
         do {
             var blocked = false;
@@ -20,12 +27,11 @@ public class LaserBomb : BaseBomb
             if (blocked) {
                 break;
             } else {
-                var explosion = Instantiate(explosionPrefab, spawnPos, transform.rotation);
+                var explosion = Instantiate(beamPrefab, spawnPos, transform.rotation);
             }
             length++;
         } while (length < range);
 
         Destroy(gameObject);
-        yield return null;
     }
 }
