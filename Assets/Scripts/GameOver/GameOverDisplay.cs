@@ -9,6 +9,7 @@ public class GameOverDisplay : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text gameOverText, winnerText, winnerNameText, menuText;
+
     [SerializeField]
     GameObject gameOverScreen;
     TimeDisplay timeValue;
@@ -21,6 +22,7 @@ public class GameOverDisplay : MonoBehaviour
 
         timeValue = GameObject.Find("TimeDisplayManager").GetComponent<TimeDisplay>();
         displayGameOver = false;
+ 
 
 
     }
@@ -47,7 +49,7 @@ public class GameOverDisplay : MonoBehaviour
         gameOverScreen.SetActive(true);
         gameOverText.text = "Game Over";
         winnerText.text = "Winner is";
-        winnerNameText.text = "Player 1";//?
+        winnerNameText.text = GameOverInfo.winner;//
         menuText.text = "Sit on any chair to go back to the Main Menu (Press 1)";
 
         //gameOverButton.SetActive(true);
