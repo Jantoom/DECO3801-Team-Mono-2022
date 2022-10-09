@@ -21,8 +21,8 @@ public class PlayerControls : MonoBehaviour
     public KeyCode ItemKey { get => itemKey; }
     // Player Cooldowns
     private float timeToMove = 0.1f, timeToRebound = 0.25f;
-    public float TimeToMove { get => timeToMove * playerInfo.CooldownMultiplier; }
-    public float TimeToRebound { get => timeToRebound * playerInfo.CooldownMultiplier; }
+    public float TimeToMove { get => timeToMove * (playerInfo.Exhaust ? 10 : 1); }
+    public float TimeToRebound { get => timeToRebound * (playerInfo.Exhaust ? 10 : 1); }
     // Moving
     private int REBOUND_LAYER;
     private Vector3 origPosition, targetPosition;
@@ -75,6 +75,10 @@ public class PlayerControls : MonoBehaviour
         if (moveStatus == MoveCode.STATIONARY) {
             if (Input.GetKeyDown(bombKey)) {
                 Instantiate(playerInfo.BombPrefab, transform.position, transform.rotation);
+            }
+            else if (Input.GetKeyDown(itemKey)) {
+                var powerup = playerInfo.LoadedPowerup;
+                if (powerup != null) powerup.Activate();
             }
             Vector3 direction = Vector3.zero;
             if (Input.GetKeyDown(forwardKey)) {

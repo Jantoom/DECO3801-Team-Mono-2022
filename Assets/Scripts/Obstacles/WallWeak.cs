@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallWeak : MonoBehaviour, IDestructible
 {
-    private int health = 2;
+    private int health = GameInfo.BASE_HEALTH * 10;
     public int Health { get => health; }
 
     public void TakeDamage(int damage) {

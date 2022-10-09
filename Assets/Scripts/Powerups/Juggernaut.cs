@@ -8,12 +8,12 @@ public class Juggernaut : Powerup
     public override float Duration { get => duration; }
 
     public override void StartPowerup() {
-        playerInfo.AttackMultiplier *= 100;
+        playerInfo.Juggernaut = true;
         base.StartPowerup();
     }
     public override void EndPowerup()
     {
-        playerInfo.AttackMultiplier /= 100;
+        playerInfo.Juggernaut = false;
         base.EndPowerup();
     }
 }
