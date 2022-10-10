@@ -5,39 +5,42 @@ using UnityEngine;
 public abstract class Powerup : MonoBehaviour
 {
     // Powerup Owner
-    protected PlayerInfo playerInfo;
-    // Powerup Duration
-    protected float startTime = 0f, tick = 0.10f;
-    public virtual float Duration { get => 0f; }
-    public float StartTime { get => startTime; }
-    public float EndTime { get => StartTime + Duration; }
+    public PlayerInfo PlayerInfo;
     // Powerup State
     public bool Activated = false;
-    public virtual bool IsItem { get => false; }
-
+    // Powerup Duration
+    protected float startTime = 0f, tick = 0.10f;
+    public float Duration;
+    public float StartTime { get => startTime; }
+    public float EndTime { get => StartTime + Duration; }
+    
     void Start() {
-        playerInfo = gameObject.GetComponent<PlayerInfo>();
+        PlayerInfo = gameObject.GetComponent<PlayerInfo>();
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (playerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out playerInfo) && playerInfo.LoadedPowerup == null) {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo) && PlayerInfo.LoadedPowerup == null) {
             // Collision is a first encounter with a player not currently holding an unactivated powerup
-            var powerup = (Powerup) playerInfo.Player.AddComponent(this.GetType());
-            playerInfo.LoadedPowerup = powerup;
+            var powerup = (Powerup) PlayerInfo.Player.AddComponent(this.GetType());
+            PlayerInfo.LoadedPowerup = powerup;
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }
     }
 
+    public virtual void KillDuplicatePowerups() {
+        foreach (var powerup in PlayerInfo.GetComponents(this.GetType())) {
+            // Kill any activated powerups of the same type (effectively refreshes the powerup)
+            if (powerup != this) {
+                ((Powerup) powerup).EndPowerup();
+            }
+        }
+    }
+
     public virtual void Activate() {
         if (!Activated) {
-            foreach (var powerup in playerInfo.GetComponents(this.GetType())) {
-                // Kill any activated powerups of the same type (effectively refreshes the powerup)
-                if (powerup != this) {
-                    ((Powerup) powerup).EndPowerup();
-                }
-            }
-            playerInfo.LoadedPowerup = null;
+            KillDuplicatePowerups();
+            PlayerInfo.LoadedPowerup = null;
             Activated = true;
             StartPowerup();
         }
@@ -49,13 +52,11 @@ public abstract class Powerup : MonoBehaviour
     }
 
     public IEnumerator RunPowerup() {
-        while (true) {
+        while (Time.time < EndTime) {
             TickPowerup();
-            if (Time.time >= EndTime) {
-                EndPowerup();
-            }
             yield return new WaitForSeconds(tick);
         }
+        EndPowerup();
     }
 
     public virtual void TickPowerup() {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseBomb : MonoBehaviour, IDestructible
+public class Bomb : MonoBehaviour, IDestructible
 {
     [SerializeField]
     protected GameObject explosionPrefab;
@@ -30,36 +30,20 @@ public abstract class BaseBomb : MonoBehaviour, IDestructible
 
     protected virtual IEnumerator Explode() {
         isExploding = true;
+        FindObjectOfType<AudioManager>().play("BombSound");
         gameObject.GetComponent<Renderer>().enabled = false;
         explosionPrefab.GetComponent<Explosion>().Owner = owner;
-        
-        var directions = new List<Vector3> { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
-        var radius = 0;
-        do {
-            var removeList = new List<Vector3> {};
+
+        var directions = new Vector3[] { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        for (int radius = 0; radius < range; radius++) {
             foreach (var direction in directions) {
-                var blocked = false;
                 var spawnPos = transform.position + direction * radius;
-                foreach (var collider in Physics.OverlapSphere(spawnPos, 0.3f)) {
-                    if (collider.gameObject.TryGetComponent<WallStrong>(out var temp)) {
-                        blocked = true;
-                        break;
-                    }
-                }
-                if (blocked) {
-                    removeList.Add(direction);
-                } else {
-                    var explosion = Instantiate(explosionPrefab, spawnPos, Quaternion.identity);
-                }
+                Instantiate(explosionPrefab, spawnPos, Quaternion.identity);
             }
-            foreach (var direction in removeList) {
-                directions.Remove(direction);
-            }
-            radius++;
             yield return new WaitForSeconds(speed);
-        } while (radius < range);
+        }
 
         Destroy(gameObject);
-        FindObjectOfType<AudioManager>().play("BombSound");
     }
 }

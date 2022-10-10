@@ -21,8 +21,8 @@ public class PlayerControls : MonoBehaviour
     public KeyCode ItemKey { get => itemKey; }
     // Player Cooldowns
     private float timeToMove = 0.1f, timeToRebound = 0.25f;
-    public float TimeToMove { get => timeToMove * (playerInfo.Exhaust ? 10 : 1); }
-    public float TimeToRebound { get => timeToRebound * (playerInfo.Exhaust ? 10 : 1); }
+    public float TimeToMove { get => timeToMove * (playerInfo.Exhausted ? 10 : 1); }
+    public float TimeToRebound { get => timeToRebound * (playerInfo.Exhausted ? 10 : 1); }
     // Moving
     private int REBOUND_LAYER;
     private Vector3 origPosition, targetPosition;
@@ -44,6 +44,9 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        if (playerInfo.Frozen) {
+            return;
+        }
         // Serial port inputs
         if (sp.IsOpen)
         {
@@ -101,7 +104,7 @@ public class PlayerControls : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING)) {
+        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING) && !playerInfo.Ghosted) {
             if (!collision.gameObject.TryGetComponent<WallWeak>(out var wall) || wall.Health - playerInfo.Attack > 0) {
                 StopCoroutine(moveCoroutine);
                 StartCoroutine(ReboundPlayer());
