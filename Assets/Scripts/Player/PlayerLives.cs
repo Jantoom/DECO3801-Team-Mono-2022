@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerLives : MonoBehaviour
 {
     private PlayerInfo playerInfo;
-    //private string winner;
     //private bool isWinnerFound;
 
     [SerializeField]
@@ -15,23 +14,16 @@ public class PlayerLives : MonoBehaviour
     public Image Heart1 { get => heart1; }
     public Image Heart2 { get => heart2; }
     public Image Heart3 { get => heart3; }
-    //public string Winner { get => winner; }
-    //public void SetWinner (string name) { winner = name; }
 
     private void Awake()
     {
         playerInfo = GetComponent<PlayerInfo>();
-        //isWinnerFound = false;
-        //winner = "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log("Health is " + playerInfo.Health);
-        //Debug.Log("GameOver is " + GameOverInfo.isGameOver);
-        //Debug.Log(GameObject.Find("Player1"));
-        //Debug.Log(gameObject.ToString());
+            
         if (!GameOverInfo.isGameOver)
         {
             switch (playerInfo.Health)
@@ -39,23 +31,33 @@ public class PlayerLives : MonoBehaviour
 
                 case 20:
                     Heart1.gameObject.SetActive(false);
-
+                    Heart2.gameObject.SetActive(true);
+                    Heart3.gameObject.SetActive(true);
                     break;
                 case 10:
+                    Heart1.gameObject.SetActive(false);
                     Heart2.gameObject.SetActive(false);
+                    Heart3.gameObject.SetActive(true);
                     break;
                 case 0: //Game Over
+                    Heart1.gameObject.SetActive(false);
+                    Heart2.gameObject.SetActive(false);
                     Heart3.gameObject.SetActive(false);
-                    //if (!isWinnerFound) { SetWinner(gameObject.ToString()); isWinnerFound = true; Debug.Log(Winner); }
+
                     FindWinner();
                     GameOverInfo.isGameOver = true;
-                    //Destroy(gameObject);
+                    Destroy(gameObject);
                     break;
             }
         }
+        /*if (!GameOverInfo.isGameOver)
+    {
+        Debug.Log(gameObject.name + " damage is " + damage);
+        Debug.Log(gameObject.name + " health is " + playerInfo.Health);
+    }*/
 
 
-   }
+    }
 
     public void FindWinner()
     {
