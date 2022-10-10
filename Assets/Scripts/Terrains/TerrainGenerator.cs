@@ -101,4 +101,8 @@ public class TerrainGenerator : MonoBehaviour
     private GameObject PickNextRandomValidTerrain() {
         return terrainPrefabs[Random.Range(1, terrainPrefabs.Length)];
     }
+
+    public Queue<GameObject> getActiveRows() {
+        return activeRows;
+    }
 }
