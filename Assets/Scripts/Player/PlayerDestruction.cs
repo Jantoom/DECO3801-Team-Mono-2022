@@ -13,11 +13,12 @@ public class PlayerDestruction : MonoBehaviour, IDestructible
     public void TakeDamage(int damage) {
         if (damage > 0) {
             // Took actual damage/lost a life
+            
             playerInfo.Health -= GameInfo.BASE_HEALTH * 10; // Health regulation for under/overkill damage
-            if (playerInfo.Health == 0) {
+           /* if (playerInfo.Health == 0) {
                 // Has no more lives
                 Destroy(gameObject);
-            }
+            }*/
         }
     }
 }
