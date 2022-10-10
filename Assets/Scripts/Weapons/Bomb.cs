@@ -36,7 +36,7 @@ public class Bomb : MonoBehaviour, IDestructible
 
         var directions = new Vector3[] { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        for (int radius = 0; radius < range; radius++) {
+        for (int radius = 1; radius < range; radius++) {
             foreach (var direction in directions) {
                 var spawnPos = transform.position + direction * radius;
                 Instantiate(explosionPrefab, spawnPos, Quaternion.identity);
