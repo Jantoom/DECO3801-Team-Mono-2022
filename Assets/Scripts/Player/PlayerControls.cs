@@ -15,13 +15,13 @@ public class PlayerControls : MonoBehaviour
     // Player Controls
     [SerializeField]
     // Change int to KeyCode and enter keycodes 
-    private int forwardKey, backKey, leftKey, rightKey, bombKey, itemKey;
-    public int ForwardKey { get => forwardKey; }
-    public int BackKey { get => backKey; }
-    public int LeftKey { get => leftKey; }
-    public int RightKey { get => rightKey; }
-    public int BombKey { get => bombKey; }
-    public int ItemKey { get => itemKey; }
+    private KeyCode forwardKey, backKey, leftKey, rightKey, bombKey, itemKey;
+    public KeyCode ForwardKey { get => forwardKey; }
+    public KeyCode BackKey { get => backKey; }
+    public KeyCode LeftKey { get => leftKey; }
+    public KeyCode RightKey { get => rightKey; }
+    public KeyCode BombKey { get => bombKey; }
+    public KeyCode ItemKey { get => itemKey; }
     // Player Cooldowns
     private float timeToMove = 0.1f, timeToRebound = 0.25f;
     public float TimeToMove { get => timeToMove * (playerInfo.Exhausted ? 10 : 1); }
@@ -54,6 +54,7 @@ public class PlayerControls : MonoBehaviour
         }
         // Serial port inputs
         // COMMENT THIS SECTION IF YOU WANT TO PLAY WITH KEYBOARD
+        /*
         if (sp.IsOpen)
         {
             //print(forwardKey);
@@ -89,11 +90,11 @@ public class PlayerControls : MonoBehaviour
 
             }
         }
-        
+        */
 
         // UNCOMMENT THIS IF YOU WANT TO PLAY WITH KEYBOARD
         // also have to change int to keycode in keycodes and assign codes
-        /*
+        
         // Keyboard input
         if (moveStatus == MoveCode.STATIONARY) {
             if (Input.GetKeyDown(bombKey)) {
@@ -120,7 +121,7 @@ public class PlayerControls : MonoBehaviour
                 moveCoroutine = MovePlayer(direction);
                 StartCoroutine(moveCoroutine);
             }
-        }*/
+        }
     }
         
 
