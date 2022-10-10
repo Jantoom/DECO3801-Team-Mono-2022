@@ -14,8 +14,8 @@ public class Laser : MonoBehaviour
     void Start()
     {
         beamPrefab.GetComponent<Explosion>().Owner = owner;
-        var length = 1;
-        do {
+        
+        for (var length = 1; length < range; length++) {
             var blocked = false;
             var spawnPos = transform.position + transform.forward * length;
             foreach (var collider in Physics.OverlapSphere(spawnPos, 0.3f)) {
@@ -24,13 +24,10 @@ public class Laser : MonoBehaviour
                     break;
                 }
             }
-            if (blocked) {
-                break;
-            } else {
-                var explosion = Instantiate(beamPrefab, spawnPos, transform.rotation);
-            }
-            length++;
-        } while (length < range);
+            if (blocked) break;
+
+            Instantiate(beamPrefab, spawnPos, transform.rotation);
+        }
 
         Destroy(gameObject);
     }
