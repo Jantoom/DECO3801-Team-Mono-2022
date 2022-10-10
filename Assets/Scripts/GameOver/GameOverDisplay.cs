@@ -49,10 +49,8 @@ public class GameOverDisplay : MonoBehaviour
         gameOverScreen.SetActive(true);
         gameOverText.text = "Game Over";
         winnerText.text = "Winner is";
-        winnerNameText.text = GameOverInfo.winner;//
+        winnerNameText.text = GameOverInfo.winner;
         menuText.text = "Sit on any chair to go back to the Main Menu (Press 1)";
-
-        //gameOverButton.SetActive(true);
         FindObjectOfType<AudioManager>().stop("GameMusic");
         FindObjectOfType<AudioManager>().play("WinSound");
     }
