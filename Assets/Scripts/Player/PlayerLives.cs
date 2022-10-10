@@ -7,14 +7,10 @@ using UnityEngine.UI;
 public class PlayerLives : MonoBehaviour
 {
     private PlayerInfo playerInfo;
-    [SerializeField]
-    private KeyCode liveKey;
+    //private bool isWinnerFound;
 
     [SerializeField]
     private Image heart1, heart2, heart3;
-
-    bool gameOverCon;//
-    public KeyCode LiveKey { get => liveKey; }  
     public Image Heart1 { get => heart1; }
     public Image Heart2 { get => heart2; }
     public Image Heart3 { get => heart3; }
@@ -27,27 +23,50 @@ public class PlayerLives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(liveKey))
+            
+        if (!GameOverInfo.isGameOver)
         {
-            playerInfo.Health --;
-
             switch (playerInfo.Health)
             {
-                case 2:
-                    heart1.gameObject.SetActive(false);
+
+                case 20:
+                    Heart1.gameObject.SetActive(false);
+                    Heart2.gameObject.SetActive(true);
+                    Heart3.gameObject.SetActive(true);
                     break;
-                case 1:
-                    heart2.gameObject.SetActive(false);
+                case 10:
+                    Heart1.gameObject.SetActive(false);
+                    Heart2.gameObject.SetActive(false);
+                    Heart3.gameObject.SetActive(true);
                     break;
                 case 0: //Game Over
-                    heart3.gameObject.SetActive(false);
-                    GameOverInfo.isGameOver = true;//
+                    Heart1.gameObject.SetActive(false);
+                    Heart2.gameObject.SetActive(false);
+                    Heart3.gameObject.SetActive(false);
 
-
+                    FindWinner();
+                    GameOverInfo.isGameOver = true;
+                    Destroy(gameObject);
                     break;
-
-
             }
+        }
+        /*if (!GameOverInfo.isGameOver)
+    {
+        Debug.Log(gameObject.name + " damage is " + damage);
+        Debug.Log(gameObject.name + " health is " + playerInfo.Health);
+    }*/
+
+
+    }
+
+    public void FindWinner()
+    {
+        if (gameObject.name == "Player1")
+        {
+            GameOverInfo.winner = "Team 2";
+        } else if (gameObject.name == "Player2")
+        {
+            GameOverInfo.winner = "Team 1";
         }
     }
 }

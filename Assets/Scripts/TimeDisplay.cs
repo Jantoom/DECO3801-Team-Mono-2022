@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class TimeDisplay : MonoBehaviour
 {
+    [SerializeField]
     public float timeAmount;
     public TMP_Text timeT;
 
@@ -19,17 +20,23 @@ public class TimeDisplay : MonoBehaviour
     }
     void Update()
     {
-        if (timeAmount > 0)
+        if (!GameOverInfo.isGameOver)
         {
-            timeAmount -= Time.deltaTime;
-        } else
-        {
-            timeAmount = 0;
-            GameOverInfo.isGameOver = true;
+            if (timeAmount > 0)
+            {
+                timeAmount -= Time.deltaTime;
+            }
+            else
+            {
+                timeAmount = 0;
+                GameOverInfo.isGameOver = true;
 
 
+            }
+            ShowTime(timeAmount);
         }
-        ShowTime(timeAmount);
+
+        
     }
     void ShowTime(float timeToShow)
     {
