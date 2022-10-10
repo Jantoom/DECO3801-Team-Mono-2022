@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private int damage = GameInfo.BASE_HEALTH * 10;
+    private int damage = GameInfo.BASE_HEALTH * 20;
     private float persistence = 0.2f;
     private PlayerInfo owner = null;
     public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }

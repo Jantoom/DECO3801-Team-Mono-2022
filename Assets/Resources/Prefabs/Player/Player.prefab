@@ -147,7 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625a427fa98a7c4439754b9c8d58cd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  Opponent: {fileID: 0}
+  Invincible: 0
+  Juggernaut: 0
+  Ghosted: 0
+  Exhausted: 0
+  Frozen: 0
+  defaultBombPrefab: {fileID: 5686585067370764456, guid: f97f367b36307e64b968f0f16fa01c9b,
+    type: 3}
+  overrideBombPrefab: {fileID: 0}
+  LoadedPowerup: {fileID: 0}
 --- !u!114 &2150773631684907096
 MonoBehaviour:
   m_ObjectHideFlags: 0
