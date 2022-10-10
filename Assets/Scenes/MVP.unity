@@ -1313,32 +1313,32 @@ PrefabInstance:
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: backKey
-      value: 274
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: bombKey
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: itemKey
-      value: 303
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: leftKey
-      value: 276
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: rightKey
-      value: 275
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: forwardKey
-      value: 273
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
@@ -2756,32 +2756,32 @@ PrefabInstance:
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: backKey
-      value: 115
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: bombKey
-      value: 32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: itemKey
-      value: 101
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: leftKey
-      value: 97
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: rightKey
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: forwardKey
-      value: 119
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
