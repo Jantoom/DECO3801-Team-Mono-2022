@@ -113,5 +113,5 @@ MonoBehaviour:
   PlayerInfo: {fileID: 0}
   Activated: 0
   Duration: 10
-  WeaponPrefab: {fileID: 5686585067370764456, guid: ba032a61ba2fb90459e4b5e1e8cb324d,
+  WeaponPrefab: {fileID: 5686585067370764456, guid: f97f367b36307e64b968f0f16fa01c9b,
     type: 3}
