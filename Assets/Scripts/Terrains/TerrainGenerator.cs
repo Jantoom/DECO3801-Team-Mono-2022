@@ -84,9 +84,12 @@ public class TerrainGenerator : MonoBehaviour
                 var rigidbody = obj.gameObject.GetComponent<Rigidbody>();
                 rigidbody.useGravity = true;
                 rigidbody.constraints = RigidbodyConstraints.None;
-                rigidbody.AddExplosionForce(5f, obj.position + 
-                    new Vector3(Random.Range(-0.5f, 0.5f), 0.9f, Random.Range(-0.5f, 0.5f)), 
-                    0.2f, 0.0f, ForceMode.Impulse);
+                if (rigidbody.CompareTag("Tile")) {
+                    rigidbody.AddExplosionForce(5.0f, obj.position + new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(-0.5f, 0.5f)), 0.5f, 0.0f, ForceMode.Impulse);
+                } else {
+                    rigidbody.AddExplosionForce(5.0f, obj.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f)), 0.5f, 0.0f, ForceMode.Impulse);
+                }
+                
             }
             
         }
