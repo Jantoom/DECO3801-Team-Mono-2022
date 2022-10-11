@@ -8,10 +8,10 @@ public class TerrainGenerator : MonoBehaviour
     public static readonly int MAX_TERRAINS_PER_MAP = 1, MAX_ACTIVE_ROWS = 12;
     public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 1.0f, DEGENERATION_SPEED = 2.0f;
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
-    [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
-    [SerializeField] private GameObject startTerrain, finishTerrain;
     [SerializeField] private GameObject[] randomTerrains;
+    [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
     [SerializeField] private RuntimeAnimatorController spawnAnimator;
+    [SerializeField] private GameObject startTerrain, finishTerrain;
     private Queue<Transform> activeRows = new();
 
     void Awake()
@@ -85,5 +85,11 @@ public class TerrainGenerator : MonoBehaviour
 
     private GameObject PickNextRandomValidTerrain() {
         return randomTerrains[Random.Range(1, randomTerrains.Length)];
+    }
+
+    public Queue<Transform> getActiveRows() {
+        // Returning copy of queue so PowerupSpawner queue traversal
+        // doesn't affect the TerrainGenerator
+        return new Queue<Transform>(activeRows);
     }
 }
