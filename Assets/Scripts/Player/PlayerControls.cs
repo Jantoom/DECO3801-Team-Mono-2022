@@ -6,12 +6,15 @@ using System.IO.Ports;
 public class PlayerControls : MonoBehaviour
 {
     // Serial Port Comms from arduino
-    SerialPort sp = new SerialPort("COM4", 9600);
-    int movement; 
+    
+    int movement;
+
+    static SerialPort sp = new SerialPort("COM3", 9600);
 
     private PlayerInfo playerInfo;
     // Player Controls
     [SerializeField]
+    // Change int to KeyCode and enter keycodes 
     private KeyCode forwardKey, backKey, leftKey, rightKey, bombKey, itemKey;
     public KeyCode ForwardKey { get => forwardKey; }
     public KeyCode BackKey { get => backKey; }
@@ -21,8 +24,8 @@ public class PlayerControls : MonoBehaviour
     public KeyCode ItemKey { get => itemKey; }
     // Player Cooldowns
     private float timeToMove = 0.1f, timeToRebound = 0.25f;
-    public float TimeToMove { get => timeToMove * playerInfo.CooldownMultiplier; }
-    public float TimeToRebound { get => timeToRebound * playerInfo.CooldownMultiplier; }
+    public float TimeToMove { get => timeToMove * (playerInfo.Exhausted ? 10 : 1); }
+    public float TimeToRebound { get => timeToRebound * (playerInfo.Exhausted ? 10 : 1); }
     // Moving
     private int REBOUND_LAYER;
     private Vector3 origPosition, targetPosition;
@@ -32,6 +35,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Start()
     {
+        
         // Opens port and sets a timeout between reads
         sp.Open();
         sp.ReadTimeout = 1;
@@ -44,20 +48,36 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        
+        if (playerInfo.Frozen) {
+            return;
+        }
         // Serial port inputs
+        // COMMENT THIS SECTION IF YOU WANT TO PLAY WITH KEYBOARD
+        /*
         if (sp.IsOpen)
         {
+            //print(forwardKey);
             try
             {
-                movement = sp.ReadByte();
-                print(sp.ReadByte());
+                movement = (int) sp.ReadByte();
+                print(movement);
+                
                 if (moveStatus == MoveCode.STATIONARY)
                 {
                     Vector3 direction = Vector3.zero;
-                    if (movement == 1)
+                    if (movement == forwardKey)
                     {
+                        //print("hello");
                         direction = Vector3.forward;
+                    } else if (movement == leftKey)
+                    {
+                        direction = Vector3.left;
+                    } else if (movement == rightKey)
+                    {
+                        direction = Vector3.right;
                     }
+                    //print(direction);
                     if (direction != Vector3.zero)
                     {
                         moveCoroutine = MovePlayer(direction);
@@ -70,11 +90,19 @@ public class PlayerControls : MonoBehaviour
 
             }
         }
+        */
 
+        // UNCOMMENT THIS IF YOU WANT TO PLAY WITH KEYBOARD
+        // also have to change int to keycode in keycodes and assign codes
+        
         // Keyboard input
         if (moveStatus == MoveCode.STATIONARY) {
             if (Input.GetKeyDown(bombKey)) {
                 Instantiate(playerInfo.BombPrefab, transform.position, transform.rotation);
+            }
+            else if (Input.GetKeyDown(itemKey)) {
+                var powerup = playerInfo.LoadedPowerup;
+                if (powerup != null) powerup.Activate();
             }
             Vector3 direction = Vector3.zero;
             if (Input.GetKeyDown(forwardKey)) {
@@ -95,9 +123,10 @@ public class PlayerControls : MonoBehaviour
             }
         }
     }
+        
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING)) {
+        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && moveStatus.Equals(MoveCode.MOVING) && !playerInfo.Ghosted) {
             if (!collision.gameObject.TryGetComponent<WallWeak>(out var wall) || wall.Health - playerInfo.Attack > 0) {
                 StopCoroutine(moveCoroutine);
                 StartCoroutine(ReboundPlayer());

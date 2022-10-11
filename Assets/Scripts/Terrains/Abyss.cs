@@ -22,6 +22,7 @@ public class Abyss : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
             gameInfo.GetComponent<PlayerGenerator>().Spawn(other.gameObject);
+            other.gameObject.GetComponent<IDestructible>().TakeDamage(GameInfo.BASE_HEALTH * 10);
         }
     }
 }

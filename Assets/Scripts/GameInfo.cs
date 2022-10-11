@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameInfo : MonoBehaviour
 {
-    public static int BASE_HEALTH = 100;
+    public static int BASE_HEALTH = 1;
     // Start is called before the first frame update
     void Start()
     {

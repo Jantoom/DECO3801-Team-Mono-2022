@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Heal : Powerup
 {
-    private int healAmount = 100;
-
     public override void StartPowerup() {
-        playerInfo.Health += healAmount;
+        PlayerInfo.Health += GameInfo.BASE_HEALTH * 10;
         EndPowerup();
     }
 }
