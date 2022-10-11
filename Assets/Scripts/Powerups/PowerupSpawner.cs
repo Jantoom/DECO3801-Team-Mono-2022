@@ -5,11 +5,11 @@ using System.Linq;
 
 public class PowerupSpawner : MonoBehaviour
 {
-
     public TerrainGenerator terrainGenerator;
     private Queue<GameObject> activeRows;
     private float SPAWN_DELAY = 5.0f;
-    private List<GameObject> powerups;
+    private List<GameObject> powerupsTierOne;
+    private List<GameObject> powerupsTierTwo;
     private PlayerInfo playerOne, playerTwo;
 
     // Start is called before the first frame update
@@ -18,13 +18,15 @@ public class PowerupSpawner : MonoBehaviour
         terrainGenerator = GetComponent<TerrainGenerator>();
         playerOne = GameObject.Find("Player1").GetComponent<PlayerInfo>();
         playerTwo = GameObject.Find("Player1").GetComponent<PlayerInfo>();
-        powerups = Resources.LoadAll<GameObject>("Prefabs/Powerups").ToList();
+        powerupsTierOne = Resources.LoadAll<GameObject>("Prefabs/Powerups/Tier1").ToList();
+        powerupsTierTwo = Resources.LoadAll<GameObject>("Prefabs/Powerups/Tier2").ToList();
         InvokeRepeating("SpawnPowerups", SPAWN_DELAY, SPAWN_DELAY);
     }
 
     private void SpawnPowerups() {
         Transform emptyCell = FindEmptyCell();
-        GameObject randomPowerup = GetRandomPowerup();
+        GameObject randomPowerup = GetRandomPowerup(powerupsTierTwo);
+        Debug.Log(randomPowerup.name);
         Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
     }
 
@@ -79,7 +81,7 @@ public class PowerupSpawner : MonoBehaviour
         return emptyCells;
     }
 
-    private GameObject GetRandomPowerup() {
+    private GameObject GetRandomPowerup(List<GameObject> powerups) {
         return powerups[Random.Range(0, powerups.Count - 1)];
     }
 }
