@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerLives : MonoBehaviour
 {
     private PlayerInfo playerInfo;
-    //private bool isWinnerFound;
 
     public GameObject heart1, heart2, heart3;
 
@@ -46,11 +45,6 @@ public class PlayerLives : MonoBehaviour
                     break;
             }
         }
-        /*if (!GameOverInfo.isGameOver)
-    {
-        Debug.Log(gameObject.name + " damage is " + damage);
-        Debug.Log(gameObject.name + " health is " + playerInfo.Health);
-    }*/
 
 
     }

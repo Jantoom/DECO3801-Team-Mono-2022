@@ -16,7 +16,7 @@ public class TimeDisplay : MonoBehaviour
 
     private void Start()
     {
-        timeAmount = 60;
+        timeAmount = 40;
     }
     void Update()
     {
@@ -30,7 +30,6 @@ public class TimeDisplay : MonoBehaviour
             {
                 timeAmount = 0;
                 GameOverInfo.isGameOver = true;
-
 
             }
             ShowTime(timeAmount);
@@ -58,9 +57,9 @@ public class TimeDisplay : MonoBehaviour
         }
         return false;
     }
-    public float getTime()
+   /* public float getTime()
     {
         return timeAmount;
-    }
+    }*/
 
 }
