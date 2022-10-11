@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class Abyss : MonoBehaviour
 {
-    private GameObject gameInfo;
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameInfo = GameObject.Find("GameInfo");
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (gameInfo.GetComponent<TerrainGenerator>().IsGenerating) {
-            gameObject.transform.Translate(Vector3.forward * TerrainGenerator.GENERATION_COOLDOWN * Time.deltaTime, Space.World);
+        if (GameObject.Find("GameInfo").GetComponent<TerrainGenerator>().IsGenerating) {
+            gameObject.transform.Translate(Vector3.forward * TerrainGenerator.GENERATION_SPEED * Time.deltaTime, Space.World);
         }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            gameInfo.GetComponent<PlayerGenerator>().Spawn(other.gameObject);
+            PlayerGenerator.Spawn(other.gameObject, true);
             other.gameObject.GetComponent<IDestructible>().TakeDamage(GameInfo.BASE_HEALTH * 10);
         }
     }
