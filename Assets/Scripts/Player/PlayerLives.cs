@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerLives : MonoBehaviour
 {
     private PlayerInfo playerInfo;
-    //private bool isWinnerFound;
 
     public GameObject heart1, heart2, heart3;
 
@@ -22,6 +21,7 @@ public class PlayerLives : MonoBehaviour
             
         if (!GameOverInfo.isGameOver)
         {
+
             switch (playerInfo.Health)
             {
 
@@ -39,30 +39,12 @@ public class PlayerLives : MonoBehaviour
                     heart1.SetActive(false);
                     heart2.SetActive(false);
                     heart3.SetActive(false);
-
-                    FindWinner();
                     GameOverInfo.isGameOver = true;
-                    Destroy(gameObject);
+                   // Destroy(gameObject);
                     break;
             }
         }
-        /*if (!GameOverInfo.isGameOver)
-    {
-        Debug.Log(gameObject.name + " damage is " + damage);
-        Debug.Log(gameObject.name + " health is " + playerInfo.Health);
-    }*/
 
 
-    }
-
-    public void FindWinner()
-    {
-        if (gameObject.name == "Player1")
-        {
-            GameOverInfo.winner = "Team 2";
-        } else if (gameObject.name == "Player2")
-        {
-            GameOverInfo.winner = "Team 1";
-        }
     }
 }
