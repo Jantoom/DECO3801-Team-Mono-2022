@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System.IO.Ports;
 
@@ -23,20 +24,18 @@ public class PlayerControls : MonoBehaviour
     [field: SerializeField] public KeyCode RightKey { get; private set; }
     private KeyCode lastKeyCode;
     // Player Cooldowns
-    public static float ITEM_WAIT_TIME = 0.8f;
+    public static float ITEM_WAIT_TIME = 0.35f;
     private float timeSinceLastInput = 0.0f, timeToMove = 0.1f, timeToRebound = 0.25f;
     public float TimeToMove { get => timeToMove * (playerInfo.Exhausted ? 10 : 1); }
     public float TimeToRebound { get => timeToRebound * (playerInfo.Exhausted ? 10 : 1); }
     // Moving
     public MoveCode MoveStatus { get; private set; } = MoveCode.STATIONARY;
-    private int REBOUND_LAYER;
     private Vector3 origPosition, targetPosition;
-    private IEnumerator moveCoroutine;
+    private IEnumerator moveCoroutine = null;
 
     void Awake()
     {
         playerInfo = GetComponent<PlayerInfo>();
-        REBOUND_LAYER = LayerMask.NameToLayer("Wall");
         // Opens port and sets a timeout between reads
         if (UseSerialControls) {
             serialInput.Open();
@@ -71,10 +70,11 @@ public class PlayerControls : MonoBehaviour
                     direction = Vector3.back;
                 }
                 if (direction != Vector3.zero) {
-                    moveCoroutine = MovePlayer(direction);
+                    moveCoroutine = MovePlayer(direction, false);
                     StartCoroutine(moveCoroutine);
                 }
-            } else if (((signal == LeftSignal && lastSignal == RightSignal) ||
+            }
+            if (((signal == LeftSignal && lastSignal == RightSignal) ||
                 (signal == RightSignal && lastSignal == LeftSignal)) &&
                 Time.time - timeSinceLastInput < ITEM_WAIT_TIME) {
                 // Item Activation
@@ -109,14 +109,15 @@ public class PlayerControls : MonoBehaviour
                 direction = Vector3.back;
             }
             if (direction != Vector3.zero) {
-                moveCoroutine = MovePlayer(direction);
+                moveCoroutine = MovePlayer(direction, false);
                 StartCoroutine(moveCoroutine);
             }
-        } else if (((Input.GetKeyDown(LeftKey) && lastKeyCode == RightKey) ||
+        }
+        if (((Input.GetKeyDown(LeftKey) && Input.GetKeyDown(RightKey)) ||
+            (Input.GetKeyDown(LeftKey) && lastKeyCode == RightKey) ||
             (Input.GetKeyDown(RightKey) && lastKeyCode == LeftKey)) &&
             Time.time - timeSinceLastInput < ITEM_WAIT_TIME) {
             // Item Activation
-            Debug.Log("We not stationary yo");
             var powerup = playerInfo.LoadedPowerup;
             if (powerup != null) powerup.Activate();
 
@@ -127,25 +128,41 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKeyUp(ForwardKey) || Input.GetKeyUp(LeftKey) || Input.GetKeyUp(RightKey)) {
             lastKeyCode = KeyCode.None;
-        } else {
+        } else if (downKey != KeyCode.None) {
             lastKeyCode = downKey;
         }
         timeSinceLastInput = Time.time;        
     }
         
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer.Equals(REBOUND_LAYER) && MoveStatus.Equals(MoveCode.MOVING) && !playerInfo.Ghosted) {
-            if (!collision.gameObject.TryGetComponent<WallWeak>(out var wall) || wall.Health - playerInfo.Attack > 0) {
+    void OnTriggerEnter(Collider collider) {
+        if (!playerInfo.Ghosted && collider.gameObject.CompareTag("Wall") && MoveStatus.Equals(MoveCode.MOVING)) {
+            if (!collider.gameObject.TryGetComponent<WallWeak>(out var wall) || wall.Health - playerInfo.Attack > 0) {
                 StopCoroutine(moveCoroutine);
                 StartCoroutine(ReboundPlayer());
             }
-            collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(playerInfo.Attack);
+            collider.gameObject.GetComponent<IDestructible>()?.TakeDamage(playerInfo.Attack);
         }
     }
 
-    private IEnumerator MovePlayer(Vector3 direction) {
-        MoveStatus = MoveCode.MOVING;
+    void OnTriggerStay(Collider collider) {
+        if (!playerInfo.Ghosted && collider.gameObject.CompareTag("Wall") && MoveStatus.Equals(MoveCode.STATIONARY)) {
+            var directions = new Vector3[] { Vector3.forward, Vector3.left, Vector3.right };
+            for (var range = 1; range < 5; range++) {
+                foreach (var direction in directions) {
+                    var overlaps = Physics.OverlapSphere(transform.position + direction * range + Vector3.down * 0.5f, 0.4f);
+                    if (!overlaps.Any(x => x.CompareTag("Wall")) && overlaps.Any(x => x.CompareTag("Tile"))) {
+                        StartCoroutine(MovePlayer(direction * range, true));
+                        return;
+                    }
+                }
+            }
+            PlayerGenerator.Spawn(gameObject, true);
+        }
+    }
+
+    private IEnumerator MovePlayer(Vector3 direction, bool forced) {
+        MoveStatus = forced ? MoveCode.FORCED : MoveCode.MOVING;
         origPosition = transform.position;
         targetPosition = origPosition + direction;
         targetPosition = new Vector3(Mathf.Round(targetPosition.x), Mathf.Round(targetPosition.y), Mathf.Round(targetPosition.z));
@@ -180,5 +197,5 @@ public class PlayerControls : MonoBehaviour
 }
 
 public enum MoveCode {
-        STATIONARY, MOVING, REBOUNDING
+        STATIONARY, MOVING, REBOUNDING, FORCED
 }
