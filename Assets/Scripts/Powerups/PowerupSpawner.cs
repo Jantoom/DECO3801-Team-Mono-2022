@@ -17,7 +17,7 @@ public class PowerupSpawner : MonoBehaviour
     {
         terrainGenerator = GetComponent<TerrainGenerator>();
         playerOne = GameObject.Find("Player1").GetComponent<PlayerInfo>();
-        playerTwo = GameObject.Find("Player1").GetComponent<PlayerInfo>();
+        playerTwo = GameObject.Find("Player2").GetComponent<PlayerInfo>();
         powerupsTierOne = Resources.LoadAll<GameObject>("Prefabs/Powerups/Tier1").ToList();
         powerupsTierTwo = Resources.LoadAll<GameObject>("Prefabs/Powerups/Tier2").ToList();
         InvokeRepeating("SpawnPowerups", SPAWN_DELAY, SPAWN_DELAY);
@@ -25,7 +25,14 @@ public class PowerupSpawner : MonoBehaviour
 
     private void SpawnPowerups() {
         Transform emptyCell = FindEmptyCell();
-        GameObject randomPowerup = GetRandomPowerup(powerupsTierTwo);
+        GameObject randomPowerup;
+        Debug.Log("Player One Health:" + playerOne.Health);
+        Debug.Log("Player Two Health:" + playerTwo.Health);
+        if (playerOne.Health != playerTwo.Health) {
+            randomPowerup = GetRandomPowerup(powerupsTierTwo);
+        } else {
+            randomPowerup = GetRandomPowerup(powerupsTierOne);
+        }
         Debug.Log(randomPowerup.name);
         Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
     }
