@@ -82,6 +82,6 @@ public class PowerupSpawner : MonoBehaviour
     }
 
     private GameObject GetRandomPowerup(List<GameObject> powerups) {
-        return powerups[Random.Range(0, powerups.Count - 1)];
+        return powerups[Random.Range(0, powerups.Count)];
     }
 }
