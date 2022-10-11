@@ -14,15 +14,7 @@ public class PlayerInfo : MonoBehaviour
     private bool invincible = false, juggernaut = false, ghosted = false, exhausted = false, frozen = false;
     public bool Invincible { get => invincible; set => invincible = value; }
     public bool Juggernaut { get => juggernaut; set => juggernaut = value; }
-    public bool Ghosted { get => ghosted; 
-        set { 
-            if (ghosted == true && value == false && GetComponent<Rigidbody>().SweepTest(Vector3.forward, out var hit, 0.5f)) {
-                PlayerGenerator.Spawn(Player, true);
-                transform.rotation = Quaternion.identity;
-            }
-            ghosted = value; 
-        }
-    }
+    public bool Ghosted { get => ghosted; set => ghosted = value; }
     public bool Exhausted { get => exhausted; set => exhausted = value; }
     public bool Frozen { get => frozen; set => frozen = value; }
     // Player Bomb

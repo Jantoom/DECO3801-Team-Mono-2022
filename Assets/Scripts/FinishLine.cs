@@ -15,9 +15,9 @@ public class FinishLine : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) {
             GameOverInfo.isGameOver = true;
             if (other.gameObject.name == "Player1") {
-                GameOverInfo.winner = "Team 2";
+                GameOverInfo.winner = "Winner is \n Team 1";
             } else if (other.gameObject.name == "Player2") {
-                GameOverInfo.winner = "Team 1";
+                GameOverInfo.winner = "Winner is \n Team 2";
             }
         }
     }

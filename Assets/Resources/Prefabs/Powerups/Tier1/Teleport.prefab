@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 5650542819009983139}
   - component: {fileID: 4313368243367815531}
   - component: {fileID: 8324642281976744629}
-  - component: {fileID: 8515227334108755208}
-  - component: {fileID: 6124362503508272656}
+  - component: {fileID: -4672931739995920961}
+  - component: {fileID: 8100542265144946464}
+  - component: {fileID: 716140149247310881}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5400587712483704592}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4170667394059517457, guid: d22a4860aa2177b4fa3253bc57bd840c, type: 3}
 --- !u!23 &4313368243367815531
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: ff02a0a00ab750f48b09459b1cafd1b8, type: 3}
+  - {fileID: 2100000, guid: f449c71a12b2cb24797198873ba0b2cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +100,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8515227334108755208
+--- !u!114 &-4672931739995920961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,15 +109,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5400587712483704592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee575c51b5da85e4ca8d2d6a996486ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 3739db43dc8a8d94598db86d7654f401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInfo: {fileID: 0}
   Activated: 0
-  Duration: 10
-  WeaponPrefab: {fileID: 5686585067370764456, guid: 9660658637cc56046891603db6547ca2,
-    type: 3}
---- !u!114 &6124362503508272656
+  Duration: 0
+--- !u!54 &8100542265144946464
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400587712483704592}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 90
+  m_CollisionDetection: 0
+--- !u!114 &716140149247310881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

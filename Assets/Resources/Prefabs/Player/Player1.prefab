@@ -134,6 +134,26 @@ PrefabInstance:
       propertyPath: forwardKey
       value: 119
       objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <BackKey>k__BackingField
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <LeftKey>k__BackingField
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <RightKey>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <ForwardKey>k__BackingField
+      value: 119
+      objectReference: {fileID: 0}
     - target: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: m_RootOrder
