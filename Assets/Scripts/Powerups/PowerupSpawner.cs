@@ -19,27 +19,37 @@ public class PowerupSpawner : MonoBehaviour
         InvokeRepeating("SpawnPowerups", SPAWN_DELAY, SPAWN_DELAY);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     private void SpawnPowerups() {
         Debug.Log("Spawn Powerups");
-        GameObject emptyCell = FindEmptyCell();
+        Transform emptyCell = FindEmptyCell();
+        Debug.Log(emptyCell.name);
         GameObject randomPowerup = GetRandomPowerup();
+        Debug.Log(randomPowerup.name);
         Instantiate(randomPowerup, emptyCell.transform.position, Quaternion.identity, emptyCell.transform);
     }
 
-    private GameObject FindEmptyCell() {
+    private Transform FindEmptyCell() {
+        List<Transform> emptyCells = GetAllEmptyCells();
+        return emptyCells[Random.Range(0, emptyCells.Count - 1)];
+    }
+
+    private List<Transform> GetAllEmptyCells() {
         activeRows = terrainGenerator.getActiveRows();
-        Transform firstRow = activeRows.Peek().transform;
-        foreach (Transform cell in firstRow) {
-            if (cell.childCount == 1) {
-                return cell.gameObject;
+        List<Transform> emptyCells = new List<Transform>();
+        int rowNumber = 0;
+        foreach (GameObject row in activeRows) {
+            // Do not want to spawn in the first 3 rows
+            if (rowNumber++ > 2) {
+                foreach (Transform cell in row.transform) {
+                    Debug.Log("Checking cell: " + cell.name);
+                    if (cell.transform.childCount == 1) {
+                        Debug.Log("Empty cell found: " + cell.name);
+                        emptyCells.Add(cell);
+                    }
+                }
             }
         }
-        return null;
+        return emptyCells;
     }
 
     private GameObject GetRandomPowerup() {

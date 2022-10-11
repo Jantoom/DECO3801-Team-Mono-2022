@@ -103,6 +103,8 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     public Queue<GameObject> getActiveRows() {
-        return activeRows;
+        // Returning copy of queue so PowerupSpawner queue traversal
+        // doesn't affect the TerrainGenerator
+        return new Queue<GameObject>(activeRows);
     }
 }
