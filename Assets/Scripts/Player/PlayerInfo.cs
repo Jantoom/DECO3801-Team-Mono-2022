@@ -17,7 +17,7 @@ public class PlayerInfo : MonoBehaviour
     public bool Ghosted { get => ghosted; 
         set { 
             if (ghosted == true && value == false && GetComponent<Rigidbody>().SweepTest(Vector3.forward, out var hit, 0.5f)) {
-                PlayerGenerator.Spawn(Player);
+                PlayerGenerator.Spawn(Player, true);
                 transform.rotation = Quaternion.identity;
             }
             ghosted = value; 

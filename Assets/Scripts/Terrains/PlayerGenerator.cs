@@ -6,11 +6,30 @@ using UnityEngine;
 public class PlayerGenerator : MonoBehaviour
 {
     public static readonly int SPAWN_ROW_BUFFER = 3;
+    [SerializeField] private GameObject playerOnePrefab, playerTwoPrefab;
 
-    public static void Spawn(GameObject player) {
+    void Start() {
+        var playerOne = Instantiate(playerOnePrefab);
+        var playerTwo = Instantiate(playerTwoPrefab);
+
+        playerOne.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart1");
+        playerOne.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart2");
+        playerOne.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart3");
+        playerTwo.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart4");
+        playerTwo.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart5");
+        playerTwo.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart6");
+
+        playerOne.name = "Player1";
+        playerTwo.name = "Player2";
+
+        Spawn(playerOne, false);
+        Spawn(playerTwo, false);
+    }
+
+    public static void Spawn(GameObject player, bool useBuffer) {
         var terrains = GameObject.Find("Map").transform;
         foreach (Transform terrain in terrains) {
-            var rows = Enumerable.Range(0, terrain.childCount).Select(x => terrain.GetChild(x)).Skip(SPAWN_ROW_BUFFER);
+            var rows = Enumerable.Range(0, terrain.childCount).Select(x => terrain.GetChild(x)).Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
             foreach (Transform row in rows) {
                 var cells = Enumerable.Range(0, row.childCount).Select(x => row.GetChild(x));
                 cells = player.name == "Player1" ?

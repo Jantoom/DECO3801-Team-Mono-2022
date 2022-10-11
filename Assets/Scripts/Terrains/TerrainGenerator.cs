@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    public static readonly int MAX_TERRAINS_PER_MAP = 5, MAX_ACTIVE_ROWS = 12;
+    public static readonly int MAX_TERRAINS_PER_MAP = 1, MAX_ACTIVE_ROWS = 12;
     public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 1.0f, DEGENERATION_SPEED = 2.0f;
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
@@ -14,7 +14,7 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController spawnAnimator;
     private Queue<Transform> activeRows = new();
 
-    void Start()
+    void Awake()
     {
         StartCoroutine(GenerateMap());
     }
@@ -48,7 +48,7 @@ public class TerrainGenerator : MonoBehaviour
     private void GenerateRow(Transform terrain, Transform prefab, int id) {
         var row = new GameObject($"Row{id}").transform;
         row.SetParent(terrain, false);
-        row.localPosition = Vector3.forward * id;
+        row.localPosition = prefab.localPosition;
 
         for (var count = 0; count < prefab.childCount; count++) {
             GenerateCell(row, prefab.GetChild(count), count);
@@ -64,7 +64,7 @@ public class TerrainGenerator : MonoBehaviour
     private void GenerateCell(Transform row, Transform prefab, int id) {
         var cell = Instantiate(prefab.gameObject, row, false).transform;
         cell.name = $"Cell{id}";
-        cell.localPosition = Vector3.right * id;
+        cell.localPosition = prefab.localPosition;
         // Add extra Animator Controller for load in animation
         var animator = cell.gameObject.AddComponent<Animator>();
         animator.runtimeAnimatorController = spawnAnimator;
