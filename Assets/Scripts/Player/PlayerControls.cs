@@ -23,7 +23,7 @@ public class PlayerControls : MonoBehaviour
     [field: SerializeField] public KeyCode RightKey { get; private set; }
     // Player Cooldowns
     public static float ITEM_WAIT_TIME = 0.15f;
-    private float timeSinceLastInput = 0.0f, timeToMove = 0.2f, timeToRebound = 0.4f;
+    private float timeAtLastInput = 0.0f, timeToMove = 0.2f, timeToRebound = 0.4f;
     public float TimeToMove { get => timeToMove * (playerInfo.Exhausted ? 10 : 1); }
     public float TimeToRebound { get => timeToRebound * (playerInfo.Exhausted ? 10 : 1); }
     // Moving
@@ -62,7 +62,7 @@ public class PlayerControls : MonoBehaviour
         if (signal != 0) {
             if (((signal == LeftSignal && lastDirections[0] == Vector3.right) ||
                 (signal == RightSignal && lastDirections[0] == Vector3.left)) &&
-                Time.time - timeSinceLastInput < ITEM_WAIT_TIME) {
+                Time.time - timeAtLastInput < ITEM_WAIT_TIME) {
                 // Ensure proper rotation
                 transform.LookAt(transform.position + lastDirections[1]);
                 ActivateItem();
@@ -72,7 +72,7 @@ public class PlayerControls : MonoBehaviour
                 lastDirections[1] = lastDirections[0];
                 lastDirections[0] = direction;
             }
-            timeSinceLastInput = Time.time;
+            timeAtLastInput = Time.time;
         }
     }
 
@@ -84,7 +84,7 @@ public class PlayerControls : MonoBehaviour
             if (((Input.GetKeyDown(LeftKey) && Input.GetKeyDown(RightKey)) ||
                 (Input.GetKeyDown(LeftKey) && lastDirections[0] == Vector3.right) ||
                 (Input.GetKeyDown(RightKey) && lastDirections[0] == Vector3.left)) &&
-                Time.time - timeSinceLastInput < ITEM_WAIT_TIME) {
+                Time.time - timeAtLastInput < ITEM_WAIT_TIME) {
                 // Ensure proper rotation
                 if (Input.GetKeyDown(LeftKey) && Input.GetKeyDown(RightKey)) {
                     transform.LookAt(transform.position + lastDirections[0]);
@@ -98,7 +98,7 @@ public class PlayerControls : MonoBehaviour
                 lastDirections[1] = lastDirections[0];
                 lastDirections[0] = direction;
             }
-            timeSinceLastInput = Time.time;
+            timeAtLastInput = Time.time;
         }
     }
 
@@ -172,7 +172,7 @@ public class PlayerControls : MonoBehaviour
             var directions = new Vector3[] { Vector3.forward, Vector3.left, Vector3.right };
             for (var range = 1; range < 5; range++) {
                 foreach (var direction in directions) {
-                    var overlaps = Physics.OverlapSphere(transform.position + direction * range + Vector3.down * 0.5f, 0.4f);
+                    var overlaps = Physics.OverlapSphere(transform.position + direction * range, 0.4f);
                     if (!overlaps.Any(x => x.CompareTag("Wall")) && overlaps.Any(x => x.CompareTag("Tile")) && overlaps.All(x => x.attachedRigidbody.useGravity == false)) {
                         StartCoroutine(MovePlayer(direction * range, true));
                         return;
@@ -187,17 +187,17 @@ public class PlayerControls : MonoBehaviour
         MoveStatus = forced ? MoveCode.FORCED : MoveCode.MOVING;
         origPosition = transform.position;
         targetPosition = origPosition + direction;
-        targetPosition = new Vector3(Mathf.Round(targetPosition.x), Mathf.Round(targetPosition.y), Mathf.Round(targetPosition.z));
         transform.LookAt(targetPosition);
 
         float elapsedTime = 0f;
         while (elapsedTime < timeToMove) {
-            transform.position = Vector3.Lerp(origPosition, targetPosition, (elapsedTime / timeToMove));
+            var lerpPosition = Vector3.Lerp(origPosition, targetPosition, (elapsedTime / timeToMove));
+            transform.position = new Vector3(lerpPosition.x, transform.position.y, lerpPosition.z);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPosition;
+        transform.position = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
         MoveStatus = MoveCode.STATIONARY;
     }
 
@@ -206,20 +206,21 @@ public class PlayerControls : MonoBehaviour
         var reboundPosition = transform.position;
 
         float elapsedTime = 0f;
-        while (elapsedTime < timeToRebound) {
-            transform.position = Vector3.Lerp(reboundPosition, origPosition, (elapsedTime / timeToRebound));
+        while (elapsedTime < TimeToRebound) {
+            var lerpPosition = Vector3.Lerp(reboundPosition, origPosition, (elapsedTime / TimeToRebound));
+            transform.position = new Vector3(lerpPosition.x, transform.position.y, lerpPosition.z);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = origPosition;
+        transform.position = new Vector3(origPosition.x, transform.position.y, origPosition.z);
         MoveStatus = MoveCode.STATIONARY;
         moveCoroutine = null;
     }
 
     private void HaltPlayer() {
         StopCoroutine(moveCoroutine);
-        transform.position = origPosition;
+        transform.position = new Vector3(origPosition.x, transform.position.y, origPosition.z);
         MoveStatus = MoveCode.STATIONARY;
         moveCoroutine = null;
     }

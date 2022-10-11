@@ -7,7 +7,8 @@ public class Buff : Powerup
     public string BuffStat;
 
     void OnCollisionEnter(Collision collision) {
-        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo) && PlayerInfo.LoadedPowerup == null) {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info) && info.LoadedPowerup == null) {
+            PlayerInfo = info;
             // Collision is a first encounter with a player not currently holding an unactivated powerup
             var powerup = PlayerInfo.Player.AddComponent<Buff>();
             powerup.BuffStat = BuffStat;
