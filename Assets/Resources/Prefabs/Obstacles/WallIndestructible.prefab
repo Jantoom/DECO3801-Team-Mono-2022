@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8487624383685883074}
   - component: {fileID: -8657086711682870168}
   - component: {fileID: 2688864309752018123}
+  - component: {fileID: 2267186189132486894}
   m_Layer: 10
   m_Name: WallIndestructible
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,3 +111,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a55d5429ca83e947998a059c24978a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &2267186189132486894
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983445182557574423}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.5
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
