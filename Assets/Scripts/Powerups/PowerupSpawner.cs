@@ -6,7 +6,7 @@ using System.Linq;
 public class PowerupSpawner : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
-    private Queue<GameObject> activeRows;
+    private Queue<Transform> activeRows;
     private float SPAWN_DELAY = 5.0f;
     private List<GameObject> powerupsTierOne;
     private List<GameObject> powerupsTierTwo;
@@ -46,10 +46,10 @@ public class PowerupSpawner : MonoBehaviour
         activeRows = terrainGenerator.getActiveRows();
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
-        foreach (GameObject row in activeRows) {
+        foreach (Transform row in activeRows) {
             // Do not want to spawn in the first 3 rows
             if (rowNumber++ > 2) {
-                foreach (Transform cell in row.transform) {
+                foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         emptyCells.Add(cell);
                     }
@@ -63,10 +63,10 @@ public class PowerupSpawner : MonoBehaviour
         activeRows = terrainGenerator.getActiveRows();
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
-        foreach (GameObject row in activeRows) {
+        foreach (Transform row in activeRows) {
             // Do not want to spawn in the first 3 rows
             if (rowNumber++ > 2) {
-                foreach (Transform cell in row.transform) {
+                foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         // Only adds cell to list if it is closer to the player behind than the one in front
                         float distanceToAhead = Vector3.Distance(cell.position, ahead.position);

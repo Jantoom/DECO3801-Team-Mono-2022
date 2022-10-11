@@ -7,13 +7,8 @@ using UnityEngine.UI;
 public class PlayerLives : MonoBehaviour
 {
     private PlayerInfo playerInfo;
-    //private bool isWinnerFound;
 
-    [SerializeField]
-    private Image heart1, heart2, heart3;
-    public Image Heart1 { get => heart1; }
-    public Image Heart2 { get => heart2; }
-    public Image Heart3 { get => heart3; }
+    public GameObject heart1, heart2, heart3;
 
     private void Awake()
     {
@@ -26,47 +21,30 @@ public class PlayerLives : MonoBehaviour
             
         if (!GameOverInfo.isGameOver)
         {
+
             switch (playerInfo.Health)
             {
 
                 case 20:
-                    Heart1.gameObject.SetActive(false);
-                    Heart2.gameObject.SetActive(true);
-                    Heart3.gameObject.SetActive(true);
+                    heart1.SetActive(false);
+                    heart2.SetActive(true);
+                    heart3.SetActive(true);
                     break;
                 case 10:
-                    Heart1.gameObject.SetActive(false);
-                    Heart2.gameObject.SetActive(false);
-                    Heart3.gameObject.SetActive(true);
+                    heart1.SetActive(false);
+                    heart2.SetActive(false);
+                    heart3.SetActive(true);
                     break;
                 case 0: //Game Over
-                    Heart1.gameObject.SetActive(false);
-                    Heart2.gameObject.SetActive(false);
-                    Heart3.gameObject.SetActive(false);
-
-                    FindWinner();
+                    heart1.SetActive(false);
+                    heart2.SetActive(false);
+                    heart3.SetActive(false);
                     GameOverInfo.isGameOver = true;
-                    Destroy(gameObject);
+                   // Destroy(gameObject);
                     break;
             }
         }
-        /*if (!GameOverInfo.isGameOver)
-    {
-        Debug.Log(gameObject.name + " damage is " + damage);
-        Debug.Log(gameObject.name + " health is " + playerInfo.Health);
-    }*/
 
 
-    }
-
-    public void FindWinner()
-    {
-        if (gameObject.name == "Player1")
-        {
-            GameOverInfo.winner = "Team 2";
-        } else if (gameObject.name == "Player2")
-        {
-            GameOverInfo.winner = "Team 1";
-        }
     }
 }
