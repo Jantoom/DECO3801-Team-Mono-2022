@@ -4185,6 +4185,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ec23135a81f744da1861eddf53dfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1537060478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537060470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e61814522ed5545bf570da87cd4d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 0}
 --- !u!4 &1584753737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
@@ -4203,10 +4216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ca2ba44ae36b449a61e0efdce967f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveKey: 117
-  heart1: {fileID: 1536766295}
-  heart2: {fileID: 1666124782}
-  heart3: {fileID: 1222154151}
+  heart1: {fileID: 0}
+  heart2: {fileID: 0}
+  heart3: {fileID: 0}
 --- !u!4 &1584821270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7314186321140223917, guid: 805c39428de819544a44883309e238a1,
@@ -4231,10 +4243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ca2ba44ae36b449a61e0efdce967f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveKey: 121
-  heart1: {fileID: 997292398}
-  heart2: {fileID: 693600289}
-  heart3: {fileID: 633228980}
+  heart1: {fileID: 0}
+  heart2: {fileID: 0}
+  heart3: {fileID: 0}
 --- !u!4 &1615771157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1347440243076860092, guid: 214492802469dda4c9c42dedcad21f99,
@@ -5394,6 +5405,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
+        type: 3}
+      propertyPath: startTerrain
+      value: 
+      objectReference: {fileID: 1750576853607991601, guid: 1c510dfc046ea9841a73c9bead4d6672,
+        type: 3}
+    - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
+        type: 3}
+      propertyPath: finishTerrain
+      value: 
+      objectReference: {fileID: 1750576853607991601, guid: 137d98875dbee994f8047bbe6ccde020,
+        type: 3}
     - target: {fileID: -7237902080514761353, guid: 8b320e8f658de984089b43796d35a45b,
         type: 3}
       propertyPath: animController
