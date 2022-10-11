@@ -10,26 +10,33 @@ public class PowerupSpawner : MonoBehaviour
     private Queue<GameObject> activeRows;
     private float SPAWN_DELAY = 5.0f;
     private List<GameObject> powerups;
+    private PlayerInfo playerOne, playerTwo;
 
     // Start is called before the first frame update
     void Start()
     {
         terrainGenerator = GetComponent<TerrainGenerator>();
+        playerOne = GameObject.Find("Player1").GetComponent<PlayerInfo>();
+        playerTwo = GameObject.Find("Player1").GetComponent<PlayerInfo>();
         powerups = Resources.LoadAll<GameObject>("Prefabs/Powerups").ToList();
         InvokeRepeating("SpawnPowerups", SPAWN_DELAY, SPAWN_DELAY);
     }
 
     private void SpawnPowerups() {
-        Debug.Log("Spawn Powerups");
         Transform emptyCell = FindEmptyCell();
-        Debug.Log(emptyCell.name);
         GameObject randomPowerup = GetRandomPowerup();
-        Debug.Log(randomPowerup.name);
-        Instantiate(randomPowerup, emptyCell.transform.position, Quaternion.identity, emptyCell.transform);
+        Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
     }
 
     private Transform FindEmptyCell() {
-        List<Transform> emptyCells = GetAllEmptyCells();
+        List<Transform> emptyCells;
+        if (playerOne.Health == playerTwo.Health) {
+            emptyCells = GetAllEmptyCells();
+        } else if (playerOne.Health < playerTwo.Health) {
+            emptyCells = GetClosestEmptyCellsToPlayer(playerOne.transform, playerTwo.transform);
+        } else {
+            emptyCells = GetClosestEmptyCellsToPlayer(playerTwo.transform, playerOne.transform);
+        }
         return emptyCells[Random.Range(0, emptyCells.Count - 1)];
     }
 
@@ -41,10 +48,30 @@ public class PowerupSpawner : MonoBehaviour
             // Do not want to spawn in the first 3 rows
             if (rowNumber++ > 2) {
                 foreach (Transform cell in row.transform) {
-                    Debug.Log("Checking cell: " + cell.name);
                     if (cell.transform.childCount == 1) {
-                        Debug.Log("Empty cell found: " + cell.name);
                         emptyCells.Add(cell);
+                    }
+                }
+            }
+        }
+        return emptyCells;
+    }
+
+    private List<Transform> GetClosestEmptyCellsToPlayer(Transform behind, Transform ahead) {
+        activeRows = terrainGenerator.getActiveRows();
+        List<Transform> emptyCells = new List<Transform>();
+        int rowNumber = 0;
+        foreach (GameObject row in activeRows) {
+            // Do not want to spawn in the first 3 rows
+            if (rowNumber++ > 2) {
+                foreach (Transform cell in row.transform) {
+                    if (cell.transform.childCount == 1) {
+                        // Only adds cell to list if it is closer to the player behind than the one in front
+                        float distanceToAhead = Vector3.Distance(cell.position, ahead.position);
+                        float distanceToBehind = Vector3.Distance(cell.position, behind.position);
+                        if (distanceToBehind < distanceToAhead) {
+                            emptyCells.Add(cell);
+                        }
                     }
                 }
             }
