@@ -6,13 +6,13 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 {
     public static readonly int MAX_TERRAINS_PER_MAP = 1, MAX_ACTIVE_ROWS = 12;
-    public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 1.0f, DEGENERATION_SPEED = 2.0f;
+    public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 1.0f, DEGENERATION_SPEED = 0.4f;
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
     [SerializeField] private GameObject startTerrain, finishTerrain;
     [SerializeField] private GameObject[] randomTerrains;
     [SerializeField] private RuntimeAnimatorController spawnAnimator;
-    private Queue<Transform> activeRows = new();
+    public Queue<Transform> ActiveRows = new();
 
     void Awake()
     {
@@ -20,7 +20,8 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     private IEnumerator GenerateMap() {
-        var map = GameObject.Find("Map").transform;
+        var map = new GameObject("Map").transform;
+        map.position = new Vector3(0.0f, -0.5f, 0.0f);
 
         yield return GenerateTerrain(map, startTerrain.transform, 0, true);
         yield return new WaitForSeconds(GENERATION_DELAY);
@@ -35,7 +36,7 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     private IEnumerator GenerateTerrain(Transform map, Transform prefab, int id, bool instant) {
-        var terrain = new GameObject($"Terrain{id} ({prefab.name})").transform;
+        var terrain = new GameObject($"{id} ({prefab.name})").transform;
         terrain.SetParent(map, false);
         terrain.localPosition = Vector3.forward * RowsGenerated;
 
@@ -46,7 +47,7 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     private void GenerateRow(Transform terrain, Transform prefab, int id) {
-        var row = new GameObject($"Row{id}").transform;
+        var row = new GameObject(prefab.name).transform;
         row.SetParent(terrain, false);
         row.localPosition = prefab.localPosition;
 
@@ -55,15 +56,15 @@ public class TerrainGenerator : MonoBehaviour
         }
         RowsGenerated++;
 
-        activeRows.Enqueue(row);
-        if (activeRows.Count > MAX_ACTIVE_ROWS) {
-            StartCoroutine(DegenerateRow(activeRows.Dequeue()));
+        ActiveRows.Enqueue(row);
+        if (ActiveRows.Count > MAX_ACTIVE_ROWS) {
+            StartCoroutine(DegenerateRow(ActiveRows.Dequeue()));
         }
     }
 
     private void GenerateCell(Transform row, Transform prefab, int id) {
         var cell = Instantiate(prefab.gameObject, row, false).transform;
-        cell.name = $"Cell{id}";
+        cell.name = prefab.name;
         cell.localPosition = prefab.localPosition;
         // Add extra Animator Controller for load in animation
         var animator = cell.gameObject.AddComponent<Animator>();
@@ -74,13 +75,21 @@ public class TerrainGenerator : MonoBehaviour
     private IEnumerator DegenerateRow(Transform row) {
         var terrain = row.parent;
 
-        for (var count = 0; count < row.childCount; count++) {
-            row.GetChild(count).gameObject.GetComponent<Animator>().Play("Despawn");
+        foreach (Transform cell in row) {
+            cell.gameObject.GetComponent<Animator>().Play("Despawn");
         }
         yield return new WaitForSeconds(DEGENERATION_SPEED);
-
-        Destroy(row.gameObject);
-        if (terrain.childCount == 1) Destroy(terrain.gameObject);
+        foreach (Transform cell in row) {
+            foreach (Transform obj in cell) {
+                var rigidbody = obj.gameObject.GetComponent<Rigidbody>();
+                rigidbody.useGravity = true;
+                rigidbody.constraints = RigidbodyConstraints.None;
+                rigidbody.AddExplosionForce(5f, obj.position + 
+                    new Vector3(Random.Range(-0.5f, 0.5f), 0.9f, Random.Range(-0.5f, 0.5f)), 
+                    0.2f, 0.0f, ForceMode.Impulse);
+            }
+            
+        }
     }
 
     private GameObject PickNextRandomValidTerrain() {
