@@ -17,16 +17,7 @@ public class PlayerInfo : MonoBehaviour
     public bool Ghosted { get => ghosted; set => ghosted = value; }
     public bool Exhausted { get => exhausted; set => exhausted = value; }
     public bool Frozen { get => frozen; set => frozen = value; }
-    // Player Bomb
-    [SerializeField]
-    private Object defaultBombPrefab = null, overrideBombPrefab = null;
-    public Object BombPrefab { get => overrideBombPrefab != null ? overrideBombPrefab : defaultBombPrefab; set => overrideBombPrefab = value; }
-    // Player Item (only useful if we decide to separate controls for items and bombs)
+    // Player Item
     public Powerup LoadedPowerup = null;
-    private Object itemPrefab = null;
-    public Object ItemPrefab { get => itemPrefab; set => itemPrefab = value; }
-
-    void Awake() {
-        Opponent = name == "Player1" ? GameObject.Find("Player2") : GameObject.Find("Player1");
-    }
+    [field: SerializeField] public GameObject WeaponPrefab { get; set; } = null;
 }

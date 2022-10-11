@@ -25,6 +25,9 @@ public class PlayerGenerator : MonoBehaviour
         playerOne.name = "Player1";
         playerTwo.name = "Player2";
 
+        playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
+        playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
+
         Spawn(playerOne, false);
         Spawn(playerTwo, false);
     }

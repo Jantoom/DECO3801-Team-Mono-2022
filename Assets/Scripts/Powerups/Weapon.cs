@@ -35,13 +35,13 @@ public class Weapon : Powerup
 
     public override void StartPowerup()
     {
-        PlayerInfo.BombPrefab = WeaponPrefab;
+        PlayerInfo.WeaponPrefab = WeaponPrefab;
         base.StartPowerup();
     }
 
     public override void EndPowerup()
     {
-        PlayerInfo.BombPrefab = null;
+        PlayerInfo.WeaponPrefab = null;
         base.EndPowerup();
     }
 }
