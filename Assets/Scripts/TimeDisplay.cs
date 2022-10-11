@@ -8,15 +8,15 @@ using UnityEngine.UIElements;
 
 public class TimeDisplay : MonoBehaviour
 {
-    [SerializeField]
-    public float timeAmount;
-    public TMP_Text timeT;
+    
+    private float timeAmount;
+    [SerializeField] private TMP_Text timeLimit;
 
 
 
     private void Start()
     {
-        timeAmount = 40;
+        timeAmount = 30;
     }
     void Update()
     {
@@ -45,21 +45,7 @@ public class TimeDisplay : MonoBehaviour
         }
         float min = Mathf.FloorToInt(timeToShow / 60);
         float sec = Mathf.FloorToInt(timeToShow % 60);
-        timeT.text = string.Format("{0:00}:{1:00}", min, sec); ;
+        timeLimit.text = string.Format("{0:00}:{1:00}", min, sec); ;
     }
-    public Boolean IsTimeOver()
-    {
-        if( timeAmount <= 0)
-        {
-            GameOverInfo.isGameOver = true;//
-
-            return true;
-        }
-        return false;
-    }
-   /* public float getTime()
-    {
-        return timeAmount;
-    }*/
 
 }
