@@ -5,52 +5,46 @@ using UnityEngine;
 
 public class PlayerGenerator : MonoBehaviour
 {
-    private static readonly int SPAWN_ROW_BUFFER = 3;
-    private Transform mapTran;
+    public static readonly int SPAWN_ROW_BUFFER = 3;
+    [SerializeField] private GameObject playerOnePrefab, playerTwoPrefab;
 
-    void Start()
-    {
-        mapTran = GameObject.Find("Map").transform;
+    void Start() {
+        var playerOne = Instantiate(playerOnePrefab);
+        var playerTwo = Instantiate(playerTwoPrefab);
+
+        playerOne.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart1");
+        playerOne.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart2");
+        playerOne.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart3");
+        playerTwo.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart4");
+        playerTwo.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart5");
+        playerTwo.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart6");
+
+        playerOne.name = "Player1";
+        playerTwo.name = "Player2";
+
+        Spawn(playerOne, false);
+        Spawn(playerTwo, false);
     }
 
-    public void Spawn(GameObject player) {
-        var spawnCellTran = player.name == "Player1" ? FindSpawnPlayerOne() : FindSpawnPlayerTwo();
-        if (spawnCellTran != null) {
-            player.transform.SetPositionAndRotation(spawnCellTran.position + Vector3.up, spawnCellTran.rotation);
-        } else {
-            Debug.LogError("Couldn't spawn player");
-        }
-    }
-
-    private Transform FindSpawnPlayerOne() {
-        for (int terrainCount = 1; terrainCount < mapTran.childCount; terrainCount++) {
-            var terrainTran = mapTran.GetChild(terrainCount);
-            for (int rowCount = SPAWN_ROW_BUFFER; rowCount < terrainTran.childCount; rowCount++) {
-                var rowTran = terrainTran.GetChild(rowCount);
-                for (int cellCount = 0; cellCount < Mathf.FloorToInt(rowTran.childCount / 2); cellCount++) {
-                    var cellTran = rowTran.GetChild(cellCount);
-                    if (cellTran.childCount < 2) {
-                        return cellTran;
+    public static void Spawn(GameObject player, bool useBuffer) {
+        var terrains = GameObject.Find("Map").transform;
+        foreach (Transform terrain in terrains) {
+            var rows = Enumerable.Range(0, terrain.childCount).Select(x => terrain.GetChild(x)).Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
+            foreach (Transform row in rows) {
+                var cells = Enumerable.Range(0, row.childCount).Select(x => row.GetChild(x));
+                cells = player.name == "Player1" ?
+                    // Can only spawn in left half of cells, preferring leftmost
+                    cells.Take(Mathf.FloorToInt(row.childCount / 2)) :
+                    // Can only spawn in right half of cells, preferring rightmost
+                    cells.Skip(Mathf.CeilToInt(row.childCount / 2)).Reverse();
+                foreach (var cell in cells) {
+                    if (cell.childCount < 2) {
+                        player.transform.SetPositionAndRotation(cell.position + Vector3.up, cell.rotation);
+                        return;
                     }
                 }
             }
         }
-        return null;
-    }
-
-    private Transform FindSpawnPlayerTwo() {
-        for (int terrainCount = 1; terrainCount < mapTran.childCount; terrainCount++) {
-            var terrainTran = mapTran.GetChild(terrainCount);
-            for (int rowCount = SPAWN_ROW_BUFFER; rowCount < terrainTran.childCount; rowCount++) {
-                var rowTran = terrainTran.GetChild(rowCount);
-                for (int cellCount = rowTran.childCount - 1; cellCount > Mathf.FloorToInt(rowTran.childCount / 2); cellCount--) {
-                    var cellTran = rowTran.GetChild(cellCount);
-                    if (cellTran.childCount < 2) {
-                        return cellTran;
-                    }
-                }
-            }
-        }
-        return null;
+        Debug.LogError("Couldn't spawn player!");
     }
 }
