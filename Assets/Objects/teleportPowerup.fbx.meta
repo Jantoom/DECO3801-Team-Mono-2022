@@ -1,12 +1,14 @@
 fileFormatVersion: 2
-guid: bea613459fca50f4aa76844743c09e5f
+guid: d22a4860aa2177b4fa3253bc57bd840c
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 5431812570196217794
-    second: pCube239|pCube239|Take 001|BaseLayer
-  externalObjects: {}
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Teleport
+    second: {fileID: 2800000, guid: 46d9f83bbfb2ea441a0b7ed872eff177, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 40
+    globalScale: 0.7
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -91,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.39999998
+    globalScale: 0.0069999998
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

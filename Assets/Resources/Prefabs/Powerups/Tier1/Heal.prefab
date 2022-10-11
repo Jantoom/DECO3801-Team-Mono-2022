@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8324642281976744629}
   - component: {fileID: 7343888870557830172}
   - component: {fileID: -3749910747183171630}
+  - component: {fileID: 5313294629837632658}
   m_Layer: 0
   m_Name: Heal
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: b3368283f1d273d41bf556b915f58ac8, type: 3}
+  - {fileID: 2100000, guid: 956e50dbdcc626d4dbaae0e6fcdde9cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,3 +131,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
+--- !u!114 &5313294629837632658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400587712483704592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5ed60c59e0e26499edc502309f4ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8324642281976744629}
   - component: {fileID: 8361157731289838186}
   - component: {fileID: 4335910527733809018}
+  - component: {fileID: 3410273693441015956}
   m_Layer: 0
   m_Name: Exhaust
   m_TagString: Untagged
@@ -131,3 +132,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
+--- !u!114 &3410273693441015956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400587712483704592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5ed60c59e0e26499edc502309f4ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
