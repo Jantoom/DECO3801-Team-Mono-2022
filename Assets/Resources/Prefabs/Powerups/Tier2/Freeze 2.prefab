@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4313368243367815531}
   - component: {fileID: 8324642281976744629}
   - component: {fileID: 8044153187316580313}
-  - component: {fileID: 3773921497863370585}
   m_Layer: 0
   m_Name: Freeze 2
   m_TagString: Untagged
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8616999104981551419, guid: bea613459fca50f4aa76844743c09e5f, type: 3}
+  - {fileID: 2100000, guid: f6d126d46ca14bd499e181da6dadc8ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,15 +114,3 @@ MonoBehaviour:
   Activated: 0
   Duration: 3.5
   NerfStat: Frozen
---- !u!122 &3773921497863370585
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5400587712483704592}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 6.55
