@@ -8,9 +8,10 @@ public class PlayerControls : MonoBehaviour
 {
     private PlayerInfo playerInfo;
     // Control Type
-    [field: SerializeField] public bool UseSerialControls { get; private set; } = false;
+    public bool UseSerialControls { get; private set; } = true;
     // Serial Controls from Arduino
-    private static SerialPort serialInput = new SerialPort("COM3", 9600);
+    public static SerialPort serialInput = new SerialPort("COM4", 9600);
+    public static bool serialInputOpen = false;
     [field: SerializeField] public int ForwardSignal { get; private set; }
     [field: SerializeField] public int BackSignal { get; private set; }
     [field: SerializeField] public int LeftSignal { get; private set; }
@@ -36,9 +37,10 @@ public class PlayerControls : MonoBehaviour
     {
         playerInfo = GetComponent<PlayerInfo>();
         // Opens port and sets a timeout between reads
-        if (UseSerialControls) {
+        if (UseSerialControls && !serialInputOpen) {
             serialInput.Open();
             serialInput.ReadTimeout = 1;
+            serialInputOpen = true;
         }
         lastDirections = new Vector3[2] { Vector3.zero, Vector3.zero };
     }
