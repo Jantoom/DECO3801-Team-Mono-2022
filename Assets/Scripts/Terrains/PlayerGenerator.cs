@@ -25,6 +25,9 @@ public class PlayerGenerator : MonoBehaviour
         playerOne.name = "Player1";
         playerTwo.name = "Player2";
 
+        playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
+        playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
+
         Spawn(playerOne, false);
         Spawn(playerTwo, false);
     }
@@ -40,7 +43,7 @@ public class PlayerGenerator : MonoBehaviour
                 cells.Skip(Mathf.CeilToInt(row.childCount / 2)).Reverse();
             foreach (var cell in cells) {
                 if (cell.childCount < 2) {
-                    player.transform.SetPositionAndRotation(cell.position + Vector3.up, cell.rotation);
+                    player.transform.SetPositionAndRotation(cell.position, cell.rotation);
                     return;
                 }
             }
