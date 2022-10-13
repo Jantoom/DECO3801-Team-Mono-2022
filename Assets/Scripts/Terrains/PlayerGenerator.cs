@@ -5,35 +5,47 @@ using UnityEngine;
 
 public class PlayerGenerator : MonoBehaviour
 {
-    public static readonly int SPAWN_ROW_BUFFER = 1;
-    [SerializeField] private GameObject playerOnePrefab, playerTwoPrefab;
-    private static TerrainGenerator terrainGenerator;
+    public static readonly int SPAWN_ROW_BUFFER = 2;
+    private static TerrainGenerator _terrainGenerator;
+    [SerializeField] private GameObject _playerOne, _playerTwo;
 
-    void Start() {
-        terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
+    void Start()
+    {
+        _terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
 
-        var playerOne = Instantiate(playerOnePrefab);
-        var playerTwo = Instantiate(playerTwoPrefab);
+        _playerOne = Instantiate(_playerOne);
+        _playerTwo = Instantiate(_playerTwo);
 
-        playerOne.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart1");
-        playerOne.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart2");
-        playerOne.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart3");
-        playerTwo.GetComponent<PlayerLives>().heart1 = GameObject.Find("Heart4");
-        playerTwo.GetComponent<PlayerLives>().heart2 = GameObject.Find("Heart5");
-        playerTwo.GetComponent<PlayerLives>().heart3 = GameObject.Find("Heart6");
+        _playerOne.name = "Player1";
+        _playerTwo.name = "Player2";
 
-        playerOne.name = "Player1";
-        playerTwo.name = "Player2";
+        _playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart1");
+        _playerOne.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart2");
+        _playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart3");
+        _playerTwo.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart6");
+        _playerTwo.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart5");
+        _playerTwo.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart4");
 
-        playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
-        playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
+        _playerOne.GetComponent<PlayerInfo>().Opponent = _playerTwo;
+        _playerTwo.GetComponent<PlayerInfo>().Opponent = _playerOne;
 
-        Spawn(playerOne, false);
-        Spawn(playerTwo, false);
+        Spawn(_playerOne, false);
+        Spawn(_playerTwo, false);
     }
-
-    public static void Spawn(GameObject player, bool useBuffer) {
-        var rows = terrainGenerator.ActiveRows.ToList().Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
+    public static void Spawn(GameObject player) => Spawn(player, true);
+    // Summary:
+    //     Spawns the given player in a suitable position based on which side the player has
+    //     preference for.
+    //
+    // Parameters:
+    //   player:
+    //     The player to spawn
+    //   useBuffer:
+    //     Whether the generator should use include a buffer zone between the first row and the 
+    //     player
+    public static void Spawn(GameObject player, bool useBuffer)
+    {
+        var rows = _terrainGenerator.ActiveRows.ToList().Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
         foreach (Transform row in rows) {
             var cells = Enumerable.Range(0, row.childCount).Select(x => row.GetChild(x));
             cells = player.name == "Player1" ?

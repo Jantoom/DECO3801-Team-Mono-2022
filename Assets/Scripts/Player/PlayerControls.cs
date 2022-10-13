@@ -29,7 +29,7 @@ public class PlayerControls : MonoBehaviour
     private Vector3 _lastPosition;
     private IEnumerator _moveCoroutine = null;
 
-    public void Awake()
+    void Awake()
     {
         _playerInfo = GetComponent<PlayerInfo>();
         if (UseSerialControls && !SerialInputOpen) {
@@ -38,7 +38,7 @@ public class PlayerControls : MonoBehaviour
             SerialInputOpen = true;
         }
     }
-    public void Update()
+    void Update()
     {
         // Player cannot move while frozen
         if (_playerInfo.Frozen) return;
@@ -49,7 +49,7 @@ public class PlayerControls : MonoBehaviour
             ProcessDirection(KeyCodeToDirection(KeyDownToKeyCode()));
         }
     }
-    public void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         // Player is free to traverse while ghosted
         if (_playerInfo.Ghosted) return;
@@ -65,7 +65,7 @@ public class PlayerControls : MonoBehaviour
             collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(_playerInfo.Attack);
         }
     }
-    public void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         // Player is free to traverse while ghosted or collider is freefalling from terrain
         if (_playerInfo.Ghosted || collision.collider.attachedRigidbody.useGravity) return;
@@ -97,7 +97,6 @@ public class PlayerControls : MonoBehaviour
     private void ProcessDirection(Vector3 direction)
     {
         if (direction != Vector3.zero) {
-            Debug.Log(direction);
             if ((direction + _lastDirections[0]).Equals(Vector3.zero) &&
                 Time.time - _timeAtLastInput < ACTIVATION_WAIT_TIME) {
                 ActivateItem();

@@ -6,10 +6,11 @@ public class Weapon : Powerup
 {
     public GameObject WeaponPrefab;
 
-    void OnCollisionEnter(Collision collision) {
-        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info) && info.LoadedPowerup == null) {
-            PlayerInfo = info;
-            // Collision is a first encounter with a player not currently holding an unactivated powerup
+    void OnCollisionEnter(Collision collision)
+    {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
+            // First encounter with a player
+            Destroy(PlayerInfo.LoadedPowerup);
             var powerup = PlayerInfo.Player.AddComponent<Weapon>();
             powerup.WeaponPrefab = WeaponPrefab;
             powerup.Duration = Duration;
@@ -18,31 +19,34 @@ public class Weapon : Powerup
             Destroy(gameObject);
         }
     }
-
-    public override void KillDuplicatePowerups() {
+    public override void Activate()
+    {
+        base.Activate();
+        Instantiate(WeaponPrefab, transform.position, transform.rotation);
+    }
+    //
+    // Summary:
+    //     Updates player's weapon prefab. Instantiates one instance of that weapon.
+    protected override void StartPowerup()
+    {
+        PlayerInfo.WeaponPrefab = WeaponPrefab;
+        base.StartPowerup();
+    }
+    //
+    // Summary:
+    //     Updates player's weapon prefab to null.
+    protected override void EndPowerup()
+    {
+        PlayerInfo.WeaponPrefab = null;
+        base.EndPowerup();
+    }
+    protected override void KillDuplicatePowerups()
+    {
         foreach (var powerup in PlayerInfo.GetComponents<Weapon>()) {
             // Kill any activated powerups of the same type (effectively refreshes the powerup)
             if (powerup.WeaponPrefab == WeaponPrefab && powerup != this) {
                 powerup.EndPowerup();
             }
         }
-    }
-
-    public override void Activate()
-    {
-        base.Activate();
-        Instantiate(WeaponPrefab, transform.position, transform.rotation);
-    }
-
-    public override void StartPowerup()
-    {
-        PlayerInfo.WeaponPrefab = WeaponPrefab;
-        base.StartPowerup();
-    }
-
-    public override void EndPowerup()
-    {
-        PlayerInfo.WeaponPrefab = null;
-        base.EndPowerup();
     }
 }
