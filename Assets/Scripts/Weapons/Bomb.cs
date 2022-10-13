@@ -4,44 +4,37 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour, IDestructible
 {
-    [SerializeField]
-    protected GameObject explosionPrefab;
-    [SerializeField]
-    protected int range = 3;
-    [SerializeField]
-    protected float delay = 2.0f, speed = 0.1f;
-    protected PlayerInfo owner = null;
-    protected bool isExploding = false;
-    public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }
+    [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private int _range = 3;
+    [SerializeField] private float _delay = 2.0f, _speed = 0.1f;
+    private bool _isExploding = false;
 
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(StartExplosion());
+        yield return new WaitForSeconds(_delay);
+        if (!_isExploding) StartCoroutine(Explode());
     }
-
-    protected virtual IEnumerator StartExplosion() {
-        yield return new WaitForSeconds(delay);
-        if (!isExploding) StartCoroutine(Explode());
+    public void TakeDamage(int damage)
+    {
+        if (!_isExploding) StartCoroutine(Explode());
     }
-
-    public void TakeDamage(int damage) {
-        if (!isExploding) StartCoroutine(Explode());
-    }
-
-    protected virtual IEnumerator Explode() {
-        isExploding = true;
+    //
+    // Summary:
+    //     Explodes the bomb, spawning explosion objects in every direction.
+    private IEnumerator Explode()
+    {
+        _isExploding = true;
         FindObjectOfType<AudioManager>().play("BombSound");
         gameObject.GetComponent<Renderer>().enabled = false;
-        explosionPrefab.GetComponent<Explosion>().Owner = owner;
 
         var directions = new Vector3[] { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        for (int radius = 1; radius < range; radius++) {
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        for (int radius = 1; radius < _range; radius++) {
             foreach (var direction in directions) {
                 var spawnPos = transform.position + direction * radius;
-                Instantiate(explosionPrefab, spawnPos, Quaternion.identity);
+                Instantiate(_explosionPrefab, spawnPos, Quaternion.identity);
             }
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(_speed);
         }
 
         Destroy(gameObject);

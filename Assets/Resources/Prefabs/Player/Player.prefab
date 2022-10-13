@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 2150773631684907090}
   - component: {fileID: 2150773631684907089}
   - component: {fileID: 2150773631684907102}
-  - component: {fileID: 2150773631684907101}
   - component: {fileID: 1758625746909005334}
-  - component: {fileID: 2150773631684907096}
+  - component: {fileID: 2150773631684907101}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -31,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283895187677194583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 1, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,7 +99,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &2150773631684907102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,24 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &2150773631684907101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283895187677194583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b597f18ca6ad014994c3b822fedcaab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardKey: 0
-  backKey: 0
-  leftKey: 0
-  rightKey: 0
-  bombKey: 0
-  itemKey: 0
 --- !u!114 &1758625746909005334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +134,9 @@ MonoBehaviour:
   Ghosted: 0
   Exhausted: 0
   Frozen: 0
-  defaultBombPrefab: {fileID: 5686585067370764456, guid: f97f367b36307e64b968f0f16fa01c9b,
-    type: 3}
-  overrideBombPrefab: {fileID: 0}
   LoadedPowerup: {fileID: 0}
---- !u!114 &2150773631684907096
+  WeaponPrefab: {fileID: 0}
+--- !u!114 &2150773631684907101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,6 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 283895187677194583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d63bd3945430584b92aee29f93ad756, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b597f18ca6ad014994c3b822fedcaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LeftSignal>k__BackingField: 0
+  <ForwardSignal>k__BackingField: 0
+  <RightSignal>k__BackingField: 0
+  <LeftKey>k__BackingField: 0
+  <ForwardKey>k__BackingField: 0
+  <RightKey>k__BackingField: 0
