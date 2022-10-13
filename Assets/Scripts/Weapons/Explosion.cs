@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private int damage = GameInfo.BASE_HEALTH * 20;
-    private float persistence = 0.2f;
-    private PlayerInfo owner = null;
-    public PlayerInfo Owner { get => owner; set => owner = owner ?? value; }
+    [SerializeField] private int _damage = GameInfo.BASE_HEALTH * 20;
+    [SerializeField] private float _persistence = 0.2f;
 
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(Fizzle());
-    }
-
-    private IEnumerator Fizzle()
-    {
-        yield return new WaitForSeconds(persistence);
+        yield return new WaitForSeconds(_persistence);
         Destroy(gameObject);
     }
-
     private void OnCollisionEnter(Collision collision)
     {
-        collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(damage);
+        collision.gameObject.GetComponent<IDestructible>()?.TakeDamage(_damage);
     }
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WallWeak : MonoBehaviour, IDestructible
 {
-    private int health = GameInfo.BASE_HEALTH * 10;
-    public int Health { get => health; }
+    [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 10;
 
-    public void TakeDamage(int damage) {
-        health -= damage;
-        if (health <= 0) Destroy(gameObject);
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        if (Health <= 0) Destroy(gameObject);
     }
 }

@@ -86,7 +86,7 @@ public class PlayerControls : MonoBehaviour
                 }
             }
             // Player has no immediate cells to move into, so just find one using respawn algorithm
-            PlayerGenerator.Spawn(gameObject, true);
+            PlayerGenerator.Spawn(gameObject);
         }
     }
     //

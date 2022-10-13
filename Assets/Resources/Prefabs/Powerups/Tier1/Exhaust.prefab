@@ -115,6 +115,9 @@ MonoBehaviour:
   PlayerInfo: {fileID: 0}
   Activated: 0
   Duration: 3.5
+  _loadedImage: {fileID: 0}
+  _effectImage: {fileID: 0}
+  _effectParticles: {fileID: 0}
   NerfStat: Exhausted
 --- !u!54 &4335910527733809018
 Rigidbody:
@@ -130,7 +133,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3410273693441015956
 MonoBehaviour:

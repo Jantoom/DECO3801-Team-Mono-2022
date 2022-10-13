@@ -28,6 +28,7 @@ public class Nerf : Powerup
         if (Activated) {
             // Owner of nerf powerup
             var powerup = PlayerInfo.Opponent.AddComponent<Nerf>();
+            powerup.PlayerInfo = PlayerInfo.Opponent.GetComponent<PlayerInfo>();
             powerup.NerfStat = NerfStat;
             powerup.Duration = Duration;
             powerup.KillDuplicatePowerups();

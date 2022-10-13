@@ -116,6 +116,9 @@ MonoBehaviour:
   PlayerInfo: {fileID: 0}
   Activated: 0
   Duration: 3
+  _loadedImage: {fileID: 0}
+  _effectImage: {fileID: 0}
+  _effectParticles: {fileID: 0}
   BuffStat: Juggernaut
 --- !u!54 &5523237176754986387
 Rigidbody:
@@ -131,7 +134,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!111 &2504866747228581074
 Animation:
