@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948bfd8caad19404fa20ae4999e023c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 8431613691879521690, guid: dc16846eff7171f49ac3efb2bd80a2b7,
+  _explosionPrefab: {fileID: 8431613691879521690, guid: dc16846eff7171f49ac3efb2bd80a2b7,
     type: 3}
-  range: 5
-  delay: 2
-  speed: 0.1
+  _range: 5
+  _delay: 2
+  _speed: 0.1

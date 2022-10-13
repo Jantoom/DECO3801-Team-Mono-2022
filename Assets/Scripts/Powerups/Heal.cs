@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Heal : Powerup
 {
-    public override void StartPowerup() {
-        PlayerInfo.Health += GameInfo.BASE_HEALTH * 10;
+    //
+    // Summary:
+    //     Heals player for one life.
+    protected override void StartPowerup()
+    {
+        PlayerInfo.Health += GameInfo.BASE_HEALTH;
         EndPowerup();
     }
 }

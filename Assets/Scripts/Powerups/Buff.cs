@@ -6,10 +6,11 @@ public class Buff : Powerup
 {
     public string BuffStat;
 
-    void OnCollisionEnter(Collision collision) {
-        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info) && info.LoadedPowerup == null) {
-            PlayerInfo = info;
-            // Collision is a first encounter with a player not currently holding an unactivated powerup
+    void OnCollisionEnter(Collision collision)
+    {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
+            // First encounter with a player
+            Destroy(PlayerInfo.LoadedPowerup);
             var powerup = PlayerInfo.Player.AddComponent<Buff>();
             powerup.BuffStat = BuffStat;
             powerup.Duration = Duration;
@@ -18,24 +19,29 @@ public class Buff : Powerup
             Destroy(gameObject);
         }
     }
-
-    public override void KillDuplicatePowerups() {
+    //
+    // Summary:
+    //     Updates player's buff stat to true.
+    protected override void StartPowerup()
+    {
+        PlayerInfo.GetType().GetField(BuffStat).SetValue(PlayerInfo, true);
+        base.StartPowerup();
+    }
+    //
+    // Summary:
+    //     Updates player's buff stat to false.
+    protected override void EndPowerup()
+    {
+        PlayerInfo.GetType().GetField(BuffStat).SetValue(PlayerInfo, false);
+        base.EndPowerup();
+    }
+    protected override void KillDuplicatePowerups()
+    {
         foreach (var powerup in PlayerInfo.GetComponents<Buff>()) {
             // Kill any activated powerups of the same type (effectively refreshes the powerup)
             if (powerup.BuffStat == BuffStat && powerup != this) {
                 powerup.EndPowerup();
             }
         }
-    }
-
-    public override void StartPowerup() {
-        PlayerInfo.GetType().GetProperty(BuffStat).SetValue(PlayerInfo, true);
-        base.StartPowerup();
-    }
-
-    public override void EndPowerup()
-    {
-        PlayerInfo.GetType().GetProperty(BuffStat).SetValue(PlayerInfo, false);
-        base.EndPowerup();
     }
 }

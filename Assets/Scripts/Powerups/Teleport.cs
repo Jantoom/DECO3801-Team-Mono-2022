@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Teleport : Powerup
 {
-    public override void StartPowerup() {
+    //
+    // Summary:
+    //     Swaps the locations of both players.
+    protected override void StartPowerup()
+    {
         var playerPos = transform.position;
         var opponentPos = PlayerInfo.Opponent.transform.position;
         transform.position = opponentPos;
