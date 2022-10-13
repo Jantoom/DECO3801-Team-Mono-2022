@@ -19,11 +19,6 @@ public class Weapon : Powerup
             Destroy(gameObject);
         }
     }
-    public override void Activate()
-    {
-        base.Activate();
-        Instantiate(WeaponPrefab, transform.position, transform.rotation);
-    }
     //
     // Summary:
     //     Updates player's weapon prefab. Instantiates one instance of that weapon.

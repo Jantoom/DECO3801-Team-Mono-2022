@@ -28,7 +28,6 @@ public class Nerf : Powerup
         if (Activated) {
             // Owner of nerf powerup
             var powerup = PlayerInfo.Opponent.AddComponent<Nerf>();
-            powerup.PlayerInfo = PlayerInfo.Opponent.GetComponent<PlayerInfo>();
             powerup.NerfStat = NerfStat;
             powerup.Duration = Duration;
             powerup.KillDuplicatePowerups();
@@ -36,7 +35,7 @@ public class Nerf : Powerup
             EndPowerup();
         } else {
             // Opponent (receiver of nerf)
-            PlayerInfo.GetType().GetProperty(NerfStat).SetValue(PlayerInfo, true);
+            PlayerInfo.GetType().GetField(NerfStat).SetValue(PlayerInfo, true);
             base.StartPowerup();
         }
     }
@@ -50,7 +49,7 @@ public class Nerf : Powerup
             // No nerf on owner
         } else {
             // Undo nerf on opponent
-            PlayerInfo.GetType().GetProperty(NerfStat).SetValue(PlayerInfo, false);
+            PlayerInfo.GetType().GetField(NerfStat).SetValue(PlayerInfo, false);
         }
         base.EndPowerup();
     }

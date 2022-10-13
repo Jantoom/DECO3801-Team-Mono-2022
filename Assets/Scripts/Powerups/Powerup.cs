@@ -10,7 +10,7 @@ public abstract class Powerup : MonoBehaviour
     public bool Activated = false;
     // Powerup Duration
     public float StartTime { get; private set; } = 0.0f;
-    public float Duration { get; set; }
+    public float Duration;
     public float EndTime { get => StartTime + Duration; }
     protected float _tick = 0.10f;
     // Powerup UI
@@ -23,19 +23,19 @@ public abstract class Powerup : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info)) {
             // First encounter with a player
-            Destroy(PlayerInfo.LoadedPowerup);
-            var powerup = (Powerup) PlayerInfo.Player.AddComponent(this.GetType());
+            Destroy(info.LoadedPowerup);
+            var powerup = (Powerup) info.Player.AddComponent(this.GetType());
             powerup.Duration = Duration;
-            PlayerInfo.LoadedPowerup = powerup;
+            info.LoadedPowerup = powerup;
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }
     }
     void OnDestroy()
     {
-        EndPowerup();
+        if (PlayerInfo != null) EndPowerup();
     }
     //
     // Summary:

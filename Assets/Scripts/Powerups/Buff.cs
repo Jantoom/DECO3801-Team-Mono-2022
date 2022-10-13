@@ -24,7 +24,7 @@ public class Buff : Powerup
     //     Updates player's buff stat to true.
     protected override void StartPowerup()
     {
-        PlayerInfo.GetType().GetProperty(BuffStat).SetValue(PlayerInfo, true);
+        PlayerInfo.GetType().GetField(BuffStat).SetValue(PlayerInfo, true);
         base.StartPowerup();
     }
     //
@@ -32,7 +32,7 @@ public class Buff : Powerup
     //     Updates player's buff stat to false.
     protected override void EndPowerup()
     {
-        PlayerInfo.GetType().GetProperty(BuffStat).SetValue(PlayerInfo, false);
+        PlayerInfo.GetType().GetField(BuffStat).SetValue(PlayerInfo, false);
         base.EndPowerup();
     }
     protected override void KillDuplicatePowerups()
