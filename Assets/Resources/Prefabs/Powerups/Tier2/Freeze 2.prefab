@@ -112,5 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerInfo: {fileID: 0}
   Activated: 0
-  Duration: 3.5
+  Duration: 2.5
   NerfStat: Frozen

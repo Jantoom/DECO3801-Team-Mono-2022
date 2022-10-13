@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    public static readonly int MAX_TERRAINS_PER_MAP = 1, MAX_ACTIVE_ROWS = 12;
-    public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 1.0f, DEGENERATION_SPEED = 0.4f;
+    public static readonly int MAX_TERRAINS_PER_MAP = 3, MAX_ACTIVE_ROWS = 12;
+    public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 2.0f, DEGENERATION_SPEED = 0.4f;
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
     [SerializeField] private GameObject[] randomTerrains;
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
@@ -96,7 +96,7 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     private GameObject PickNextRandomValidTerrain() {
-        return randomTerrains[Random.Range(1, randomTerrains.Length)];
+        return randomTerrains[Random.Range(0, randomTerrains.Length)];
     }
 
     public Queue<Transform> getActiveRows() {

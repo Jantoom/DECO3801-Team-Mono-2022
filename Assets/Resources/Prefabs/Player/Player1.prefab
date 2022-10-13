@@ -154,6 +154,21 @@ PrefabInstance:
       propertyPath: <ForwardKey>k__BackingField
       value: 119
       objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <LeftSignal>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <RightSignal>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150773631684907101, guid: 6ba9fd07145718f4db6c7034ad2405a7,
+        type: 3}
+      propertyPath: <ForwardSignal>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8417387294499209792, guid: 6ba9fd07145718f4db6c7034ad2405a7,
         type: 3}
       propertyPath: m_RootOrder

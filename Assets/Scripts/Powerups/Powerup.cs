@@ -19,7 +19,8 @@ public abstract class Powerup : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo) && PlayerInfo.LoadedPowerup == null) {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info) && info.LoadedPowerup == null) {
+            PlayerInfo = info;
             // Collision is a first encounter with a player not currently holding an unactivated powerup
             var powerup = (Powerup) PlayerInfo.Player.AddComponent(this.GetType());
             PlayerInfo.LoadedPowerup = powerup;
@@ -63,6 +64,6 @@ public abstract class Powerup : MonoBehaviour
     }
 
     public virtual void EndPowerup() {
-        Destroy(GetComponent(this.GetType()));
+        Destroy(this);
     }
 }

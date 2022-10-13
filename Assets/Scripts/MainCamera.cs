@@ -8,7 +8,7 @@ public class MainCamera : MonoBehaviour
     void Update()
     {
         if (GameObject.Find("GameInfo").GetComponent<TerrainGenerator>().IsGenerating) {
-            transform.Translate(Vector3.forward * TerrainGenerator.GENERATION_SPEED * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.forward * (1 / TerrainGenerator.GENERATION_SPEED) * Time.deltaTime, Space.World);
         }
     }
 }
