@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WallStrong : MonoBehaviour, IDestructible
 {
-    private int health = GameInfo.BASE_HEALTH * 20;
-    public int Health { get => health; }
+    [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 20;
 
-    public void TakeDamage(int damage) {
-        if (health <= damage) Destroy(gameObject);
+    public void TakeDamage(int damage)
+    {
+        if (Health <= damage) Destroy(gameObject);
     }
 }
