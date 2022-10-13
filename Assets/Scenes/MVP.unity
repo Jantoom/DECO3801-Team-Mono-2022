@@ -2111,9 +2111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ec23135a81f744da1861eddf53dfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerOne: {fileID: 8192905056973487409, guid: 2796f669aa7391641b050b1bb6ef7b87,
+  _playerOnePrefab: {fileID: 8192905056973487409, guid: 2796f669aa7391641b050b1bb6ef7b87,
     type: 3}
-  _playerTwo: {fileID: 3199652402682523556, guid: 3db4951f48e3aa7489773768c44c1268,
+  _playerTwoPrefab: {fileID: 3199652402682523556, guid: 3db4951f48e3aa7489773768c44c1268,
     type: 3}
 --- !u!114 &1537060478
 MonoBehaviour:
