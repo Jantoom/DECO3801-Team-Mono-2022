@@ -24,17 +24,19 @@ public class PowerupSpawner : MonoBehaviour
     }
 
     private void SpawnPowerups() {
-        Transform emptyCell = FindEmptyCell();
-        GameObject randomPowerup;
-        Debug.Log("Player One Health:" + playerOne.Health);
-        Debug.Log("Player Two Health:" + playerTwo.Health);
-        if (playerOne.Health != playerTwo.Health) {
-            randomPowerup = GetRandomPowerup(powerupsTierTwo);
-        } else {
-            randomPowerup = GetRandomPowerup(powerupsTierOne);
+        if (!GameOverInfo.isGameOver) {
+            Transform emptyCell = FindEmptyCell();
+            GameObject randomPowerup;
+            Debug.Log("Player One Health:" + playerOne.Health);
+            Debug.Log("Player Two Health:" + playerTwo.Health);
+            if (playerOne.Health != playerTwo.Health) {
+                randomPowerup = GetRandomPowerup(powerupsTierTwo);
+            } else {
+                randomPowerup = GetRandomPowerup(powerupsTierOne);
+            }
+            Debug.Log(randomPowerup.name);
+            Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
         }
-        Debug.Log(randomPowerup.name);
-        Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
     }
 
     private Transform FindEmptyCell() {
