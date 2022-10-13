@@ -12,6 +12,7 @@ public class TerrainGenerator : MonoBehaviour
     // For synchronous object movement and other generators
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
+    public float GenerationSpeed { get => GENERATION_SPEED * (DistanceFrontPlayerToFrontRow() / MAX_ACTIVE_ROWS); }
     // Generation prefabs and components
     [SerializeField] private GameObject startTerrain, finishTerrain;
     [SerializeField] private GameObject[] randomTerrains;
@@ -70,7 +71,7 @@ public class TerrainGenerator : MonoBehaviour
 
         for (var count = 0; count < prefab.childCount; count++) {
             GenerateRow(terrain, prefab.GetChild(count));
-            if (!instant) yield return new WaitForSeconds(GENERATION_SPEED);
+            if (!instant) yield return new WaitForSeconds(GenerationSpeed);
         }
     }
     //
@@ -176,5 +177,9 @@ public class TerrainGenerator : MonoBehaviour
         // Returning copy of queue so PowerupSpawner queue traversal
         // doesn't affect the TerrainGenerator
         return new Queue<Transform>(ActiveRows);
+    }
+    private float DistanceFrontPlayerToFrontRow() {
+        return RowsGenerated - Mathf.Max(_gameInfo.PlayerOne.transform.position.z, 
+                                         _gameInfo.PlayerTwo.transform.position.z);
     }
 }
