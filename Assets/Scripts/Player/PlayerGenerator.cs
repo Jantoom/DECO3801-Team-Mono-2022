@@ -7,30 +7,38 @@ public class PlayerGenerator : MonoBehaviour
 {
     public static readonly int SPAWN_ROW_BUFFER = 2;
     private static TerrainGenerator _terrainGenerator;
-    [SerializeField] private GameObject _playerOne, _playerTwo;
+    [SerializeField] private GameObject _playerOnePrefab, _playerTwoPrefab;
 
-    void Start()
+    void Awake()
     {
-        _terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
+        var gameInfo = GameObject.Find("GameInfo");
 
-        _playerOne = Instantiate(_playerOne);
-        _playerTwo = Instantiate(_playerTwo);
+        _terrainGenerator = gameInfo.GetComponent<TerrainGenerator>();
 
-        _playerOne.name = "Player1";
-        _playerTwo.name = "Player2";
+        var playerOne = Instantiate(_playerOnePrefab);
+        var playerTwo = Instantiate(_playerTwoPrefab);
 
-        _playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart1");
-        _playerOne.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart2");
-        _playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart3");
-        _playerTwo.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart6");
-        _playerTwo.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart5");
-        _playerTwo.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart4");
+        playerOne.name = "Player1";
+        playerTwo.name = "Player2";
 
-        _playerOne.GetComponent<PlayerInfo>().Opponent = _playerTwo;
-        _playerTwo.GetComponent<PlayerInfo>().Opponent = _playerOne;
+        gameInfo.GetComponent<GameInfo>().PlayerOne = playerOne;
+        gameInfo.GetComponent<GameInfo>().PlayerTwo = playerTwo;
 
-        Spawn(_playerOne, false);
-        Spawn(_playerTwo, false);
+        playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
+        playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
+
+        playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart1");
+        playerOne.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart2");
+        playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart3");
+        playerTwo.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart6");
+        playerTwo.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart5");
+        playerTwo.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart4");
+    }
+
+    void Start() {
+        var gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
+        Spawn(gameInfo.PlayerOne, false);
+        Spawn(gameInfo.PlayerTwo, false);
     }
     public static void Spawn(GameObject player) => Spawn(player, true);
     // Summary:

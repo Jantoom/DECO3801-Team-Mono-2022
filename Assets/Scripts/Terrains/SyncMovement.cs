@@ -11,7 +11,7 @@ public class SyncMovement : MonoBehaviour
     void Update()
     {
         if (_terrainGenerator.IsGenerating) {
-            gameObject.transform.Translate(Vector3.forward * (1 / TerrainGenerator.GENERATION_SPEED) * Time.deltaTime, Space.World);
+            gameObject.transform.Translate(Vector3.forward * (1 / _terrainGenerator.GenerationSpeed) * Time.deltaTime, Space.World);
         }
     }
 }
