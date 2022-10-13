@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 {
     private PlayerInfo playerInfo;
     // Control Type
-    public bool UseSerialControls { get; private set; } = true;
+    public bool UseSerialControls { get; private set; } = false;
     // Serial Controls from Arduino
     public static SerialPort serialInput = new SerialPort("COM4", 9600);
     public static bool serialInputOpen = false;
