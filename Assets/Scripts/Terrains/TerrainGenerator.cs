@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
+    private GameInfo _gameInfo;
     // Generation constants
     public static readonly int MAX_TERRAINS_PER_MAP = 3, MAX_ACTIVE_ROWS = 12;
     public static readonly float GENERATION_DELAY = 2.0f, GENERATION_SPEED = 2.0f, DEGENERATION_SPEED = 0.4f;
@@ -14,12 +15,12 @@ public class TerrainGenerator : MonoBehaviour
     // Generation prefabs and components
     [SerializeField] private GameObject startTerrain, finishTerrain;
     [SerializeField] private GameObject[] randomTerrains;
-    [SerializeField] private RuntimeAnimatorController spawnAnimator;
     // Rows that have generated and not fallen
     public Queue<Transform> ActiveRows = new();
 
     void Awake()
     {
+        _gameInfo = GetComponent<GameInfo>();
         StartCoroutine(GenerateMap());
     }
     //
@@ -119,7 +120,7 @@ public class TerrainGenerator : MonoBehaviour
         cell.localPosition = prefab.localPosition;
         // Add extra Animator Controller for load in animation
         var animator = cell.gameObject.AddComponent<Animator>();
-        animator.runtimeAnimatorController = spawnAnimator;
+        animator.runtimeAnimatorController = _gameInfo.SpawnAnimator;
         animator.applyRootMotion = true;
     }
     //
@@ -143,6 +144,9 @@ public class TerrainGenerator : MonoBehaviour
         // Enable physics on all objects of the cells. Add explosive force for aesthetic effect.
         foreach (Transform cell in row) {
             foreach (Transform obj in cell) {
+                // Stop any animations on the object
+                Destroy(obj.GetComponent<Animator>());
+                // Apply explosive physics for cool effect
                 var rigidbody = obj.gameObject.GetComponent<Rigidbody>();
                 rigidbody.useGravity = true;
                 rigidbody.constraints = RigidbodyConstraints.None;

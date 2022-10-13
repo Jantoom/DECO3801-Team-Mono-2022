@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Abyss : MonoBehaviour
 {
-    void Update()
-    {
-        if (GameObject.Find("GameInfo").GetComponent<TerrainGenerator>().IsGenerating) {
-            gameObject.transform.Translate(Vector3.forward * (1 / TerrainGenerator.GENERATION_SPEED) * Time.deltaTime, Space.World);
-        }
-    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player")) {

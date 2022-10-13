@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class Hazard : MonoBehaviour
 {
     [SerializeField] private int _damage = GameInfo.BASE_HEALTH * 20;
     [SerializeField] private float _persistence = 0.2f;
