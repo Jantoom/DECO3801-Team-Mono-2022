@@ -8,6 +8,8 @@ public class GameOverDisplay : MonoBehaviour
     [SerializeField]
     private TMP_Text gameOverText, winnerNameText, menuText;
 
+    
+
     [SerializeField]
     GameObject gameOverScreen;
     bool displayGameOver;
@@ -20,6 +22,15 @@ public class GameOverDisplay : MonoBehaviour
 
     private void Awake()
     {
+        //
+        if (PlayerControls.UseSerialControls && !PlayerControls.SerialInputOpen)
+        {
+            PlayerControls.SerialInput.Open();
+            PlayerControls.SerialInput.ReadTimeout = 1;
+            PlayerControls.SerialInputOpen = true;
+        }
+        //
+
         displayGameOver = false;
         gotPlayerComponent = false;
     }
@@ -31,16 +42,33 @@ public class GameOverDisplay : MonoBehaviour
             player2Prefab = GameObject.Find("Player2").GetComponent<PlayerInfo>();
             gotPlayerComponent = true;
         }
+
         if (GameOverInfo.isGameOver)
         {
             if (!displayGameOver)
             {
                 DisplayGameOverScreen();
             }
-            if (Input.GetKeyDown(transitionKey))
+        }
+
+        if (GameOverInfo.isGameOver)
+        {
+            if (PlayerControls.UseSerialControls)
             {
-                SceneManager.LoadScene(scene);
+                if (PlayerControls.SerialInput.BytesToRead > 0)
+                {
+                   // PlayerControls.SerialInput.ReadByte();
+                   PlayerControls.SerialInput.ReadExisting();
+                    SceneManager.LoadScene(scene);
+
+                }
             }
+            else if (Input.GetKeyDown(transitionKey))
+            {
+                 SceneManager.LoadScene(scene);
+
+            }
+
         }
 
 
