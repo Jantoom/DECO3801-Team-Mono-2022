@@ -8,6 +8,17 @@ public class ContextMenu : MonoBehaviour
     [SerializeField]
     string gameScene;
     private bool readyToGo;
+
+
+    private void Awake()
+    {
+        if (PlayerControls.UseSerialControls && !PlayerControls.SerialInputOpen)
+        {
+            PlayerControls.SerialInput.Open();
+            PlayerControls.SerialInput.ReadTimeout = 1;
+            PlayerControls.SerialInputOpen = true;
+        }
+    }
     private void Start()
     {
         readyToGo = false;
@@ -17,7 +28,15 @@ public class ContextMenu : MonoBehaviour
     {
         if (readyToGo == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (PlayerControls.UseSerialControls)
+            {
+                if (PlayerControls.SerialInput.BytesToRead > 0)
+                {
+                    PlayerControls.SerialInput.ReadExisting();
+                    SceneManager.LoadScene(gameScene);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(gameScene);
             }

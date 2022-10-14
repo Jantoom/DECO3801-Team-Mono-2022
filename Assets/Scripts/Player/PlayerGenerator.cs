@@ -27,9 +27,9 @@ public class PlayerGenerator : MonoBehaviour
         playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
         playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
 
-        playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart1");
+        playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart3");
         playerOne.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart2");
-        playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart3");
+        playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart1");
         playerTwo.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart6");
         playerTwo.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart5");
         playerTwo.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart4");
