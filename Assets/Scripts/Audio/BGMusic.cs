@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BGMusic : MonoBehaviour
 {
     private static BGMusic instance = null;
+    public AudioClip audios;
     public static BGMusic Instance { get { return instance; } }
     // Start is called before the first frame update
     void Awake()
@@ -38,4 +39,6 @@ public class BGMusic : MonoBehaviour
         }
 
     }
+
+
 }

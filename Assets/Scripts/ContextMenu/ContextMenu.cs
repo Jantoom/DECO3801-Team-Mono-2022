@@ -7,11 +7,27 @@ public class ContextMenu : MonoBehaviour
 {
     [SerializeField]
     string gameScene;
+    private bool readyToGo;
+    private void Start()
+    {
+        readyToGo = false;
+        StartCoroutine(WaitSec());
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (readyToGo == true)
         {
-            SceneManager.LoadScene(gameScene);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene(gameScene);
+            }
         }
+
+    }
+    IEnumerator WaitSec()
+    {
+        yield return new WaitForSeconds(5);
+        readyToGo = true;
+
     }
 }
