@@ -11,8 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -6478536213147159724, guid: c2c731e7a56d26d44bedac9011d86322,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: c2d8065de98ddf646a3ca89d128a7ee5, type: 2}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -73,6 +72,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mine
       objectReference: {fileID: 0}
+    - target: {fileID: 5650542819009983139, guid: abc57941dc8b75b40b65311807a56b1c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -6482978782274327011, guid: b20b3f94acc61ba4da2d80ccc896d68a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc57941dc8b75b40b65311807a56b1c, type: 3}
 --- !u!1 &3392902576206517648 stripped
