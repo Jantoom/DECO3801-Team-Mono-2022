@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d3881617b402b404296229419d0fc306, type: 2}
+      objectReference: {fileID: 2100000, guid: e28ba9795f6a0481aa48ccd3100cb413, type: 2}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -35,43 +35,49 @@ PrefabInstance:
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.014784799
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.022787344
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9868351
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.15943208
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -18.3
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -177.8
       objectReference: {fileID: 0}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5400587712483704592, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_Name
       value: Ghost 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5650542819009983139, guid: abc57941dc8b75b40b65311807a56b1c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8952635692107640113, guid: 21301f80e307c4eeaaebcfba973962d9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc57941dc8b75b40b65311807a56b1c, type: 3}
 --- !u!1 &1161050394038511206 stripped
