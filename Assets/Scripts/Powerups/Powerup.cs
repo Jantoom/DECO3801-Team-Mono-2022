@@ -5,65 +5,96 @@ using UnityEngine;
 public abstract class Powerup : MonoBehaviour
 {
     // Powerup Owner
-    protected PlayerInfo playerInfo = null;
-    public PlayerInfo PlayerInfo { get => playerInfo; set => playerInfo = playerInfo ?? value; }
+    public PlayerInfo PlayerInfo;
+    // Powerup State
+    public bool Activated = false;
     // Powerup Duration
-    protected float startTime = 0f, tick = 0.25f;
-    public virtual float Duration { get => 0f; }
-    public float StartTime { get => startTime; }
+    public float StartTime { get; private set; } = 0.0f;
+    public float Duration;
     public float EndTime { get => StartTime + Duration; }
-    private IEnumerator effectCoroutine;
-    // Powerup Type
-    public virtual bool IsItem { get => false; }
-
-    void OnCollisionEnter(Collision collision) {
-        if (playerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out playerInfo)) {
-            if (!playerInfo.Player.TryGetComponent(this.GetType(), out var powerup)) {
-                powerup = playerInfo.Player.AddComponent(this.GetType());
-            }
-            ((Powerup) powerup).PlayerInfo = playerInfo;
-            ((Powerup) powerup).Activate();
-            
+    protected float _tick = 0.10f;
+    // Powerup UI
+    [SerializeField] private Sprite _loadedImage, _effectImage;
+    [SerializeField] private ParticleSystem _effectParticles;
+    
+    void Start()
+    {
+        PlayerInfo = gameObject.GetComponent<PlayerInfo>();
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info)) {
+            // First encounter with a player
+            Destroy(info.LoadedPowerup);
+            var powerup = (Powerup) info.Player.AddComponent(this.GetType());
+            powerup.Duration = Duration;
+            info.LoadedPowerup = powerup;
+            // No further functionality required from collectable game object
             Destroy(gameObject);
         }
     }
-
-    public virtual void Activate() {
-        if (effectCoroutine == null) {
-            foreach (var powerup in playerInfo.Player.GetComponents<Powerup>()) {
-                if (powerup.IsItem && powerup != this) powerup.EndPowerup();
-            }
+    void OnDestroy()
+    {
+        if (PlayerInfo != null) EndPowerup();
+    }
+    //
+    // Summary:
+    //     Activates this powerup if is not yet already activated. Activation includes killing
+    //     duplicate powerups.
+    public virtual void Activate()
+    {
+        if (!Activated) {
+            KillDuplicatePowerups();
+            PlayerInfo.LoadedPowerup = null;
+            Activated = true;
             StartPowerup();
-        } else {
-            ExtendPowerup();
         }
     }
-
-    public virtual void StartPowerup() {
-        startTime = Time.time;
-        effectCoroutine = RunPowerup();
-        StartCoroutine(effectCoroutine);
-
+    //
+    // Summary:
+    //     Starts the effect given by this powerup.
+    protected virtual void StartPowerup()
+    {
+        StartTime = Time.time;
+        StartCoroutine(RunPowerup());
     }
-
-    public virtual void ExtendPowerup() {
-        startTime = Time.time;
-    }
-
-    public IEnumerator RunPowerup() {
-        while (true) {
+    //
+    // Summary:
+    //     Main loop that is run while the powerup has not completed its duration.
+    //
+    // Returns:
+    //     The enumerator for this coroutine.
+    protected IEnumerator RunPowerup()
+    {
+        while (Time.time < EndTime) {
             TickPowerup();
-            if (Time.time >= EndTime) {
-                EndPowerup();
-            }
-            yield return new WaitForSeconds(tick);
+            yield return new WaitForSeconds(_tick);
         }
+        EndPowerup();
     }
-
-    public virtual void TickPowerup() {
+    //
+    // Summary:
+    //     Ran every tick for the powerup. Useful for tick-based logic.
+    protected virtual void TickPowerup()
+    {
     }
-
-    public virtual void EndPowerup() {
-        Destroy(GetComponent(this.GetType()));
+    //
+    // Summary:
+    //     Ends the effect given by this powerup. It is typically destroyed after this.
+    protected virtual void EndPowerup()
+    {
+        Destroy(this);
+    }
+    //
+    // Summary:
+    //     Searches for similar powerups that the player owns and ends them.
+    protected virtual void KillDuplicatePowerups()
+    {
+        foreach (var powerup in PlayerInfo.GetComponents(this.GetType())) {
+            // Kill any activated powerups of the same type (effectively refreshes the powerup)
+            if (powerup != this) {
+                ((Powerup) powerup).EndPowerup();
+            }
+        }
     }
 }

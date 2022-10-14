@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class GameInfo : MonoBehaviour
 {
-    public static int BASE_HEALTH = 100;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static readonly int BASE_HEALTH = 1;
+    [field: SerializeField] public RuntimeAnimatorController SpawnAnimator { get; private set; }
+    public GameObject PlayerOne, PlayerTwo;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Start() {
+        PlayerOne = GameObject.Find("Player1");
+        PlayerTwo = GameObject.Find("Player2");
     }
 }

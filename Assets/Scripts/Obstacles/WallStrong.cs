@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallStrong : MonoBehaviour
+public class WallStrong : MonoBehaviour, IDestructible
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 20;
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        if (Health <= damage) Destroy(gameObject);
     }
 }
