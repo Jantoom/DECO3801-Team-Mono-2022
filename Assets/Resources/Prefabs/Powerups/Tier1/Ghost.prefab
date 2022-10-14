@@ -9,10 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4313368243367815531, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313368243367815531, guid: abc57941dc8b75b40b65311807a56b1c,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 6061862182945386846, guid: 4bea5983a2aef804d90d076bf4f267ed,
+      objectReference: {fileID: 2100000, guid: 4f0979e678e97584a9c461ee39ef3a65, type: 2}
+    - target: {fileID: 4313368243367815531, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2eca8c7411e384b4a9c73a86e48a4b32, type: 2}
     - target: {fileID: 5363584068965902568, guid: abc57941dc8b75b40b65311807a56b1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -77,7 +86,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -8952635692107640113, guid: 21301f80e307c4eeaaebcfba973962d9,
+      objectReference: {fileID: 6681232170887729507, guid: 816ebaf1deaf76d42b9a35a67e74a8fa,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc57941dc8b75b40b65311807a56b1c, type: 3}
