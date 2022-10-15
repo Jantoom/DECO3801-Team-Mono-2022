@@ -7,7 +7,7 @@ public class PowerupSpawner : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
     private Queue<Transform> activeRows;
-    private float SPAWN_DELAY = 2.0f;
+    private float SPAWN_DELAY = 5.0f;
     private List<GameObject> powerupsTierOne;
     private List<GameObject> powerupsTierTwo;
     private PlayerInfo playerOne, playerTwo;
