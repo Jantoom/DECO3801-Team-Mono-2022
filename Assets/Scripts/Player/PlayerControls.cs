@@ -10,20 +10,7 @@ public class PlayerControls : MonoBehaviour
     // Control Type
     public static SerialPort SerialInput = new SerialPort("COM4", 9600);
     public static bool UseSerialControls = false, SerialInputOpen = false;
-        
     // Controls from Arduino
-    public bool UseSerialControls { get; private set; } = true;
-    // Serial Controls from Arduino
-    public static SerialPort serialInput = new SerialPort("COM4", 9600);
-    public static bool serialInputOpen = false;
-    [field: SerializeField] public int ForwardSignal { get; private set; }
-    [field: SerializeField] public int BackSignal { get; private set; }
-    public bool UseSerialControls { get; private set; } = false;
-    // Serial Controls from Arduino
-    public static SerialPort serialInput = new SerialPort("COM4", 9600);
-    public static bool serialInputOpen = false;
-    [field: SerializeField] public int ForwardSignal { get; private set; }
-    [field: SerializeField] public int BackSignal { get; private set; }
     [field: SerializeField] public int LeftSignal { get; private set; }
     [field: SerializeField] public int ForwardSignal { get; private set; }
     [field: SerializeField] public int RightSignal { get; private set; }
