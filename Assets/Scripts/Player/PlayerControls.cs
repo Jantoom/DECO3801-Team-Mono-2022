@@ -106,8 +106,10 @@ public class PlayerControls : MonoBehaviour
                 MovePlayer(transform.position + direction, TimeToMove, MoveCode.MOVING);
                 _lastDirections[1] = _lastDirections[0];
                 _lastDirections[0] = direction;
+                FindObjectOfType<AudioManager>().play("MoveSound3");//Play move sound
             }
             _timeAtLastInput = Time.time;
+            
         }
     }
     //
