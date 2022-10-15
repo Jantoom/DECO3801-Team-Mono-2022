@@ -33,6 +33,7 @@ public abstract class Powerup : MonoBehaviour
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }
+        
     }
     void OnDestroy()
     {

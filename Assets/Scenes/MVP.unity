@@ -206,6 +206,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: PowerupSound
     clip: {fileID: 8300000, guid: 79888f813009d2f42a2f484fdedb5319, type: 3}
+    vol: 1
+    pitch: 0.88
+    loop: 0
+    source: {fileID: 0}
+  - clipName: GameMusic1
+    clip: {fileID: 8300000, guid: 25230c5602e4d9544b2cf45eaa4c3e42, type: 3}
     vol: 0.793
     pitch: 0.88
     loop: 0

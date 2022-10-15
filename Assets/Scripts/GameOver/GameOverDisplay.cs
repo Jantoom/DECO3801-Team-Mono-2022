@@ -81,7 +81,7 @@ public class GameOverDisplay : MonoBehaviour
         Findwinner();
         winnerNameText.text = GameOverInfo.winner;
         menuText.text = "Sit on any chair to go back to the Main Menu (Press 1)";
-        FindObjectOfType<AudioManager>().stop("GameMusic");
+        FindObjectOfType<AudioManager>().stop("GameMusic1");
         FindObjectOfType<AudioManager>().play("WinSound");
     }
 
