@@ -48,7 +48,7 @@ public class PowerupSpawner : MonoBehaviour
         } else {
             emptyCells = GetClosestEmptyCellsToPlayer(playerTwo.transform, playerOne.transform);
         }
-        return emptyCells[Random.Range(0, emptyCells.Count - 1)];
+        return emptyCells[Random.Range(0, emptyCells.Count)];
     }
 
     private List<Transform> GetAllEmptyCells() {
