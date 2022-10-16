@@ -1,4 +1,6 @@
 
+/* reference: https://www.youtube.com/watch?v=6OT43pvUyfY */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
@@ -6,8 +8,6 @@ using UnityEngine;
 using System;
 
 
-
-//[System.Serializable]
 public class AudioManager : MonoBehaviour
 {
     [SerializeField]
