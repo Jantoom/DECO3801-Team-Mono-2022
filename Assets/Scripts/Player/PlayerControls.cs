@@ -151,7 +151,7 @@ public class PlayerControls : MonoBehaviour
         }
         _moveCoroutine = Move(transform.position, finish, duration);
         StartCoroutine(_moveCoroutine);
-        FindObjectOfType<AudioManager>().play("MoveSound3");//Play move sound
+        FindObjectOfType<AudioManager>().play("MoveSound");//Play move sound
     }
     //
     // Summary:
