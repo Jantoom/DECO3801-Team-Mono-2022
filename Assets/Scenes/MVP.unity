@@ -180,21 +180,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clipName: GameMusic
-    clip: {fileID: 8300000, guid: de662a938bc518745912e89fe8eef902, type: 3}
-    vol: 0.164
-    pitch: 0.85
-    loop: 1
-    source: {fileID: 0}
   - clipName: WinSound
     clip: {fileID: 8300000, guid: ed0796d1b4f9dc243a352db6c2d77a5a, type: 3}
-    vol: 0.706
-    pitch: 0.88
+    vol: 0.7
+    pitch: 1.94
     loop: 0
     source: {fileID: 0}
   - clipName: BombSound
     clip: {fileID: 8300000, guid: 905fa2a451e3d564e946d9606f2d914f, type: 3}
-    vol: 0.706
+    vol: 1
+    pitch: 0.88
+    loop: 0
+    source: {fileID: 0}
+  - clipName: MoveSound
+    clip: {fileID: 8300000, guid: 2df865905e54f4041a98c772692b0fb0, type: 3}
+    vol: 1
+    pitch: 0.88
+    loop: 0
+    source: {fileID: 0}
+  - clipName: MoveSound3
+    clip: {fileID: 8300000, guid: 303a10d580575924d9ae59b9d20f2195, type: 3}
+    vol: 1
+    pitch: 0.88
+    loop: 0
+    source: {fileID: 0}
+  - clipName: PowerupSound
+    clip: {fileID: 8300000, guid: 79888f813009d2f42a2f484fdedb5319, type: 3}
+    vol: 1
+    pitch: 0.88
+    loop: 0
+    source: {fileID: 0}
+  - clipName: GameMusic
+    clip: {fileID: 8300000, guid: 25230c5602e4d9544b2cf45eaa4c3e42, type: 3}
+    vol: 0.7
+    pitch: 0.85
+    loop: 0
+    source: {fileID: 0}
+  - clipName: LoseLife
+    clip: {fileID: 8300000, guid: e333c90fe1162144096f3bd04a6cddef, type: 3}
+    vol: 0.6
     pitch: 0.88
     loop: 0
     source: {fileID: 0}
