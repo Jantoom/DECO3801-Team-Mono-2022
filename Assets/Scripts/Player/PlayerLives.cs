@@ -19,7 +19,7 @@ public class PlayerLives : MonoBehaviour, IDestructible
         if (damage > 0) {
             // Took actual damage/lost a life
             _playerInfo.Health -= GameInfo.BASE_HEALTH;
-            UpdateHeartDisplay();
+           // UpdateHeartDisplay();
         }
     }
     //

@@ -33,22 +33,23 @@ public class PlayerControls : MonoBehaviour
     void Awake()
     {
         _playerInfo = GetComponent<PlayerInfo>();
-        if (UseSerialControls && !SerialInputOpen) {
+        /*if (UseSerialControls && !SerialInputOpen) {
             SerialInput.Open();
             SerialInput.ReadTimeout = 1;
             SerialInputOpen = true;
-        }
+        }*/
     }
     void Update()
     {
         // Player cannot move while frozen
         if (_playerInfo.Frozen) return;
 
-        if (UseSerialControls) {
+        /*if (UseSerialControls) {
             ProcessDirection(SignalToDirection(SerialInput.BytesToRead > 0 ? SerialInput.ReadByte() : 0));
         } else {
             ProcessDirection(KeyCodeToDirection(KeyDownToKeyCode()));
-        }
+        }*/
+        ProcessDirection(KeyCodeToDirection(KeyDownToKeyCode()));
     }
     void OnCollisionEnter(Collision collision)
     {
