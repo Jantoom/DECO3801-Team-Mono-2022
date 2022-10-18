@@ -40,7 +40,7 @@ public abstract class Powerup : MonoBehaviour
         info.LoadedPowerup = powerup;
         info.LoadedPowerupImage.sprite = TextureToSprite(_loadedImage);
         info.LoadedPowerupImage.enabled = true;
-        FindObjectOfType<AudioManager>().play("PowerupSound");
+        FindObjectOfType<AudioManager>().Play("PowerupSound");
         return powerup;
     }
     //

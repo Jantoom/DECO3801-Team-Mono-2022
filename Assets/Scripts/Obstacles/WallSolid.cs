@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallStrong : MonoBehaviour, IDestructible
+public class WallSolid : MonoBehaviour, IDestructible
 {
     [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 20;
 

@@ -10,7 +10,6 @@ public class PlayerControls : MonoBehaviour
     // Control Type
     public static SerialPort SerialInput = new SerialPort("COM5", 9600);
     public static bool UseSerialControls = false, SerialInputOpen = false;
-        
     // Controls from Arduino
     [field: SerializeField] public int LeftSignal { get; private set; }
     [field: SerializeField] public int ForwardSignal { get; private set; }
@@ -57,7 +56,7 @@ public class PlayerControls : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Wall") && MoveStatus.Equals(MoveCode.MOVING)) {
             // Player is moving into a wall from their own input
-            if (!collision.gameObject.TryGetComponent<WallWeak>(out var wall) || 
+            if (!collision.gameObject.TryGetComponent<WallCracked>(out var wall) || 
                 wall.Health - _playerInfo.Attack > 0) {
                 // Player won't break the wall on collision
                 MovePlayer(_lastPosition, TimeToRebound, MoveCode.REBOUNDING);
@@ -151,7 +150,7 @@ public class PlayerControls : MonoBehaviour
         }
         _moveCoroutine = Move(transform.position, finish, duration);
         StartCoroutine(_moveCoroutine);
-        FindObjectOfType<AudioManager>().play("MoveSound");//Play move sound
+        FindObjectOfType<AudioManager>().Play("MoveSound");//Play move sound
     }
     //
     // Summary:

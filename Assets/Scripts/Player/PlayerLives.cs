@@ -41,13 +41,13 @@ public class PlayerLives : MonoBehaviour, IDestructible
                     Heart1.SetActive(true);
                     Heart2.SetActive(true);
                     Heart3.SetActive(false);
-                    FindObjectOfType<AudioManager>().play("LoseLife");
+                    FindObjectOfType<AudioManager>().Play("LoseLife");
                     break;
                 case 1:
                     Heart1.SetActive(true);
                     Heart2.SetActive(false);
                     Heart3.SetActive(false);
-                    FindObjectOfType<AudioManager>().play("LoseLife");
+                    FindObjectOfType<AudioManager>().Play("LoseLife");
                     break;
                 case 0:
                     Heart1.SetActive(false);

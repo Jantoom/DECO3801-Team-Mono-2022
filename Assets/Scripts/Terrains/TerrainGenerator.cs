@@ -14,6 +14,7 @@ public class TerrainGenerator : MonoBehaviour
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
     public float GenerationSpeed { get => GENERATION_SPEED * (DistanceFrontPlayerToFrontRow() / MAX_ACTIVE_ROWS); }
     // Generation prefabs and components
+    [field: SerializeField] public RuntimeAnimatorController SpawnAnimator { get; private set; }
     [SerializeField] private GameObject startTerrain, finishTerrain;
     [SerializeField] private GameObject[] randomTerrains;
     // Rows that have generated and not fallen
@@ -121,7 +122,7 @@ public class TerrainGenerator : MonoBehaviour
         cell.localPosition = prefab.localPosition;
         // Add extra Animator Controller for load in animation
         var animator = cell.gameObject.AddComponent<Animator>();
-        animator.runtimeAnimatorController = _gameInfo.SpawnAnimator;
+        animator.runtimeAnimatorController = SpawnAnimator;
         animator.applyRootMotion = true;
     }
     //

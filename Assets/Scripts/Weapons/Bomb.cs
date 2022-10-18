@@ -24,7 +24,7 @@ public class Bomb : MonoBehaviour, IDestructible
     private IEnumerator Explode()
     {
         _isExploding = true;
-        FindObjectOfType<AudioManager>().play("BombSound");
+        FindObjectOfType<AudioManager>().Play("BombSound");
         gameObject.GetComponent<Renderer>().enabled = false;
 
         var directions = new Vector3[] { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };

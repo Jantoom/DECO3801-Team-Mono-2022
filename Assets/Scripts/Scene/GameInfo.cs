@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameInfo : MonoBehaviour
 {
     public static readonly int BASE_HEALTH = 1;
-    [field: SerializeField] public RuntimeAnimatorController SpawnAnimator { get; private set; }
     public GameObject PlayerOne, PlayerTwo;
     public Image LoadedPowerupPlayerOne, LoadedPowerupPlayerTwo;
 

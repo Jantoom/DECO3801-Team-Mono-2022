@@ -7,11 +7,14 @@ using System;
 /* reference: https://www.youtube.com/watch?v=6OT43pvUyfY */
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] public Sound[] sounds;
+    [field: SerializeField] public string BackgroundMusic { get; private set; } = "";
+    [field: SerializeField] public int ScenePersistence { get; private set; } = 0;
+    public Sound[] Sounds;
 
     void Awake()
     {
-        foreach (Sound music in sounds) {
+        DontDestroyOnLoad(gameObject);
+        foreach (Sound music in Sounds) {
             music.source = gameObject.AddComponent<AudioSource>();
             music.source.clip = music.clip;
             music.source.volume = music.vol;
@@ -21,7 +24,7 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
-        Play("GameMusic");
+        Play(BackgroundMusic);
     }
     //
     // Summary:
@@ -32,7 +35,7 @@ public class AudioManager : MonoBehaviour
     //     Name of the sound/music to play.
     public void Play(string name)
     {
-        Sound music = Array.Find(sounds, sound => sound.clipName == name);
+        var music = Array.Find(Sounds, sound => sound.clipName == name);
         if (music == null) {
             Debug.LogWarning("Cannot find sound " + name);
             return;
@@ -48,7 +51,7 @@ public class AudioManager : MonoBehaviour
     //     Name of the sound/music to stop.
     public void Stop(string name)
     {
-        Sound music = Array.Find(sounds, sound => sound.clipName == name);
+        var music = Array.Find(Sounds, sound => sound.clipName == name);
         if (music == null) {
             Debug.LogWarning("Cannot find sound " + name);
             return;
@@ -67,10 +70,32 @@ public class AudioManager : MonoBehaviour
     //   True if the sound is playing in the game, otherwise false.
     public bool IsAudioPlaying(string name)
     {
-        Sound music = Array.Find(sounds, sound => sound.clipName == name);
+        var music = Array.Find(Sounds, sound => sound.clipName == name);
         if (music == null) {
             Debug.LogWarning("Cannot find sound " + name);
+            return false;
         }
         return music.source.isPlaying;
+    }
+    //
+    // Summary:
+    //     Destroys this instance of the audio manager if it has persisted for enough scenes.
+    //     This is used when background audio persistence between scenes is
+    public void OnSceneTransition() {
+        ScenePersistence--;
+        if (ScenePersistence < 0) {
+            Destroy(gameObject);
+        }
+    }
+
+    [System.Serializable]
+    public class Sound
+    {
+        public string clipName;
+        public AudioClip clip;
+        [Range(0f,1f)] public float vol;
+        [Range(0.1f, 3f)] public float pitch;
+        public bool loop;
+        [HideInInspector] public AudioSource source;
     }
 }

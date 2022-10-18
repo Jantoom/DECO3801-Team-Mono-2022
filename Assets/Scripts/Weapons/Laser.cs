@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
             var spawnPos = transform.position + transform.forward * length;
             foreach (var collider in Physics.OverlapSphere(spawnPos, 0.3f)) {
                 // Lasers are not able to pass through strong walls
-                if (collider.gameObject.TryGetComponent<WallStrong>(out var temp)) {
+                if (collider.gameObject.TryGetComponent<WallSolid>(out var temp)) {
                     blocked = true;
                     break;
                 }
