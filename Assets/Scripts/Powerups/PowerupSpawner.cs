@@ -70,8 +70,8 @@ public class PowerupSpawner : MonoBehaviour
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
-            // Do not want to spawn in the first 3 rows
-            if (rowNumber++ > 2) {
+            // Do not want to spawn in the first 5 rows
+            if (rowNumber++ > 5) {
                 foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         emptyCells.Add(cell);
@@ -87,8 +87,8 @@ public class PowerupSpawner : MonoBehaviour
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
-            // Do not want to spawn in the first 3 rows
-            if (rowNumber++ > 2) {
+            // Do not want to spawn in the first 5 rows
+            if (rowNumber++ > 5) {
                 foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         // Only adds cell to list if it is closer to the player behind than the one in front
