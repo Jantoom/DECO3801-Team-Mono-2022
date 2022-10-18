@@ -74,7 +74,8 @@ public class PlayerGenerator : MonoBehaviour
                 cells.Skip(Mathf.CeilToInt(row.childCount / 2)).Reverse();
             foreach (var cell in cells) {
                 if (cell.childCount < 2) {
-                    player.transform.SetPositionAndRotation(cell.position, cell.rotation);
+                    player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    player.transform.SetPositionAndRotation(cell.position + Vector3.up * 0.5f, cell.rotation);
                     return;
                 }
             }
