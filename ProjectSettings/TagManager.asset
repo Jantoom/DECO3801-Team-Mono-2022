@@ -4,10 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CinemachineTarget
-  - Bomb
   - Wall
   - Tile
+  - Powerup
+  - Weapon
+  - Bomb
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -17,12 +19,12 @@ TagManager:
   - UI
   - 
   - 
-  - Character
-  - Ground
+  - Player
   - Wall
-  - Explosion
   - Tile
-  - 
+  - Powerup
+  - Weapon
+  - Explosion
   - 
   - 
   - 

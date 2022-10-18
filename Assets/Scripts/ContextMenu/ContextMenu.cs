@@ -5,15 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ContextMenu : MonoBehaviour
 {
-    [SerializeField]
-    string gameScene;
+    [SerializeField] string gameScene;
     private bool readyToGo;
-
 
     private void Awake()
     {
-        if (PlayerControls.UseSerialControls && !PlayerControls.SerialInputOpen)
-        {
+        if (PlayerControls.UseSerialControls && !PlayerControls.SerialInputOpen) {
             PlayerControls.SerialInput.Open();
             PlayerControls.SerialInput.ReadTimeout = 1;
             PlayerControls.SerialInputOpen = true;
@@ -26,27 +23,20 @@ public class ContextMenu : MonoBehaviour
     }
     private void Update()
     {
-        if (readyToGo == true)
-        {
-            if (PlayerControls.UseSerialControls)
-            {
-                if (PlayerControls.SerialInput.BytesToRead > 0)
-                {
+        if (readyToGo == true) {
+            if (PlayerControls.UseSerialControls) {
+                if (PlayerControls.SerialInput.BytesToRead > 0) {
                     PlayerControls.SerialInput.ReadExisting();
                     SceneManager.LoadScene(gameScene);
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Space)) {
                 SceneManager.LoadScene(gameScene);
             }
         }
-
     }
     IEnumerator WaitSec()
     {
         yield return new WaitForSeconds(3);
         readyToGo = true;
-
     }
 }

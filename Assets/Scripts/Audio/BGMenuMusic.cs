@@ -12,22 +12,17 @@ public class BGMenuMusic : MonoBehaviour
     void Awake()
     {
         //Debug.Log("Awake:" + SceneManager.GetActiveScene().name);
-        if (bgAudioInstance != null && bgAudioInstance != this)
-        {
+        if (bgAudioInstance != null && bgAudioInstance != this) {
             //not in scene 1
             Destroy(bgAudioInstance);
             return;
-        }
-        else
-        {
+        } else {
             //in scene 1
             bgAudioInstance = this;
 
         }
         DontDestroyOnLoad(this.gameObject);
-
     }
-
     private void Update()
     {
         if (!isMusicDetroyed)
@@ -35,7 +30,6 @@ public class BGMenuMusic : MonoBehaviour
             DestroyMusic();
         }
     }
-
     //
     // Summary:
     //     Destory the music when the active scene is not the menu pages; main menu or context menu.
@@ -43,12 +37,10 @@ public class BGMenuMusic : MonoBehaviour
     private void DestroyMusic()
     {
         if (SceneManager.GetActiveScene().name != "Context Menu" &&
-            SceneManager.GetActiveScene().name != "Main Menu")
-        {
+            SceneManager.GetActiveScene().name != "Main Menu") {
             Destroy(this.gameObject);
             isMusicDetroyed = true;
             return;
-
         }
     }
 }

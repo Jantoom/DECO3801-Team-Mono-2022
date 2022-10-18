@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Powerup : MonoBehaviour
 {
     // Powerup Owner
-    public PlayerInfo PlayerInfo;
+    public PlayerInfo PlayerInfo = null;
     // Powerup State
     public bool Activated = false;
     // Powerup Duration
@@ -14,9 +15,10 @@ public abstract class Powerup : MonoBehaviour
     public float EndTime { get => StartTime + Duration; }
     protected float _tick = 0.10f;
     // Powerup UI
-    [SerializeField] private Sprite _loadedImage, _effectImage;
+    [SerializeField] private Texture2D _loadedImage, _effectImage;
     [SerializeField] private ParticleSystem _effectParticles;
     
+    public static Sprite TextureToSprite(Texture2D texture) => Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 50f, 0, SpriteMeshType.FullRect);
     void Start()
     {
         PlayerInfo = gameObject.GetComponent<PlayerInfo>();
@@ -25,19 +27,21 @@ public abstract class Powerup : MonoBehaviour
     {
         if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out var info)) {
             // First encounter with a player
-            Destroy(info.LoadedPowerup);
-            var powerup = (Powerup) info.Player.AddComponent(this.GetType());
-            powerup.Duration = Duration;
-            info.LoadedPowerup = powerup;
-            FindObjectOfType<AudioManager>().play("PowerupSound");
+            AttachPowerupToPlayer(info);
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }
         
     }
-    void OnDestroy()
-    {
-        if (PlayerInfo != null) EndPowerup();
+    protected Powerup AttachPowerupToPlayer(PlayerInfo info) {
+        Destroy(info.LoadedPowerup);
+        var powerup = (Powerup) info.Player.AddComponent(this.GetType());
+        powerup.Duration = Duration;
+        info.LoadedPowerup = powerup;
+        info.LoadedPowerupImage.sprite = TextureToSprite(_loadedImage);
+        info.LoadedPowerupImage.enabled = true;
+        FindObjectOfType<AudioManager>().play("PowerupSound");
+        return powerup;
     }
     //
     // Summary:
@@ -48,6 +52,8 @@ public abstract class Powerup : MonoBehaviour
         if (!Activated) {
             KillDuplicatePowerups();
             PlayerInfo.LoadedPowerup = null;
+            PlayerInfo.LoadedPowerupImage.sprite = null;
+            PlayerInfo.LoadedPowerupImage.enabled = false;
             Activated = true;
             StartPowerup();
         }

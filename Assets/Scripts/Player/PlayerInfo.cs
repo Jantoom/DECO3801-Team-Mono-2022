@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -14,5 +15,6 @@ public class PlayerInfo : MonoBehaviour
     public bool Invincible = false, Juggernaut = false, Ghosted = false, Exhausted = false, Frozen = false;
     // Player Items
     public Powerup LoadedPowerup = null;
+    public Image LoadedPowerupImage = null;
     public GameObject WeaponPrefab = null;
 }

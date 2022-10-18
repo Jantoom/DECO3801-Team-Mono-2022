@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3091563951096698212}
   - component: {fileID: 7704457330679186553}
   - component: {fileID: 1637397690050110128}
-  - component: {fileID: -6129087191003452987}
+  - component: {fileID: -6417975621809071348}
   - component: {fileID: -6508861359201484865}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 1, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-6129087191003452987
+--- !u!54 &-6417975621809071348
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &-6508861359201484865
 MonoBehaviour:

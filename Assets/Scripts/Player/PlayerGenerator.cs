@@ -11,9 +11,8 @@ public class PlayerGenerator : MonoBehaviour
 
     void Awake()
     {
-        var gameInfo = GameObject.Find("GameInfo");
-
-        _terrainGenerator = gameInfo.GetComponent<TerrainGenerator>();
+        _terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
+        var gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
 
         var playerOne = Instantiate(_playerOnePrefab);
         var playerTwo = Instantiate(_playerTwoPrefab);
@@ -21,18 +20,30 @@ public class PlayerGenerator : MonoBehaviour
         playerOne.name = "Player1";
         playerTwo.name = "Player2";
 
-        gameInfo.GetComponent<GameInfo>().PlayerOne = playerOne;
-        gameInfo.GetComponent<GameInfo>().PlayerTwo = playerTwo;
+        gameInfo.PlayerOne = playerOne;
+        gameInfo.PlayerTwo = playerTwo;
 
-        playerOne.GetComponent<PlayerInfo>().Opponent = playerTwo;
-        playerTwo.GetComponent<PlayerInfo>().Opponent = playerOne;
+        var playerOneInfo = playerOne.GetComponent<PlayerInfo>();
+        var playerTwoInfo = playerTwo.GetComponent<PlayerInfo>();
 
-        playerOne.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart3");
-        playerOne.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart2");
-        playerOne.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart1");
-        playerTwo.GetComponent<PlayerLives>().Heart1 = GameObject.Find("Heart6");
-        playerTwo.GetComponent<PlayerLives>().Heart2 = GameObject.Find("Heart5");
-        playerTwo.GetComponent<PlayerLives>().Heart3 = GameObject.Find("Heart4");
+        playerOneInfo.Opponent = playerTwo;
+        playerTwoInfo.Opponent = playerOne;
+
+        playerOneInfo.LoadedPowerupImage = gameInfo.LoadedPowerupPlayerOne;
+        playerTwoInfo.LoadedPowerupImage = gameInfo.LoadedPowerupPlayerTwo;
+
+        playerOneInfo.LoadedPowerupImage.enabled = false;
+        playerTwoInfo.LoadedPowerupImage.enabled = false;
+
+        var playerOneLives = playerOne.GetComponent<PlayerLives>();
+        var playerTwoLives = playerTwo.GetComponent<PlayerLives>();
+
+        playerOneLives.Heart1 = GameObject.Find("Heart3");
+        playerOneLives.Heart2 = GameObject.Find("Heart2");
+        playerOneLives.Heart3 = GameObject.Find("Heart1");
+        playerTwoLives.Heart1 = GameObject.Find("Heart6");
+        playerTwoLives.Heart2 = GameObject.Find("Heart5");
+        playerTwoLives.Heart3 = GameObject.Find("Heart4");
     }
 
     void Start() {

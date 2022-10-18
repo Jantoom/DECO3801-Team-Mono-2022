@@ -10,11 +10,8 @@ public class Weapon : Powerup
     {
         if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
             // First encounter with a player
-            Destroy(PlayerInfo.LoadedPowerup);
-            var powerup = PlayerInfo.Player.AddComponent<Weapon>();
-            powerup.WeaponPrefab = WeaponPrefab;
-            powerup.Duration = Duration;
-            PlayerInfo.LoadedPowerup = powerup;
+            var powerup = AttachPowerupToPlayer(PlayerInfo);
+            ((Weapon) powerup).WeaponPrefab = WeaponPrefab;
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }

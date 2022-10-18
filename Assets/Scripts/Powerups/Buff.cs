@@ -10,11 +10,8 @@ public class Buff : Powerup
     {
         if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
             // First encounter with a player
-            Destroy(PlayerInfo.LoadedPowerup);
-            var powerup = PlayerInfo.Player.AddComponent<Buff>();
-            powerup.BuffStat = BuffStat;
-            powerup.Duration = Duration;
-            PlayerInfo.LoadedPowerup = powerup;
+            var powerup = AttachPowerupToPlayer(PlayerInfo);
+            ((Buff) powerup).BuffStat = BuffStat;
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }

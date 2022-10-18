@@ -102,7 +102,7 @@ MonoBehaviour:
   PlayerInfo: {fileID: 0}
   Activated: 0
   Duration: 3
-  _loadedImage: {fileID: 0}
+  _loadedImage: {fileID: 2800000, guid: bb5ce2625acd7ae42a4ffb91922a35f9, type: 3}
   _effectImage: {fileID: 0}
   _effectParticles: {fileID: 0}
   NerfStat: Exhausted

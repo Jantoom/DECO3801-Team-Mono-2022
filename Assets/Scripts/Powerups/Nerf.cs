@@ -10,11 +10,8 @@ public class Nerf : Powerup
     {
         if (PlayerInfo == null && collision.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo)) {
             // First encounter with a player
-            Destroy(PlayerInfo.LoadedPowerup);
-            var powerup = PlayerInfo.Player.AddComponent<Nerf>();
-            powerup.NerfStat = NerfStat;
-            powerup.Duration = Duration;
-            PlayerInfo.LoadedPowerup = powerup;
+            var powerup = AttachPowerupToPlayer(PlayerInfo);
+            ((Nerf) powerup).NerfStat = NerfStat;
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }

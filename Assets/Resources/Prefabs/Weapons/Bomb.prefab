@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3091563951096698212}
   - component: {fileID: 7704457330679186553}
   - component: {fileID: 1637397690050110128}
-  - component: {fileID: -6129087191003452987}
+  - component: {fileID: -2874227699256041536}
   - component: {fileID: 1318024194934371238}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bomb
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5686585067370764456}
-  m_Mesh: {fileID: 6123752992615479067, guid: a3f557be41a6840798a1fc7bf4848562, type: 3}
+  m_Mesh: {fileID: -849867405023671905, guid: 383ab364829ff4760aee74994cd1e78f, type: 3}
 --- !u!23 &7704457330679186553
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4589b87b8508f6e48b8fddb385924b16, type: 2}
+  - {fileID: -1580535799172915004, guid: 383ab364829ff4760aee74994cd1e78f, type: 3}
+  - {fileID: -1391134871863005975, guid: 383ab364829ff4760aee74994cd1e78f, type: 3}
+  - {fileID: -8848810374240701247, guid: 383ab364829ff4760aee74994cd1e78f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +101,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 1, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-6129087191003452987
+--- !u!54 &-2874227699256041536
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +115,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1318024194934371238
 MonoBehaviour:

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8657086711682870168}
   - component: {fileID: 2688864309752018123}
   - component: {fileID: 236489659839676697}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: WallIndestructible
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a55d5429ca83e947998a059c24978a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 20
 --- !u!54 &236489659839676697
 Rigidbody:
   m_ObjectHideFlags: 0

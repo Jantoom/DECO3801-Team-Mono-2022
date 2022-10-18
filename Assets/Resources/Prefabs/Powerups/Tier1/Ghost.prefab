@@ -111,7 +111,7 @@ MonoBehaviour:
   PlayerInfo: {fileID: 0}
   Activated: 0
   Duration: 3
-  _loadedImage: {fileID: 0}
+  _loadedImage: {fileID: 2800000, guid: 2cc4b239952e12f4a8d3f2cfee05ddf7, type: 3}
   _effectImage: {fileID: 0}
   _effectParticles: {fileID: 0}
   BuffStat: Ghosted
