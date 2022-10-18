@@ -30,19 +30,19 @@ public class PowerupSpawner : MonoBehaviour
             int rand = Random.Range(1, 101);
             if (playerOne.Health != playerTwo.Health) {
                 // This runs if a player is behind on lives
-                // 50% chance no powerup spawns
-                // 30% chance tier one powerup spawns
+                // 60% chance no powerup spawns
+                // 20% chance tier one powerup spawns
                 // 20% chance tier two powerup spawns
-                if (rand > 50 && rand < 80) {
+                if (rand > 60 && rand < 80) {
                     randomPowerup = GetRandomPowerup(powerupsTierOne);
                 } else if (rand > 80) {
                     randomPowerup = GetRandomPowerup(powerupsTierTwo);
                 }
             } else {
                 // This runs if players have the same amount of lives
-                // 70% chance no powerup spawns
-                // 30% chance tier one powerup spawns
-                if (rand >= 70) {
+                // 80% chance no powerup spawns
+                // 20% chance tier one powerup spawns
+                if (rand >= 80) {
                     randomPowerup = GetRandomPowerup(powerupsTierOne);
                 }
             }
