@@ -7,7 +7,7 @@ public class PowerupSpawner : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
     private Queue<Transform> activeRows;
-    private float SPAWN_DELAY = 5.0f;
+    private float SPAWN_DELAY = 2.0f;
     private List<GameObject> powerupsTierOne;
     private List<GameObject> powerupsTierTwo;
     private PlayerInfo playerOne, playerTwo;
@@ -31,7 +31,7 @@ public class PowerupSpawner : MonoBehaviour
             // 50% chance no powerup spawns
             // 30% chance tier one powerup spawns
             // 20% chance tier two powerup spawns
-            if (rand > 50 && rand < 80) {
+            if (rand > 40 && rand < 80) {
                 randomPowerup = GetRandomPowerup(powerupsTierOne);
                 Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
             } else if (rand > 80) {

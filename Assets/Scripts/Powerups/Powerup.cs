@@ -29,9 +29,11 @@ public abstract class Powerup : MonoBehaviour
             var powerup = (Powerup) info.Player.AddComponent(this.GetType());
             powerup.Duration = Duration;
             info.LoadedPowerup = powerup;
+            FindObjectOfType<AudioManager>().play("PowerupSound");
             // No further functionality required from collectable game object
             Destroy(gameObject);
         }
+        
     }
     void OnDestroy()
     {

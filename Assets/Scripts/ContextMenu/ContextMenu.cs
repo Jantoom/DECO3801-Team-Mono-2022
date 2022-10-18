@@ -45,7 +45,7 @@ public class ContextMenu : MonoBehaviour
     }
     IEnumerator WaitSec()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         readyToGo = true;
 
     }

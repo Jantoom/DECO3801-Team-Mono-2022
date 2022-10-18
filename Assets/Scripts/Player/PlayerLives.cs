@@ -28,28 +28,35 @@ public class PlayerLives : MonoBehaviour, IDestructible
     //     lives the player has.
     private void UpdateHeartDisplay()
     {
-        switch (_playerInfo.Health) {
-        case 3:
-            Heart1.SetActive(true);
-            Heart2.SetActive(true);
-            Heart3.SetActive(true);
-            break;
-        case 2:
-            Heart1.SetActive(true);
-            Heart2.SetActive(true);
-            Heart3.SetActive(false);
-            break;
-        case 1:
-            Heart1.SetActive(true);
-            Heart2.SetActive(false);
-            Heart3.SetActive(false);
-            break;
-        case 0:
-            Heart1.SetActive(false);
-            Heart2.SetActive(false);
-            Heart3.SetActive(false);
-            GameOverInfo.isGameOver = true;
-            break;
+        if (GameOverInfo.isGameOver == false)
+        {
+            switch (_playerInfo.Health)
+            {
+                case 3:
+                    Heart1.SetActive(true);
+                    Heart2.SetActive(true);
+                    Heart3.SetActive(true);
+                    break;
+                case 2:
+                    Heart1.SetActive(true);
+                    Heart2.SetActive(true);
+                    Heart3.SetActive(false);
+                    FindObjectOfType<AudioManager>().play("LoseLife");
+                    break;
+                case 1:
+                    Heart1.SetActive(true);
+                    Heart2.SetActive(false);
+                    Heart3.SetActive(false);
+                    FindObjectOfType<AudioManager>().play("LoseLife");
+                    break;
+                case 0:
+                    Heart1.SetActive(false);
+                    Heart2.SetActive(false);
+                    Heart3.SetActive(false);
+                    GameOverInfo.isGameOver = true;
+                    break;
+            }
         }
+
     }
 }

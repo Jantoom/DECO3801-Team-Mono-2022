@@ -8,8 +8,9 @@ public class PlayerControls : MonoBehaviour
 {
     private PlayerInfo _playerInfo;
     // Control Type
-    public static SerialPort SerialInput = new SerialPort("COM4", 9600);
-    public static bool UseSerialControls = false, SerialInputOpen = false;
+    public static SerialPort SerialInput = new SerialPort("COM5", 9600);
+    public static bool UseSerialControls = true, SerialInputOpen = false;
+        
     // Controls from Arduino
     [field: SerializeField] public int LeftSignal { get; private set; }
     [field: SerializeField] public int ForwardSignal { get; private set; }
@@ -107,6 +108,7 @@ public class PlayerControls : MonoBehaviour
                 _lastDirections[0] = direction;
             }
             _timeAtLastInput = Time.time;
+            
         }
     }
     //
@@ -149,6 +151,7 @@ public class PlayerControls : MonoBehaviour
         }
         _moveCoroutine = Move(transform.position, finish, duration);
         StartCoroutine(_moveCoroutine);
+        FindObjectOfType<AudioManager>().play("MoveSound");//Play move sound
     }
     //
     // Summary:
