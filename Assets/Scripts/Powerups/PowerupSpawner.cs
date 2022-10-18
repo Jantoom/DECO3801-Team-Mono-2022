@@ -24,18 +24,29 @@ public class PowerupSpawner : MonoBehaviour
     }
 
     private void SpawnPowerups() {
-        if (!GameOverInfo.isGameOver && playerOne.Health != playerTwo.Health) {
+        if (!GameOverInfo.isGameOver) {
             Transform emptyCell = FindEmptyCell();
-            GameObject randomPowerup;
+            GameObject randomPowerup = null;
             int rand = Random.Range(1, 101);
-            // 50% chance no powerup spawns
-            // 30% chance tier one powerup spawns
-            // 20% chance tier two powerup spawns
-            if (rand > 40 && rand < 80) {
-                randomPowerup = GetRandomPowerup(powerupsTierOne);
-                Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
-            } else if (rand > 80) {
-                randomPowerup = GetRandomPowerup(powerupsTierTwo);
+            if (playerOne.Health != playerTwo.Health) {
+                // This runs if a player is behind on lives
+                // 50% chance no powerup spawns
+                // 30% chance tier one powerup spawns
+                // 20% chance tier two powerup spawns
+                if (rand > 50 && rand < 80) {
+                    randomPowerup = GetRandomPowerup(powerupsTierOne);
+                } else if (rand > 80) {
+                    randomPowerup = GetRandomPowerup(powerupsTierTwo);
+                }
+            } else {
+                // This runs if players have the same amount of lives
+                // 70% chance no powerup spawns
+                // 30% chance tier one powerup spawns
+                if (rand >= 70) {
+                    randomPowerup = GetRandomPowerup(powerupsTierOne);
+                }
+            }
+            if (randomPowerup != null) {
                 Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
             }
         }
@@ -43,7 +54,10 @@ public class PowerupSpawner : MonoBehaviour
 
     private Transform FindEmptyCell() {
         List<Transform> emptyCells;
-        if (playerOne.Health < playerTwo.Health) {
+        if (playerOne.Health == playerTwo.Health) {
+            emptyCells = GetAllEmptyCells();
+        }
+        else if (playerOne.Health < playerTwo.Health) {
             emptyCells = GetClosestEmptyCellsToPlayer(playerOne.transform, playerTwo.transform);
         } else {
             emptyCells = GetClosestEmptyCellsToPlayer(playerTwo.transform, playerOne.transform);
@@ -56,8 +70,8 @@ public class PowerupSpawner : MonoBehaviour
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
-            // Do not want to spawn in the first 3 rows
-            if (rowNumber++ > 2) {
+            // Do not want to spawn in the first 5 rows
+            if (rowNumber++ > 5) {
                 foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         emptyCells.Add(cell);
@@ -73,8 +87,8 @@ public class PowerupSpawner : MonoBehaviour
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
-            // Do not want to spawn in the first 3 rows
-            if (rowNumber++ > 2) {
+            // Do not want to spawn in the first 5 rows
+            if (rowNumber++ > 5) {
                 foreach (Transform cell in row) {
                     if (cell.transform.childCount == 1) {
                         // Only adds cell to list if it is closer to the player behind than the one in front
