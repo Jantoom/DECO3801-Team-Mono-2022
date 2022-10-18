@@ -212,13 +212,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: GameMusic
     clip: {fileID: 8300000, guid: 25230c5602e4d9544b2cf45eaa4c3e42, type: 3}
-    vol: 0.7
-    pitch: 0.85
+    vol: 0.6
+    pitch: 0.78
     loop: 0
     source: {fileID: 0}
   - clipName: LoseLife
     clip: {fileID: 8300000, guid: e333c90fe1162144096f3bd04a6cddef, type: 3}
-    vol: 0.6
+    vol: 0.5
     pitch: 0.88
     loop: 0
     source: {fileID: 0}
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}

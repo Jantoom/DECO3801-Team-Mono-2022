@@ -203,7 +203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288257162
@@ -444,11 +444,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456684754}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 248cc221d21c102439a76313150b7441, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 028a601a2ac67754fbca96105ee04df4, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: e3572ef3104f90b4aa4dd4a73e9add4d, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 0cff5fb013da46b40aaed0f03019cf6a, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
@@ -897,7 +897,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: efcd65b26c40e1b4f87519e79a21d47b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: e3572ef3104f90b4aa4dd4a73e9add4d, type: 2}
+  m_Texture: {fileID: 8400000, guid: 0cff5fb013da46b40aaed0f03019cf6a, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
