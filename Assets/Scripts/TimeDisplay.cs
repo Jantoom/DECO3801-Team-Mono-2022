@@ -9,18 +9,24 @@ using UnityEngine.UIElements;
 public class TimeDisplay : MonoBehaviour
 {
     
-    private float timeAmount;
+    private float timeAmount = 10;
     [SerializeField] private TMP_Text timeLimit;
+    private TerrainGenerator terrainGenerator;
+    private bool readyToShowTimer = false;
 
 
 
-    private void Start()
+    IEnumerator Start()
     {
-        timeAmount = 600;
+        terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
+        timeLimit.text = "";
+        yield return new WaitForSeconds(TerrainGenerator.GENERATION_DELAY + 1);
+        readyToShowTimer = true;
     }
+
     void Update()
     {
-        if (!GameOverInfo.isGameOver)
+        if (!GameOverInfo.isGameOver && readyToShowTimer && !terrainGenerator.IsGenerating)
         {
             if (timeAmount > 0)
             {
