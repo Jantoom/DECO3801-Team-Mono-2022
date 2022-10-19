@@ -20,7 +20,8 @@ Team project by Shirin, Enrique, Paul, Amit, Jen, and Jaleel
 (That is, first player left chair is digital port 2, first player forward chair is digital port 3, first player right chair is digital port 4, 
 second player left chair is digital port 5, second player forward chair is digital port 6, second player right chair is digital port 7.)
 5. Connect GND port on the arduino to the ground rail on the breadboard and the 3.3V port on the arduino to the power rail on the breadboard.
-6. Plug the arduino into the computer with the arduino to usb cable and the setup is complete. 
+6. Plug the arduino into the computer with the arduino to usb cable.
+7. In the Arduino IDE, upload the code found at Assets/Scripts/Arduino/Arduino\ Code.ino. 
 
 ### Run In-Editor
 
