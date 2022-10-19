@@ -143,7 +143,7 @@ public class PlayerControls : MonoBehaviour
     {
         MoveStatus = status;
         if (MoveStatus != MoveCode.REBOUNDING) transform.LookAt(finish);
-        // if (MoveStatus == MoveCode.MOVING) GetComponent<Rigidbody>().AddForce(Vector3.up * 3.5f, ForceMode.Impulse);
+        if (MoveStatus == MoveCode.MOVING) GetComponent<Rigidbody>().AddForce(Vector3.up * 3.5f, ForceMode.Impulse);
         // if (MoveStatus == MoveCode.MOVING) GetComponent<Animator>().Play("Jump");
 
         if (_moveCoroutine != null) {

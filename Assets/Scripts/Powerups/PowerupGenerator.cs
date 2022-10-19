@@ -13,12 +13,13 @@ public class PowerupGenerator : MonoBehaviour
     private TerrainGenerator _terrainGenerator;
     private static readonly float SPAWN_SPEED = 2.0f;
     // Reference to players for logic
-    private PlayerInfo playerOne, playerTwo;
+    private PlayerInfo _playerOne, _playerTwo;
 
     void Start()
     {
-        playerOne = GetComponent<GameInfo>().PlayerOne.GetComponent<PlayerInfo>();
-        playerTwo = GetComponent<GameInfo>().PlayerTwo.GetComponent<PlayerInfo>();
+        _terrainGenerator = GetComponent<TerrainGenerator>();
+        _playerOne = GetComponent<GameInfo>().PlayerOne.GetComponent<PlayerInfo>();
+        _playerTwo = GetComponent<GameInfo>().PlayerTwo.GetComponent<PlayerInfo>();
         InvokeRepeating("SpawnPowerups", SPAWN_SPEED, SPAWN_SPEED);
     }
     //
@@ -29,7 +30,7 @@ public class PowerupGenerator : MonoBehaviour
             Transform emptyCell = FindEmptyCell();
             GameObject randomPowerup = null;
             int rand = Random.Range(1, 101);
-            if (playerOne.Health != playerTwo.Health) {
+            if (_playerOne.Health != _playerTwo.Health) {
                 // This runs if a player is behind on lives
                 // 60% chance no powerup spawns
                 // 20% chance tier one powerup spawns
@@ -47,7 +48,7 @@ public class PowerupGenerator : MonoBehaviour
                     randomPowerup = GetRandomPowerup(PowerupsTierOne);
                 }
             }
-            if (randomPowerup != null) {
+            if (randomPowerup != null && emptyCell != null) {
                 Instantiate(randomPowerup, emptyCell.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, emptyCell.transform);
             }
         }
@@ -60,14 +61,19 @@ public class PowerupGenerator : MonoBehaviour
     //     The location of powerup spawn.
     private Transform FindEmptyCell() {
         List<Transform> emptyCells;
-        if (playerOne.Health == playerTwo.Health) {
+        if (_playerOne.Health == _playerTwo.Health) {
             emptyCells = GetAllEmptyCells();
-        } else if (playerOne.Health < playerTwo.Health) {
-            emptyCells = GetClosestEmptyCellsToPlayer(playerOne.transform, playerTwo.transform);
+        } else if (_playerOne.Health < _playerTwo.Health) {
+            emptyCells = GetClosestEmptyCellsToPlayer(_playerOne.transform, _playerTwo.transform);
         } else {
-            emptyCells = GetClosestEmptyCellsToPlayer(playerTwo.transform, playerOne.transform);
+            emptyCells = GetClosestEmptyCellsToPlayer(_playerTwo.transform, _playerOne.transform);
         }
-        return emptyCells[Random.Range(0, emptyCells.Count)];
+        // Have to do this because spawning logic has its faults.
+        if (emptyCells.Count > 0) {
+            return emptyCells[Random.Range(0, emptyCells.Count)];
+        } else {
+            return null;
+        }
     }
     //
     // Summary:
