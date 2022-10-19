@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Responsible for spawn terrain within the game. It does this at a consistent rate until all
+// wanted terrains are generated, and then the final terrain with the finish line is generated.
 public class TerrainGenerator : MonoBehaviour
 {
     private GameInfo _gameInfo;
@@ -12,7 +14,8 @@ public class TerrainGenerator : MonoBehaviour
     // For synchronous object movement and other generators
     [field: SerializeField] public bool IsGenerating { get; private set; } = false;
     [field: SerializeField] public int RowsGenerated { get; private set; } = 0;
-    public float GenerationSpeed { get => GENERATION_SPEED * (DistanceFrontPlayerToFrontRow() / MAX_ACTIVE_ROWS); }
+    private float _generationMultiplier = 1.0f;
+    public float GenerationSpeed { get => GENERATION_SPEED * _generationMultiplier; }
     // Generation prefabs and components
     [field: SerializeField] public RuntimeAnimatorController SpawnAnimator { get; private set; }
     [SerializeField] private GameObject startTerrain, finishTerrain;
@@ -72,7 +75,10 @@ public class TerrainGenerator : MonoBehaviour
 
         for (var count = 0; count < prefab.childCount; count++) {
             GenerateRow(terrain, prefab.GetChild(count));
-            if (!instant) yield return new WaitForSeconds(GenerationSpeed);
+            if (!instant) {
+                _generationMultiplier = DistanceFrontPlayerToFrontRow() / MAX_ACTIVE_ROWS;
+                yield return new WaitForSeconds(GenerationSpeed);
+            }
         }
     }
     //
@@ -172,13 +178,14 @@ public class TerrainGenerator : MonoBehaviour
     {
         return randomTerrains[Random.Range(0, randomTerrains.Length)];
     }
-    // Should remove
-    public Queue<Transform> getActiveRows()
-    {
-        // Returning copy of queue so PowerupSpawner queue traversal
-        // doesn't affect the TerrainGenerator
-        return new Queue<Transform>(ActiveRows);
-    }
+    //
+    // Summary:
+    //     Calculates the distance from the front player to the front row. This is useful for 
+    //     tweaking the generation speed so that the player cannot be punished for travelling
+    //     faster than the terrain can generate.
+    //
+    // Returns:
+    //     How far the front-most player is from the front row.
     private float DistanceFrontPlayerToFrontRow() {
         return RowsGenerated - Mathf.Max(_gameInfo.PlayerOne.transform.position.z, 
                                          _gameInfo.PlayerTwo.transform.position.z);

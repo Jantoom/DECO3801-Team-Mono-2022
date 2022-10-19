@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Describes the behaviour of a bomb that is spawned by a player. It will typically explode after
+// a short delay.
 public class Bomb : MonoBehaviour, IDestructible
 {
     [SerializeField] private GameObject _explosionPrefab;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// State storer for a player
 public class PlayerInfo : MonoBehaviour
 {
     public GameObject Player { get => gameObject; }

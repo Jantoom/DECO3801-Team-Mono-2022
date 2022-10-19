@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Used for the object at the end of the terrain generation. The first person to collide with the
+// parent game object is the first person to cross the finish line. This is one way for a team to
+// win the game.
 public class FinishLine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
             GameOverInfo.isGameOver = true;
             if (other.gameObject.name == "Player1") {

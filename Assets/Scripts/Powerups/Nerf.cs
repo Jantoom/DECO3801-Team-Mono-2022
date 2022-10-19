@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a commonly found pattern between most powerups. The nerf is in action once a single
+// field belonging to an opponent is altered. Use this if the effect of the nerf is state-like,
+// otherwise create a custom powerup inheriting from Powerup.
 public class Nerf : Powerup
 {
     public string NerfStat;

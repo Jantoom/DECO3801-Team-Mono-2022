@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Holds generic game-related information like references to both players.
 public class GameInfo : MonoBehaviour
 {
     public static readonly int BASE_HEALTH = 1;
     public GameObject PlayerOne, PlayerTwo;
     public Image LoadedPowerupPlayerOne, LoadedPowerupPlayerTwo;
-
-    void Start() {
-        PlayerOne = GameObject.Find("Player1");
-        PlayerTwo = GameObject.Find("Player2");
-    }
 }

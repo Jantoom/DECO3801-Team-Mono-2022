@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallSolid : MonoBehaviour, IDestructible
+// Makes wall prefabs unbreakable by player collision and most weapons, but can be broken from 
+// bombs due to their massive explosion damage.
+public class WallUnbreakable : MonoBehaviour, IDestructible
 {
     [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 20;
 

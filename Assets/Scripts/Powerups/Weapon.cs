@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a commonly found pattern between most powerups. The weapon is in action once the
+// weapon prefab belonging to a player is altered. Use this if the effect of the weapon is 
+// state-like, otherwise create a custom powerup inheriting from Powerup.
 public class Weapon : Powerup
 {
     public GameObject WeaponPrefab;

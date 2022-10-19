@@ -7,9 +7,9 @@ public class GameOverDisplay : MonoBehaviour
 {
     [SerializeField] private TMP_Text _gameOverText, _winnerNameText, _menuText;
     [SerializeField] private GameObject _gameOverScreen;
-    bool displayGameOver;
     [SerializeField] private KeyCode transitionKey;
     [SerializeField] private string scene;
+    bool displayGameOver;
 
     void Awake()
     {

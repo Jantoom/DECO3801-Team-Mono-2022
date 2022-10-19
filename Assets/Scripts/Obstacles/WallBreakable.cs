@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallCracked : MonoBehaviour, IDestructible
+// Makes wall prefabs breakable by player collision or weapons.
+public class WallBreakable : MonoBehaviour, IDestructible
 {
     [field: SerializeField] public int Health { get; private set; } = GameInfo.BASE_HEALTH * 10;
 

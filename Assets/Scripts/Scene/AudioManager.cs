@@ -4,7 +4,11 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 
-/* reference: https://www.youtube.com/watch?v=6OT43pvUyfY */
+// Responsible for the audio in the game. Has default persistence through scenes, but is
+// configurable to destroy itself after a certain number of transitions. This is useful for
+// backgroun music.
+// 
+// Programmer used reference: https://www.youtube.com/watch?v=6OT43pvUyfY
 public class AudioManager : MonoBehaviour
 {
     [field: SerializeField] public string BackgroundMusic { get; private set; } = "";
@@ -87,7 +91,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    //
+    // List of serialised variables for a single sound to configure in scene editing.
     [System.Serializable]
     public class Sound
     {

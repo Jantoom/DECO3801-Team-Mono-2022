@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using System.IO.Ports;
 
+// Main class for player movement. Handles all calculations used to move the player, and all
+// logic for the player to transition between move states.
 public class PlayerControls : MonoBehaviour
 {
     private PlayerInfo _playerInfo;
@@ -19,7 +21,7 @@ public class PlayerControls : MonoBehaviour
     [field: SerializeField] public KeyCode ForwardKey { get; private set; }
     [field: SerializeField] public KeyCode RightKey { get; private set; }
     // Control Times
-    private static readonly float ACTIVATION_WAIT_TIME = 0.15f, MOVE_TIME = 0.20f, REBOUND_TIME = 0.40f;
+    private static readonly float ACTIVATION_TIME = 0.20f, MOVE_TIME = 0.20f, REBOUND_TIME = 0.40f;
     public float TimeToMove { get => MOVE_TIME * (_playerInfo.Exhausted ? 10 : 1); }
     public float TimeToRebound { get => REBOUND_TIME * (_playerInfo.Exhausted ? 10 : 1); }
     private float _timeAtLastInput = 0.0f;
@@ -56,7 +58,7 @@ public class PlayerControls : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Wall") && MoveStatus.Equals(MoveCode.MOVING)) {
             // Player is moving into a wall from their own input
-            if (!collision.gameObject.TryGetComponent<WallCracked>(out var wall) || 
+            if (!collision.gameObject.TryGetComponent<WallBreakable>(out var wall) || 
                 wall.Health - _playerInfo.Attack > 0) {
                 // Player won't break the wall on collision
                 MovePlayer(_lastPosition, TimeToRebound, MoveCode.REBOUNDING);
@@ -98,7 +100,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (direction != Vector3.zero) {
             if ((direction + _lastDirections[0]).Equals(Vector3.zero) &&
-                Time.time - _timeAtLastInput < ACTIVATION_WAIT_TIME) {
+                Time.time - _timeAtLastInput < ACTIVATION_TIME) {
                 ActivateItem();
                 _lastDirections[0] = _lastDirections[1];  // This direction was used for powerups
             } else if (MoveStatus == MoveCode.STATIONARY && direction != Vector3.zero) {
@@ -240,7 +242,12 @@ public class PlayerControls : MonoBehaviour
         }
     }
 }
-
+//
+// Move states that the player can be in. A player is 
+// - stationary if they are not moving, 
+// - moving if they made the intention to move, 
+// - rebounding if their movement is blocked by a wall, and 
+// - forced if they are in an illegal position and need to be moved to a legal one forcefully.
 public enum MoveCode
 {
     STATIONARY, MOVING, REBOUNDING, FORCED

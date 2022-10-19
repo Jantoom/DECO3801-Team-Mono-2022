@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Responsible for transitioning between scenes. Has direct communication with the instance of
+// AudioManager within the scene. 
 public class GameTransition : MonoBehaviour
 {
     [field: SerializeField] public string TransitionScene { get; private set; } = "";

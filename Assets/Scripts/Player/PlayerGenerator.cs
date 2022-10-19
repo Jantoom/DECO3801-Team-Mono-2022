@@ -3,41 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Responsible for spawning the players in the map. This includes initialisation and when a 
+// player falls off the map.
 public class PlayerGenerator : MonoBehaviour
 {
     public static readonly int SPAWN_ROW_BUFFER = 2;
-    private static TerrainGenerator _terrainGenerator;
     [SerializeField] private GameObject _playerOnePrefab, _playerTwoPrefab;
 
     void Awake()
     {
-        _terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
         var gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
-
+        // Spawn players in the world
         var playerOne = Instantiate(_playerOnePrefab);
         var playerTwo = Instantiate(_playerTwoPrefab);
-
+        // Give aliases to the players
         playerOne.name = "Player1";
         playerTwo.name = "Player2";
-
+        // Reference the players in the game info
         gameInfo.PlayerOne = playerOne;
         gameInfo.PlayerTwo = playerTwo;
 
         var playerOneInfo = playerOne.GetComponent<PlayerInfo>();
         var playerTwoInfo = playerTwo.GetComponent<PlayerInfo>();
-
+        // Give players acknowledgement of each other
         playerOneInfo.Opponent = playerTwo;
         playerTwoInfo.Opponent = playerOne;
-
+        // Give reference to UI element
         playerOneInfo.LoadedPowerupImage = gameInfo.LoadedPowerupPlayerOne;
         playerTwoInfo.LoadedPowerupImage = gameInfo.LoadedPowerupPlayerTwo;
-
+        // Initialise images to be hidden due to no starting powerups
         playerOneInfo.LoadedPowerupImage.enabled = false;
         playerTwoInfo.LoadedPowerupImage.enabled = false;
 
         var playerOneLives = playerOne.GetComponent<PlayerLives>();
         var playerTwoLives = playerTwo.GetComponent<PlayerLives>();
-
+        // Give reference to UI elements
         playerOneLives.Heart1 = GameObject.Find("Heart3");
         playerOneLives.Heart2 = GameObject.Find("Heart2");
         playerOneLives.Heart3 = GameObject.Find("Heart1");
@@ -45,7 +45,6 @@ public class PlayerGenerator : MonoBehaviour
         playerTwoLives.Heart2 = GameObject.Find("Heart5");
         playerTwoLives.Heart3 = GameObject.Find("Heart4");
     }
-
     void Start() {
         var gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
         Spawn(gameInfo.PlayerOne, false);
@@ -64,7 +63,8 @@ public class PlayerGenerator : MonoBehaviour
     //     player
     public static void Spawn(GameObject player, bool useBuffer)
     {
-        var rows = _terrainGenerator.ActiveRows.ToList().Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
+        var terrainGenerator = GameObject.Find("GameInfo").GetComponent<TerrainGenerator>();
+        var rows = terrainGenerator.ActiveRows.ToList().Skip(useBuffer ? SPAWN_ROW_BUFFER : 0);
         foreach (Transform row in rows) {
             var cells = Enumerable.Range(0, row.childCount).Select(x => row.GetChild(x));
             cells = player.name == "Player1" ?

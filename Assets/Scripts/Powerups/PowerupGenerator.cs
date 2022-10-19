@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+// Responsible for spawning powerups in the scene.
 public class PowerupGenerator : MonoBehaviour
 {
-    public TerrainGenerator terrainGenerator;
-    private Queue<Transform> activeRows;
-    private float SPAWN_DELAY = 2.0f;
+    // List of spawnable prefabs
     [field: SerializeField] public List<GameObject> PowerupsTierOne { get; private set; }
     [field: SerializeField] public List<GameObject> PowerupsTierTwo { get; private set; }
+    // Powerup generation
+    private TerrainGenerator _terrainGenerator;
+    private static readonly float SPAWN_SPEED = 2.0f;
+    // Reference to players for logic
     private PlayerInfo playerOne, playerTwo;
 
-    // Start is called before the first frame update
     void Start()
     {
-        terrainGenerator = GetComponent<TerrainGenerator>();
-        playerOne = GameObject.Find("Player1").GetComponent<PlayerInfo>();
-        playerTwo = GameObject.Find("Player2").GetComponent<PlayerInfo>();
-        InvokeRepeating("SpawnPowerups", SPAWN_DELAY, SPAWN_DELAY);
+        playerOne = GetComponent<GameInfo>().PlayerOne.GetComponent<PlayerInfo>();
+        playerTwo = GetComponent<GameInfo>().PlayerTwo.GetComponent<PlayerInfo>();
+        InvokeRepeating("SpawnPowerups", SPAWN_SPEED, SPAWN_SPEED);
     }
-
+    //
+    // Summary:
+    //    Checks the state of the game and spawns powerups accordingly.
     private void SpawnPowerups() {
         if (!GameOverInfo.isGameOver) {
             Transform emptyCell = FindEmptyCell();
@@ -49,22 +52,31 @@ public class PowerupGenerator : MonoBehaviour
             }
         }
     }
-
+    //
+    // Summary:
+    //     Finds the appropriate cell to spawn a powerup given the imbalance between the players.
+    //
+    // Returns:
+    //     The location of powerup spawn.
     private Transform FindEmptyCell() {
         List<Transform> emptyCells;
         if (playerOne.Health == playerTwo.Health) {
             emptyCells = GetAllEmptyCells();
-        }
-        else if (playerOne.Health < playerTwo.Health) {
+        } else if (playerOne.Health < playerTwo.Health) {
             emptyCells = GetClosestEmptyCellsToPlayer(playerOne.transform, playerTwo.transform);
         } else {
             emptyCells = GetClosestEmptyCellsToPlayer(playerTwo.transform, playerOne.transform);
         }
         return emptyCells[Random.Range(0, emptyCells.Count)];
     }
-
+    //
+    // Summary:
+    //     Finds all empty cells within the active terrain.
+    //
+    // Returns:
+    //     A list of all empty cells.
     private List<Transform> GetAllEmptyCells() {
-        activeRows = terrainGenerator.getActiveRows();
+        var activeRows = _terrainGenerator.ActiveRows.ToList();
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
@@ -79,9 +91,21 @@ public class PowerupGenerator : MonoBehaviour
         }
         return emptyCells;
     }
-
+    //
+    // Summary:
+    //     Filters through all empty cells in the terrain to pick ones that favour the player
+    //     behind in the game. This is defined by how many lives they have.
+    //
+    // Parameters:
+    //   behind:
+    //     Location of the player behind in the game
+    //   ahead:
+    //     Location of the player ahead in the game
+    //
+    // Returns:
+    //     A list of favourable empty cells.
     private List<Transform> GetClosestEmptyCellsToPlayer(Transform behind, Transform ahead) {
-        activeRows = terrainGenerator.getActiveRows();
+        var activeRows = _terrainGenerator.ActiveRows.ToList();
         List<Transform> emptyCells = new List<Transform>();
         int rowNumber = 0;
         foreach (Transform row in activeRows) {
@@ -101,7 +125,16 @@ public class PowerupGenerator : MonoBehaviour
         }
         return emptyCells;
     }
-
+    //
+    // Summary:
+    //     Picks a random powerup to spawn.
+    //
+    // Parameters:
+    //   powerups:
+    //     List of powerups to pick from. This is typically between tier 1 and 2 powerups.
+    //
+    // Returns:
+    //     A randomly selected powerup.
     private GameObject GetRandomPowerup(List<GameObject> powerups) {
         return powerups[Random.Range(0, powerups.Count)];
     }

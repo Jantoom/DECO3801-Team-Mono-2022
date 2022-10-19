@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a commonly found pattern between most powerups. The buff is in action once a single
+// field belonging to a player is altered. Use this if the effect of the buff is state-like,
+// otherwise create a custom powerup inheriting from Powerup.
 public class Buff : Powerup
 {
     public string BuffStat;

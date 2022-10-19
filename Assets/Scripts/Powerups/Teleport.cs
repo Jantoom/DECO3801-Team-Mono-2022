@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Custom powerup that doesn't fit any of the general types of powerups. Teleports the player to the
+// other's location, and vice versa.
 public class Teleport : Powerup
 {
     //

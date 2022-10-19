@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Parent class for all powerups in the game. Powerups are collectable items within the scene that
+// affect the player's in positive and negative ways. 
 public abstract class Powerup : MonoBehaviour
 {
     // Powerup Owner

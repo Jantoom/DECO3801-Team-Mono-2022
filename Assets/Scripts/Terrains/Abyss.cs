@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Used for the large game object resting at the bottom of the game map. Used to detect when a
+// player has fallen from the active terrain, and will signal to respawn them. If a fallen object
+// is not a player, they are aesthetically removed from the environment.
 public class Abyss : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
